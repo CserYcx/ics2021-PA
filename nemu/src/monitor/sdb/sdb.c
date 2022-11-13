@@ -58,6 +58,8 @@ static int cmd_info(char *args);
 
 static int cmd_help(char *args);
 
+//static int cmd_x(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -69,9 +71,8 @@ static struct {
 
   /* TODO: Add more commands */
 	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},
-	{"info", "Print the register state, or print the watchpoint information", cmd_info},/*
-	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
-*/
+	{"info", "Print the register state, or print the watchpoint information", cmd_info},
+	//{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
 
 };
 
@@ -111,7 +112,29 @@ static int cmd_info(char *args){
 		}
 	return 0;
 }
+/*
+static int cmd_x(char *args) {
+  * extract the first argument *
+  char *arg = strtok(NULL, " ");
+  int next = 0;
+	int i = 10;
+	int temp = 0;
 
+  if (arg == NULL) {
+    * no argument given *
+		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
+  }
+  else {
+			**arg = strtok(NULL, " ");
+			temp = ((int)*arg-48)*i;  
+			while(*(arg) != 0){
+				next =(int)*(arg+1)-48;
+				temp = temp + next;
+				arg = arg+1;
+    }
+  }
+  return 0;
+}*/
 
 
 void sdb_set_batch_mode() {
