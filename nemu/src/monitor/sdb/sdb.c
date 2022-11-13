@@ -54,6 +54,7 @@ static int cmd_si(char *args){
   return 0;
 }
 
+static int cmd_info(char *args);
 
 static int cmd_help(char *args);
 
@@ -67,8 +68,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},/*
-	{"info", "Print the register state, or print the watchpoint information", cmd_info},
+	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},
+	{"info", "Print the register state, or print the watchpoint information", cmd_info},/*
 	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
 */
 
@@ -98,6 +99,20 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+
+static int cmd_info(char *args){
+  char *arg = strtok(NULL," ");
+	
+	if(arg == NULL){   
+		printf("%s - %s\n", cmd_table[4].name, cmd_table[4].description);
+		}
+	else if (strcmp(arg,"r")==0){
+		isa_reg_display();
+		}
+	return 0;
+}
+
+
 
 void sdb_set_batch_mode() {
   is_batch_mode = true;
