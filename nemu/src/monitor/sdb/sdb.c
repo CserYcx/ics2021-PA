@@ -10,6 +10,7 @@ void init_regex();
 void init_wp_pool();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
+//line read and return the string for the next cut
 static char* rl_gets() {
   static char *line_read = NULL;
 
@@ -37,7 +38,21 @@ static int cmd_q(char *args) {
   return -1;
 }
 
-//static int cmd_si(char *args){
+static int cmd_si(char *args){
+	//cut the string
+	char *arg = strtok(NULL, " ");
+
+  if (arg == NULL) {
+    /* no argument given */
+		cpu_exec(1);
+  }
+  else {
+		int num = (int)*arg;
+		cpu_exec(num);
+		assert(num);
+  }
+  return 0;
+}
 
 
 static int cmd_help(char *args);
@@ -52,8 +67,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-/*	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},
-	{"info", "Print the register state, or print the watchpointinformation", cmd_info},
+	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},/*
+	{"info", "Print the register state, or print the watchpoint information", cmd_info},
 	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
 */
 
