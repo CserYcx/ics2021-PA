@@ -11,7 +11,7 @@ const char *regs[] = {
 void isa_reg_display() {
 	// print the registers' value
 	for(int cnt = 0;cnt<32;++cnt){
-		printf("%s = %u  \n",regs[cnt],cpu.gpr[cnt]._32);
+		printf("%4s = %u  \n",regs[cnt],cpu.gpr[cnt]._32);
 	}
 
 }
