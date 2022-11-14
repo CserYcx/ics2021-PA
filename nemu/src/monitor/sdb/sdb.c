@@ -28,6 +28,18 @@ static char* rl_gets() {
   return line_read;
 }
 
+int string_turn_int(char *arg){
+		int next = 0;
+		while((int)*arg != 0){
+				next = (int)*arg-48+next*10;
+				arg = arg+1;
+		}
+		assert(next);
+		return next;
+}
+
+
+
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -41,17 +53,13 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args){
 	//cut the string
 	char *arg = strtok(NULL, " ");
-
+		int num = 0;
   if (arg == NULL) {
     /* no argument given */
 		cpu_exec(1);
   }
   else {
-		int num = 0;
-		while((int)*arg != 0){
-			num = (int)*arg-48+num*10;
-			arg = arg+1;
-		}
+		num = string_turn_int(arg);
 		cpu_exec(num);
 		assert(num);
   }
@@ -62,6 +70,7 @@ static int cmd_info(char *args);
 
 static int cmd_help(char *args);
 
+static int cmd_x(char *args);
 //static int cmd_x(char *args);
 
 static struct {
@@ -76,7 +85,7 @@ static struct {
   /* TODO: Add more commands */
 	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},
 	{"info", "Print the register state, or print the watchpoint information", cmd_info},
-	//{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
+	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
 
 };
 
@@ -116,29 +125,24 @@ static int cmd_info(char *args){
 		}
 	return 0;
 }
-/*
+
 static int cmd_x(char *args) {
-  * extract the first argument *
+  /* extract the first argument */
   char *arg = strtok(NULL, " ");
-  int next = 0;
-	int i = 10;
-	int temp = 0;
+  //int next = 0;
 
   if (arg == NULL) {
-    * no argument given *
+    /* no argument given */
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
   }
   else {
-			**arg = strtok(NULL, " ");
-			temp = ((int)*arg-48)*i;  
-			while(*(arg) != 0){
-				next =(int)*(arg+1)-48;
-				temp = temp + next;
-				arg = arg+1;
-    }
+			arg = strtok(NULL, " ");
+			// the next stores n for address to show nth 4-byte memory 
+			//next = string_turn_int(arg);
+			arg = strtok(NULL, " ");
   }
   return 0;
-}*/
+}
 
 
 void sdb_set_batch_mode() {
