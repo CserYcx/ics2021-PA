@@ -47,7 +47,11 @@ static int cmd_si(char *args){
 		cpu_exec(1);
   }
   else {
-		int num = (int)*arg;
+		int num = 0;
+		while((int)*arg != 0){
+			num = (int)*arg-48+num*10;
+			arg = arg+1;
+		}
 		cpu_exec(num);
 		assert(num);
   }
