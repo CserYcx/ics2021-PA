@@ -14,7 +14,7 @@
 #define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 
 // macro concatenation
-#define concat_temp(x, y) x ## y
+#define concat_temp(x, y) x ## y // the define to connect x wity such as creating "xy"
 #define concat(x, y) concat_temp(x, y)
 #define concat3(x, y, z) concat(concat(x, y), z)
 #define concat4(x, y, z, w) concat3(concat(x, y), z, w)
