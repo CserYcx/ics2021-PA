@@ -131,8 +131,7 @@ static int cmd_x(char *args) {
   char *arg = strtok(NULL, " ");
   int next = 0;
 	int show = 0;
-	int *addr_int = (int*)malloc(sizeof(int));
-
+	int *addr_int = (int *)malloc(sizeof(int));
   if (arg == NULL) {
     /* no argument given */
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
@@ -141,9 +140,11 @@ static int cmd_x(char *args) {
 			// the next stores n for address to show nth 4-byte memory 
 			assert(arg != NULL);
 			next = string_turn_int(arg);
+			printf("next = %d\n",next);
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
-			*addr_int = string_turn_int(arg+2);
+			//*addr_int = string_turn_int(arg+2);
+			sscanf(arg,"%x",addr_int);
 			for(int cnt=0;cnt<next;cnt++){
 				show = host_read((void *)addr_int,1);
 				printf("0x%016x   \n",show);
