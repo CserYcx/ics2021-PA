@@ -116,7 +116,7 @@ static int cmd_help(char *args) {
 
 static int cmd_info(char *args){
   char *arg = strtok(NULL," ");
-	
+	assert(arg != NULL);
 	if(arg == NULL){   
 		printf("%s - %s\n", cmd_table[4].name, cmd_table[4].description);
 		}
@@ -140,9 +140,9 @@ static int cmd_x(char *args) {
   else {
 			arg = strtok(NULL, " ");
 			// the next stores n for address to show nth 4-byte memory 
-			//assert(arg != NULL);
+			assert(arg != NULL);
 			next = string_turn_int(arg);
-			//arg = strtok(NULL, " ");
+			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 			*addr_int = string_turn_int(arg+2);
 			for(int cnt=0;cnt<next;cnt++){
