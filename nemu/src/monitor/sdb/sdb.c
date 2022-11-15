@@ -145,6 +145,7 @@ static int cmd_x(char *args) {
 			assert(arg != NULL);
 			//*addr_int = string_turn_int(arg+2);
 			sscanf(arg,"%x",addr_int);
+			printf("%d\n",*addr_int);
 			for(int cnt=0;cnt<next;cnt++){
 				show = host_read((void *)addr_int,1);
 				printf("0x%016x   \n",show);
