@@ -138,7 +138,6 @@ static int cmd_x(char *args) {
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
   }
   else {
-			arg = strtok(NULL, " ");
 			// the next stores n for address to show nth 4-byte memory 
 			assert(arg != NULL);
 			next = string_turn_int(arg);
