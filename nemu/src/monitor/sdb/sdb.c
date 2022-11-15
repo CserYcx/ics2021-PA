@@ -3,6 +3,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include </home/cracker/ics2021/nemu/include/memory/host.h>
 
 static int is_batch_mode = false;
 
@@ -37,7 +38,6 @@ int string_turn_int(char *arg){
 		assert(next);
 		return next;
 }
-
 
 
 static int cmd_c(char *args) {
@@ -129,7 +129,9 @@ static int cmd_info(char *args){
 static int cmd_x(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
-  //int next = 0;
+  int next = 0;
+	int show = 0;
+	int *addr_int = (int*)malloc(sizeof(int));
 
   if (arg == NULL) {
     /* no argument given */
@@ -138,8 +140,15 @@ static int cmd_x(char *args) {
   else {
 			arg = strtok(NULL, " ");
 			// the next stores n for address to show nth 4-byte memory 
-			//next = string_turn_int(arg);
+			assert(arg != NULL);
+			next = string_turn_int(arg);
 			arg = strtok(NULL, " ");
+			assert(arg != NULL);
+			*addr_int = string_turn_int(arg+2);
+			for(int cnt=0;cnt<next;cnt++){
+				show = host_read((void *)addr_int,1);
+				printf("0x%016x   \n",show);
+			}
   }
   return 0;
 }

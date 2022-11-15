@@ -5,10 +5,12 @@
 
 static inline word_t host_read(void *addr, int len) {
   switch (len) {
+		//turn the type and load the memory
     case 1: return *(uint8_t  *)addr;
     case 2: return *(uint16_t *)addr;
     case 4: return *(uint32_t *)addr;
     IFDEF(CONFIG_ISA64, case 8: return *(uint64_t *)addr);
+		//no length will show the error
     default: MUXDEF(CONFIG_RT_CHECK, assert(0), return 0);
   }
 }
