@@ -131,7 +131,7 @@ static int cmd_x(char *args) {
   char *arg = strtok(NULL, " ");
   int next = 0;
 	uint32_t show = 0;
-	long long *addr_int = (long long *)malloc(sizeof(long long));
+	long long *addr_int = (long long*)malloc(sizeof(long long));
   if (arg == NULL) {
     /* no argument given */
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
@@ -147,8 +147,6 @@ static int cmd_x(char *args) {
 			sscanf(arg,"%llx",addr_int);
 			printf("%lld\n",*addr_int);
 			for(int cnt=0;cnt<next;cnt++){
-				printf("val = %u",*(unsigned int *)(*addr_int));
-				printf("!!!!ad p");
 				assert((void *)(*addr_int));
 				show = host_read((void *)(*addr_int),4);
 
