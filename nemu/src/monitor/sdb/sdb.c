@@ -149,6 +149,7 @@ static int cmd_x(char *args) {
 			for(int cnt=0;cnt<next;cnt++){
 				show = host_read((void *)addr_int,4);
 				printf("0x%016x   \n",show);
+				printf("%d \n",show);
 			}
   }
   return 0;
