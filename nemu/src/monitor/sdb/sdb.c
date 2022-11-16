@@ -130,7 +130,7 @@ static int cmd_x(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
   int next = 0;
-	int show = 0;
+	uint32_t show = 0;
 	long long *addr_int = (long long *)malloc(sizeof(long long));
   if (arg == NULL) {
     /* no argument given */
