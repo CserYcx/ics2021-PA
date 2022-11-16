@@ -14,6 +14,7 @@ static inline word_t host_read(void *addr, int len) {
 		//no length will show the error
     default: MUXDEF(CONFIG_RT_CHECK, assert(0), return 0);
   }
+	printf("succee switch");
 }
 
 static inline void host_write(void *addr, int len, word_t data) {
