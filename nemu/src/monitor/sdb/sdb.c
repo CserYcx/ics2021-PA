@@ -144,20 +144,15 @@ static int cmd_x(char *args) {
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 			//*addr_int = string_turn_int(arg+2);
-			uint32_t aa = 444;
-sscanf(arg,"%lx",addr_int);
-			*addr_int = (uint64_t)(&aa);
-			show = host_read((void*)(*addr_int),4);
-			printf("val = %lu\n",show);
-			//sscanf(arg,"%lx",addr_int);
+			sscanf(arg,"%lx",addr_int);
 			//printf("%lld\n",*addr_int);
-			/*for(int cnt=0;cnt<next;cnt++){
+			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
 				show = host_read((void *)(*addr_int),4);
 
 				printf("0x%016lx   \n",show);
 				printf("%ld \n",show);
-			}*/
+			}
   }
   return 0;
 }
