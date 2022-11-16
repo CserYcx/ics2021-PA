@@ -146,6 +146,7 @@ static int cmd_x(char *args) {
 			//*addr_int = string_turn_int(arg+2);
 			sscanf(arg,"%llx",addr_int);
 			printf("%lld\n",*addr_int);
+			printf("%ld", sizeof(void *));
 			for(int cnt=0;cnt<next;cnt++){
 				assert((void *)(*addr_int));
 				show = host_read((void *)(*addr_int),4);
