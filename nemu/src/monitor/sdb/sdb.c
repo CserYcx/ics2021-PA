@@ -147,7 +147,10 @@ static int cmd_x(char *args) {
 			sscanf(arg,"%llx",addr_int);
 			printf("%lld\n",*addr_int);
 			for(int cnt=0;cnt<next;cnt++){
+				printf("val = %d",*(unsigned int *)addr_int);
+				printf("!!!!ad p");
 				show = host_read((void *)(*addr_int),4);
+
 				printf("0x%016x   \n",show);
 				printf("%d \n",show);
 			}
