@@ -152,7 +152,7 @@ static int cmd_x(char *args) {
 				//assert((void *)(*addr_int));
 				printf("The current address is: %lx \n",*addr_int);
 				show = paddr_read((*addr_int),4);
-				printf("show0x16 = 0x%016lx   \n",show);
+				printf("show0x16 = 0x%lx   \n",show);
 				(*addr_int)++;
 			}
   }
