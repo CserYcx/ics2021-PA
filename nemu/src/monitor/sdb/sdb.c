@@ -132,6 +132,7 @@ static int cmd_x(char *args) {
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
+//	uint64_t *temp_addr = (uint64_t*)malloc(sizeof(uint64_t));
 
   if (arg == NULL) {
     /* no argument given */
@@ -148,6 +149,7 @@ static int cmd_x(char *args) {
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
 			//printf("%lld\n",*addr_int);
+//			(void*)(*addr_int) = temp_addr;
 			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
 				show = host_read((void *)(addr_int),4);
