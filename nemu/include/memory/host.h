@@ -4,7 +4,6 @@
 #include <common.h>
 
 static inline word_t host_read(void *addr, int len) {
-	printf("addr = %p\n",addr);
   switch (len) {
 		//turn the type and load the memory
     case 1: return *(uint8_t  *)addr;
