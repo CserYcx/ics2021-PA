@@ -150,9 +150,9 @@ static int cmd_x(char *args) {
 
 			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
+				printf("The current address is: %lx \n",*addr_int);
 				show = paddr_read((*addr_int),4);
 				printf("show0x16 = 0x%016lx   \n",show);
-				printf("show = %ld \n",show);
 				(*addr_int)++;
 			}
   }
