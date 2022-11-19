@@ -146,6 +146,7 @@ static int cmd_x(char *args) {
 			assert(arg != NULL);
 			//*addr_int = string_turn_int(arg+2);
 			sscanf(arg,"%lx",addr_int);
+			printf("addr_int = %lx\n",*addr_int);
 			//printf("%lld\n",*addr_int);
 			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
