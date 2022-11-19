@@ -132,6 +132,7 @@ static int cmd_x(char *args) {
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
+
   if (arg == NULL) {
     /* no argument given */
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
@@ -148,10 +149,10 @@ static int cmd_x(char *args) {
 			//printf("%lld\n",*addr_int);
 			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
-				show = host_read((void *)(*addr_int),4);
-
+				show = host_read(addr_int,4);
 				printf("0x%016lx   \n",show);
 				printf("%ld \n",show);
+				addr_int++;
 			}
   }
   return 0;
