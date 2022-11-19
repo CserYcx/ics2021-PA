@@ -3,7 +3,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
-#include </home/cracker/ics2021/nemu/include/memory/host.h>
+#include </home/cracker/ics2021/nemu/include/memory/paddr.h>
+
 
 static int is_batch_mode = false;
 
@@ -132,7 +133,6 @@ static int cmd_x(char *args) {
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
-//	uint64_t *temp_addr = (uint64_t*)malloc(sizeof(uint64_t));
 
   if (arg == NULL) {
     /* no argument given */
@@ -145,14 +145,12 @@ static int cmd_x(char *args) {
 			printf("next = %d\n",next);
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
-			//*addr_int = string_turn_int(arg+2);
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
-			//printf("%lld\n",*addr_int);
-//			(void*)(*addr_int) = temp_addr;
+
 			for(int cnt=0;cnt<next;cnt++){
 				//assert((void *)(*addr_int));
-				show = host_read((void *)(addr_int),4);
+				show = paddr_read((*addr_int),4);
 				printf("0x%016lx   \n",show);
 				printf("%ld \n",show);
 				addr_int++;
