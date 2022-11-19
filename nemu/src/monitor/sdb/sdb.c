@@ -153,7 +153,7 @@ static int cmd_x(char *args) {
 				show = paddr_read((*addr_int),4);
 				printf("0x%016lx   \n",show);
 				printf("%ld \n",show);
-				addr_int++;
+				(*addr_int)++;
 			}
   }
   return 0;
