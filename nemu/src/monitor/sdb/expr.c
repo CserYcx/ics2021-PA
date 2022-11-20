@@ -26,8 +26,10 @@ static struct rule {
   {"==", TK_EQ},        // equal
 };
 
+//NR_REFEX is haved been recognized token number(means having all the recognized rules) 
 #define NR_REGEX ARRLEN(rules)
 
+//re is to store the token has been recognized
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
@@ -49,15 +51,19 @@ void init_regex() {
 
 typedef struct token {
   int type;
+	//Think, if str overflows , how to solve the problem
   char str[32];
 } Token;
 
+//__attribute__((used)) means that the variable must be emitted even if it appears that the variable is not referenced.
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
   int position = 0;
   int i;
+	// regmatch_t is a struct that has two members: rm_so to match the string's beginning,
+	// rm_eo to match the string's end
   regmatch_t pmatch;
 
   nr_token = 0;
@@ -65,6 +71,7 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
+			//match target string
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
