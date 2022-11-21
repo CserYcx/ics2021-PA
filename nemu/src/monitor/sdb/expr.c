@@ -1,18 +1,21 @@
 #include <isa.h>
 
+//POSIX: Portable Operating System Interface
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
 
+//rules type: use the type value to judge which token is what
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_EQ,TK_NUM
 
   /* TODO: Add more token types */
 
 };
 
 static struct rule {
+	//regex is regular expression
   const char *regex;
   int token_type;
 } rules[] = {
@@ -24,6 +27,10 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
+	{"\\-", '-'},					// sub
+	{"\\*", '*'},					// multiple
+	{"\\/", '/'},					// divide
+	{"[0-9]+", TK_NUM},		// number
 };
 
 //NR_REFEX is haved been recognized token number(means having all the recognized rules) 
@@ -87,6 +94,14 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+					case '+': tokens[i].type = rules[i].token_type;break;
+					case '-': tokens[i].type = rules[i].token_type;break;
+					case '*': tokens[i].type = rules[i].token_type;break;
+					case '/': tokens[i].type = rules[i].token_type;break;
+					case TK_NOTYPE: break;
+					case TK_NUM: tokens[i].type = rules[i].token_type;
+											 //maybe overflow, remember to rewrite the code 
+											 strcpy(tokens[i].str, e+position); 
           default: TODO();
         }
 
@@ -94,6 +109,7 @@ static bool make_token(char *e) {
       }
     }
 
+		//out of bound
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
