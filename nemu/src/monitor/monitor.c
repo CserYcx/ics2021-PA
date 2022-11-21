@@ -111,6 +111,7 @@ void init_monitor(int argc, char *argv[]) {
   init_difftest(diff_so_file, img_size, difftest_port);
 
   /* Initialize the simple debugger. */
+	/* Compile the regex*/
   init_sdb();
 
   IFDEF(CONFIG_ITRACE, init_disasm(

@@ -2,6 +2,7 @@
 #include <cpu/cpu.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "expr.c"
 #include "sdb.h"
 #include </home/cracker/ics2021/nemu/include/memory/paddr.h>
 
@@ -139,17 +140,19 @@ static int cmd_x(char *args) {
 		printf("%s - %s\n", cmd_table[5].name, cmd_table[5].description);
   }
   else {
-			// the next stores n for address to show nth 4-byte memory 
+			/* the next stores n for address to show nth 4-byte memory */
 			assert(arg != NULL);
 			next = string_turn_int(arg);
-			printf("next = %d\n",next);
+
+			/* the memory address: hex number or an expression	*/
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
+			make_token(arg);
+
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
 
 			for(int cnt=0;cnt<next;cnt++){
-				//assert((void *)(*addr_int));
 				printf("The current address is: 0x%lx \n",*addr_int);
 				show = paddr_read((*addr_int),4);
 				printf("show0x16 = 0x%lx   \n",show);
