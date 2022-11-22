@@ -2,7 +2,6 @@
 #include <cpu/cpu.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "expr.c"
 #include "sdb.h"
 #include </home/cracker/ics2021/nemu/include/memory/paddr.h>
 
@@ -131,6 +130,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
+	bool *success = (bool*)malloc(sizeof(bool));
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
@@ -147,7 +147,7 @@ static int cmd_x(char *args) {
 			/* the memory address: hex number or an expression	*/
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
-			make_token(arg);
+			expr(arg,success);
 
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
