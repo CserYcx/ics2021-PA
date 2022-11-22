@@ -147,7 +147,9 @@ static int cmd_x(char *args) {
 			/* the memory address: hex number or an expression	*/
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
+			/* expr is having testing */
 			expr(arg,success);
+			assert(*success == true);
 
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
