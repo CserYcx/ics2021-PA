@@ -36,7 +36,7 @@ static struct rule {
 //NR_REFEX is haved been recognized token number(means having all the recognized rules) 
 #define NR_REGEX ARRLEN(rules)
 
-//re is to store the token has been recognized
+//re is to store the token has been recognized and regcomp will compile them
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
@@ -80,6 +80,8 @@ static bool make_token(char *e) {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
 			//match target string
+			//ignore the line feed
+			//int regexec(regex_t *compiled,char *string,size_t nmatch,regmatch_t matchptr [],int flags)
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
