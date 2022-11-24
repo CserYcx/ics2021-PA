@@ -106,7 +106,7 @@ static bool make_token(char *e) {
 					case TK_NUM: tokens[i].type = rules[i].token_type;
 											 //maybe overflow, remember to rewrite the code 
 											 strcpy(tokens[i].str, e+position); 
-          default: TODO();
+          default: //TODO();
         }
 
         break;
@@ -131,7 +131,7 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  //TODO();
 
   return 0;
 }
