@@ -149,6 +149,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		//if token's priority is same, choose the farther one
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
 	}
+	assert(token[*pos].str != NULL);
 	return token[*pos];
 }
 
@@ -180,6 +181,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		eval(begin+1,end-1);
 	}*/
 	else{
+		printf("Begining find the main token!!");
 		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
 		uint32_t val1 = eval(begin, op_pos -1);	
@@ -189,7 +191,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
-			default: assert(0);
+			default:Log("The damn fault!"); assert(0);
 			}
 	}
 }
