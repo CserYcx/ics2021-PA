@@ -109,7 +109,7 @@ static bool make_token(char *e) {
 					//maybe overflow, remember to rewrite the code 
 											 strcpy(tokens[i].str, e+position); 
 											 assert(position <= 32); break;
-          default: TODO();
+          default: //TODO();
         }
 
         break;
