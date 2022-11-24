@@ -149,6 +149,7 @@ static int cmd_x(char *args) {
 			assert(arg != NULL);
 			/* expr is having testing */
 			show = expr(arg,success);
+			printf(" the expression vale = %ld",show);
 			assert(*success == true);
 
 			sscanf(arg,"%lx",addr_int);
