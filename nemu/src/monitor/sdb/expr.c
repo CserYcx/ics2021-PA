@@ -5,7 +5,6 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
-static bool make_token(char *e);
 
 //rules type: use the type value to judge which token is what
 enum {
