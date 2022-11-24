@@ -171,6 +171,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			return 0;
 		}
 		else{
+			assert(atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
 	}
@@ -181,7 +182,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		eval(begin+1,end-1);
 	}*/
 	else{
-		printf("Begining find the main token!!");
+		//printf("Begining find the main token!!");
 		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
 		uint32_t val1 = eval(begin, op_pos -1);	
