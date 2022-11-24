@@ -148,7 +148,7 @@ static int cmd_x(char *args) {
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 			/* expr is having testing */
-			expr(arg,success);
+			show = expr(arg,success);
 			assert(*success == true);
 
 			sscanf(arg,"%lx",addr_int);

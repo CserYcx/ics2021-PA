@@ -1,5 +1,5 @@
 #include <isa.h>
-
+#include <stdlib.h>
 //POSIX: Portable Operating System Interface
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -86,13 +86,13 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-				printf("substr_len = %d", substr_len);
+				printf("substr_len = %d\n", substr_len);
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-				printf("position = %d", position);
+				printf("position = %d\n", position);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -109,7 +109,7 @@ static bool make_token(char *e) {
 					//maybe overflow, remember to rewrite the code 
 											 strcpy(tokens[i].str, e+position); 
 											 assert(position <= 32); break;
-          default: //TODO();
+          default: TODO();
         }
 
         break;
@@ -126,6 +126,74 @@ static bool make_token(char *e) {
   return true;
 }
 
+//Get the main token and the position
+Token get_main_token(Token *token, uint32_t* pos){
+	// pos to record the current prior token position
+	int cnt;
+	int priority = 0;			// depend on priority to choose the main token 
+	int temp_priority = 0;// record the current priority
+	for(cnt = 0;cnt < 32;++cnt){
+		if(token[cnt].str == NULL){
+			break;
+		}
+		// to get the token priority 
+		if(token[cnt].type >= 42 || token[cnt].type <= 47){
+			switch(token[cnt].type){
+				case '+': priority = 1;break;
+				case '-': priority = 1;break;
+				case '*': priority = 2;break;
+				case '/': priority = 2;break;
+			}
+		}
+		if(priority > temp_priority){*pos = cnt;}
+		//if token's priority is same, choose the farther one
+		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
+	}
+	return token[*pos];
+}
+
+
+
+uint32_t eval(uint32_t begin, uint32_t end){
+	if(begin > end){
+		// Bad expression 
+		Log("That is a bad expression");
+		return 0;
+	}
+	else if(begin == end){
+		// Single tokens
+		// The token should be a number
+		// return the number value
+		 
+		if (tokens[begin].type != TK_NUM){
+			Log("The token is not a number!!!");
+			return 0;
+		}
+		else{
+			return atoi(tokens[begin].str);
+		}
+	}
+	/*else if(check_parentheses(begin,end) == true){
+		//  Expression is surronded by a matched pair of parentheses
+		//  in the case , throw away the parentheses
+		// 
+		eval(begin+1,end-1);
+	}*/
+	else{
+		uint32_t op_pos = 0;
+		Token op = get_main_token(tokens,&op_pos);
+		uint32_t val1 = eval(begin, op_pos -1);	
+		uint32_t val2 = eval(op_pos + 1,end);	
+		switch (op.type){
+			case '+': return val1 + val2;
+			case '-': return val1 - val2;
+			case '*': return val1 * val2;
+			case '/': return val1 / val2;
+			default: assert(0);
+			}
+	}
+}
+
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
@@ -134,7 +202,7 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  //TODO();
+  TODO();
 
-  return 0;
+	return eval(0,strlen(e));
 }
