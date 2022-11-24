@@ -86,7 +86,7 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-				printf("substr_len = %d\n", substr_len);
+				printf("substr_len = %d", substr_len);
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
@@ -106,7 +106,7 @@ static bool make_token(char *e) {
 					case '/': tokens[i].type = rules[i].token_type;break;
 					case TK_NOTYPE: break;
 					case TK_NUM: tokens[i].type = rules[i].token_type;
-											 //maybe overflow, remember to rewrite the code 
+					//maybe overflow, remember to rewrite the code 
 											 strcpy(tokens[i].str, e+position); 
 											 assert(position <= 32); break;
           default: //TODO();
