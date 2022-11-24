@@ -148,7 +148,8 @@ static int cmd_x(char *args) {
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 			/* expr is having testing */
-			show = expr(arg,success);
+			expr(arg,success);
+			
 			printf(" the expression vale = %ld",show);
 			assert(*success == true);
 
