@@ -31,6 +31,8 @@ static struct rule {
 	{"\\*", '*'},					// multiple
 	{"\\/", '/'},					// divide
 	{"[0-9]+", TK_NUM},		// number
+	{"\\(", '('},					// left bracket
+	{"\\)", ')'},					// right bracket
 };
 
 //NR_REFEX is haved been recognized token number(means having all the recognized rules) 
@@ -106,6 +108,7 @@ static bool make_token(char *e) {
 					case TK_NUM: tokens[i].type = rules[i].token_type;
 											 //maybe overflow, remember to rewrite the code 
 											 strcpy(tokens[i].str, e+position); 
+											 assert(position <= 32); break;
           default: //TODO();
         }
 
