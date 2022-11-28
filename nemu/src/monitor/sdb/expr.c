@@ -158,6 +158,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		//if token's priority is same, choose the farther one
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
 	}
+	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type, "Token is null!!!\n"); 
 	return token[*pos];
 }
@@ -181,6 +182,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		}
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
+			printf("the expr's value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
 	}
