@@ -5,6 +5,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include <regex.h>
+#include <string.h>
 
 //rules type: use the type value to judge which token is what
 enum {
@@ -126,16 +127,24 @@ static bool make_token(char *e) {
   return true;
 }
 
+/* *****************************************
+ * ****the following is my code*************
+ * *****************************************/
+
 //Get the main token and the position
 Token get_main_token(Token *token, uint32_t* pos){
 	// pos to record the current prior token position
 	int cnt;
 	int priority = 0;			// depend on priority to choose the main token 
 	int temp_priority = 0;// record the current priority
+	
+	// to the end
 	for(cnt = 0;cnt < 32;++cnt){
-		if(token[cnt].str == NULL){
+		if(token[cnt].type == 0){
+			printf("To the end!!!\n");
 			break;
 		}
+
 		// to get the token priority 
 		if(token[cnt].type >= 42 || token[cnt].type <= 47){
 			switch(token[cnt].type){
@@ -149,7 +158,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		//if token's priority is same, choose the farther one
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
 	}
-	assert(token[*pos].str != NULL);
+	Assert(token[*pos].type, "Token is null!!!\n"); 
 	return token[*pos];
 }
 
@@ -171,20 +180,23 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			return 0;
 		}
 		else{
-			assert(atoi(tokens[begin].str));
+			Assert(tokens[begin].str, "The num is none!!!\n");
 			return atoi(tokens[begin].str);
 		}
 	}
+
 	/*else if(check_parentheses(begin,end) == true){
 		//  Expression is surronded by a matched pair of parentheses
 		//  in the case , throw away the parentheses
 		// 
 		eval(begin+1,end-1);
 	}*/
+
 	else{
 		//printf("Begining find the main token!!");
 		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
+		printf("the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos -1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
 		switch (op.type){
@@ -206,6 +218,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-
+	printf("len is %ld\n",strlen(e));
+	
 	return eval(0,strlen(e));
 }
