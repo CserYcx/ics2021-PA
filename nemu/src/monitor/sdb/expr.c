@@ -136,7 +136,7 @@ static bool make_token(char *e) {
 Token get_main_token(Token *token, uint32_t* pos){
 	// pos to record the current prior token position
 	int cnt;
-	int priority = 0;			// depend on priority to choose the main token 
+	int priority = 0;			// current main operator priority 
 	int temp_priority = 0;// record the current priority
 	
 	// to the end
@@ -148,19 +148,23 @@ Token get_main_token(Token *token, uint32_t* pos){
 
 		// to get the token priority 
 		switch(token[cnt].type){
-			case '+': priority = 1;break;
-			case '-': priority = 1;break;
-			case '*': priority = 2;break;
-			case '/': priority = 2;break;
+			case '+': temp_priority = 1;break;
+			case '-': temp_priority = 1;break;
+			case '*': temp_priority = 2;break;
+			case '/': temp_priority = 2;break;
 			default: 
 			}
 
-		if(priority > temp_priority){*pos = cnt;}
-		//if token's priority is same, choose the farther one
-		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
-		printf("The current pos is %d\n",*pos);
-		printf("The current priority is %d\n",priority);
-		temp_priority = priority;
+		if(token[cnt].type >= 42 && token[cnt].type <=47){
+			if(priority < temp_priority){
+				priority = temp_priority;
+				*pos = cnt;
+			}
+			//if token's priority is same, choose the farther one
+			else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
+			printf("The current pos is %d\n",*pos);
+			printf("The current priority is %d\n",priority);
+		}
 	}
 	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
