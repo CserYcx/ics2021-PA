@@ -185,7 +185,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		// Single tokens
 		// The token should be a number
 		// return the number value
-		 
+		printf("the begin = %d\n", begin); 
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
 			return 0;
@@ -193,7 +193,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
 			printf("the string is %s\n", tokens[begin].str);
-			printf("the num value is %d\n", atoi(tokens[begin].str));
+			printf("the nums value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
 	}
