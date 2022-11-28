@@ -155,6 +155,7 @@ static int cmd_p(char *args){
 	uint32_t show = 0;
 	char* arg = strtok(NULL, " ");
 	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
 
 	if(arg == NULL){
 		/* no argument given */
@@ -163,7 +164,7 @@ static int cmd_p(char *args){
 	else{
 		show = expr(arg,success);
 		assert(show != 0);
-		printf(" the expression value = %d\n",show);
+		Log("the expression value = %d\n",show);
 		assert(*success == true);
 	}
 	return 0;
