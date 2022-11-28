@@ -147,18 +147,19 @@ Token get_main_token(Token *token, uint32_t* pos){
 		}
 
 		// to get the token priority 
-		if(token[cnt].type >= 42 && token[cnt].type <= 47){
-			switch(token[cnt].type){
-				case '+': priority = 1;break;
-				case '-': priority = 1;break;
-				case '*': priority = 2;break;
-				case '/': priority = 2;break;
+		switch(token[cnt].type){
+			case '+': priority = 1;break;
+			case '-': priority = 1;break;
+			case '*': priority = 2;break;
+			case '/': priority = 2;break;
+			default: 
 			}
-		}
+
 		if(priority > temp_priority){*pos = cnt;}
 		//if token's priority is same, choose the farther one
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
 		printf("The current pos is %d\n",*pos);
+		printf("The current priority is %d\n",priority);
 	}
 	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
