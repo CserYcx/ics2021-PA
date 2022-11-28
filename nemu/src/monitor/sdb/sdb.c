@@ -72,21 +72,23 @@ static int cmd_info(char *args);
 static int cmd_help(char *args);
 
 static int cmd_x(char *args);
-//static int cmd_x(char *args);
+
+static int cmd_p(char *args);
 
 static struct {
   const char *name;
   const char *description;
   int (*handler) (char *);
 } cmd_table [] = {
-  { "help", "Display informations about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
+  { "help", "Display informations about all supported commands.", cmd_help },
+  { "c", "Continue the execution of the program.", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1", cmd_si},
-	{"info", "Print the register state, or print the watchpoint information", cmd_info},
-	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form", cmd_x},
+	{"si", "Make the program execute N pieces instructions and stop, if N is null, default 1.", cmd_si},
+	{"info", "Print the register state, or print the watchpoint information.", cmd_info},
+	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form.", cmd_x},
+	{"p", "It focuses on how the expression will be calculated.", cmd_p},
 
 };
 
@@ -165,6 +167,26 @@ static int cmd_x(char *args) {
   }
   return 0;
 }
+
+static int cmd_p(char *args){
+	uint32_t show = 0;
+	char* arg = strtok(NULL, " ");
+	bool* success = (bool*)malloc(sizeof(bool));
+
+	if(arg == NULL){
+		/* no argument given */
+		printf("%s - %s\n", cmd_table[6].name, cmd_table[6].description);
+  }
+	else{
+		show = expr(arg,success);
+		assert(show != 0);
+		printf(" the expression value = %d",show);
+		assert(*success == true);
+	}
+	return 0;
+}
+
+
 
 
 void sdb_set_batch_mode() {
