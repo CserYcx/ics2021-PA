@@ -144,7 +144,7 @@ static int cmd_x(char *args) {
   else {
 			/* the next stores n for address to show nth 4-byte memory */
 			assert(arg != NULL);
-			next = string_turn_int(arg);
+			next = atoi(arg);
 
 			/* the memory address: hex number or an expression	*/
 			arg = strtok(NULL, " ");
@@ -180,7 +180,7 @@ static int cmd_p(char *args){
 	else{
 		show = expr(arg,success);
 		assert(show != 0);
-		printf(" the expression value = %d",show);
+		printf(" the expression value = %d\n",show);
 		assert(*success == true);
 	}
 	return 0;
