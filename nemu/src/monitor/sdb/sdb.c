@@ -30,17 +30,6 @@ static char* rl_gets() {
   return line_read;
 }
 
-int string_turn_int(char *arg){
-		int next = 0;
-		while((int)*arg != 0){
-				next = (int)*arg-48+next*10;
-				arg = arg+1;
-		}
-		assert(next);
-		return next;
-}
-
-
 static int cmd_c(char *args) {
   cpu_exec(-1);
   return 0;
@@ -60,7 +49,7 @@ static int cmd_si(char *args){
 		cpu_exec(1);
   }
   else {
-		num = string_turn_int(arg);
+		num = atoi(arg);
 		cpu_exec(num);
 		assert(num);
   }
@@ -132,7 +121,6 @@ static int cmd_info(char *args){
 static int cmd_x(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
-	bool *success = (bool*)malloc(sizeof(bool));
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
@@ -149,11 +137,6 @@ static int cmd_x(char *args) {
 			/* the memory address: hex number or an expression	*/
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
-			/* expr is having testing */
-			show = expr(arg,success);
-			assert(show != 0);
-			printf(" the expression vale = %ld",show);
-			assert(*success == true);
 
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
