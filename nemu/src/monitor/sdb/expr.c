@@ -93,7 +93,7 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-				printf("position = %d\n", position);
+				Log("position = %d\n", position);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -119,7 +119,7 @@ static bool make_token(char *e) {
 
 		//out of bound
     if (i == NR_REGEX) {
-      printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
+      Log("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
   }
@@ -196,7 +196,8 @@ uint32_t eval(uint32_t begin, uint32_t end){
 	}*/
 
 	else{
-		//printf("Begining find the main token!!");
+		Log("Begining find the main token!!\n");
+		Log("tokens first element is %d\n", tokens[0].type);
 		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
 		printf("the current op's position is %d\n",op_pos);
@@ -221,7 +222,6 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-	printf("len is %ld\n",strlen(e));
 	
 	return eval(0,strlen(e));
 }
