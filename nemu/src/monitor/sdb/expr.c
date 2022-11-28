@@ -124,7 +124,8 @@ static bool make_token(char *e) {
       return false;
     }
   }
-
+	
+	printf("Make token is over*******************\n");
   return true;
 }
 
@@ -168,6 +169,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	}
 	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
+	printf("Get main token is over**********************\n");
 	return token[*pos];
 }
 
