@@ -147,7 +147,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		}
 
 		// to get the token priority 
-		if(token[cnt].type >= 42 || token[cnt].type <= 47){
+		if(token[cnt].type >= 42 && token[cnt].type <= 47){
 			switch(token[cnt].type){
 				case '+': priority = 1;break;
 				case '-': priority = 1;break;
@@ -161,7 +161,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		printf("The current pos is %d\n",*pos);
 	}
 	printf("pos is %d\n",*pos);
-	Assert(token[*pos].type, "Token is null!!!\n"); 
+	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
 	return token[*pos];
 }
 
