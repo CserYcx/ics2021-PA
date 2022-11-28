@@ -233,7 +233,11 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
+	int cnt = 0;
 	printf("nr_token = %d\n", nr_token);	
-	printf("token str is %s\n", tokens[nr_token-1].str);
+	while(tokens[cnt].type != 0){
+	printf("token str is %s\n", tokens[cnt].str);
+	cnt++;
+	}
 	return eval(0,nr_token-1);
 }
