@@ -160,6 +160,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
 		printf("The current pos is %d\n",*pos);
 		printf("The current priority is %d\n",priority);
+		temp_priority = priority;
 	}
 	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
