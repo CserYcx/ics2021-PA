@@ -72,6 +72,7 @@ static int nr_token __attribute__((used))  = 0;
 static bool make_token(char *e) {
   int position = 0;
   int i;
+	int cnt = 0;
 	// regmatch_t is a struct that has two members: rm_so to match the string's beginning,
 	// rm_eo to match the string's end
   regmatch_t pmatch;
@@ -101,14 +102,15 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[i].type = rules[i].token_type;break;
-					case '-': tokens[i].type = rules[i].token_type;break;
-					case '*': tokens[i].type = rules[i].token_type;break;
-					case '/': tokens[i].type = rules[i].token_type;break;
+					case '+': tokens[cnt].type = rules[i].token_type;cnt++;break;
+					case '-': tokens[cnt].type = rules[i].token_type;cnt++;break;
+					case '*': tokens[cnt].type = rules[i].token_type;cnt++;break;
+					case '/': tokens[cnt].type = rules[i].token_type;cnt++;break;
 					case TK_NOTYPE: break;
-					case TK_NUM: tokens[i].type = rules[i].token_type;
+					case TK_NUM: tokens[cnt].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
-											 strcpy(tokens[i].str, e+position); 
+											 strcpy(tokens[cnt].str, e+position); 
+											 cnt++;
 											 assert(position <= 32); break;
           default: //TODO();
         }
