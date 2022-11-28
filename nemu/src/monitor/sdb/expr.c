@@ -67,12 +67,12 @@ typedef struct token {
 
 //__attribute__((used)) means that the variable must be emitted even if it appears that the variable is not referenced.
 static Token tokens[32] __attribute__((used)) = {};
+//the tokens have been recognized number
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
   int position = 0;
   int i;
-	int cnt = 0;
 	// regmatch_t is a struct that has two members: rm_so to match the string's beginning,
 	// rm_eo to match the string's end
   regmatch_t pmatch;
@@ -95,22 +95,21 @@ static bool make_token(char *e) {
 
         position += substr_len;
 				Log("position = %d\n", position);
-				printf("i value is %d\n",i);
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[cnt].type = rules[i].token_type;cnt++;break;
-					case '-': tokens[cnt].type = rules[i].token_type;cnt++;break;
-					case '*': tokens[cnt].type = rules[i].token_type;cnt++;break;
-					case '/': tokens[cnt].type = rules[i].token_type;cnt++;break;
+					case '+': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
+					case '-': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
+					case '*': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
+					case '/': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
 					case TK_NOTYPE: break;
-					case TK_NUM: tokens[cnt].type = rules[i].token_type;
+					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
-											 strcpy(tokens[cnt].str, e+position); 
-											 cnt++;
+											 strcpy(tokens[nr_token].str, e+position); 
+											 nr_token++;
 											 assert(position <= 32); break;
           default: //TODO();
         }
@@ -225,5 +224,5 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 	
-	return eval(0,strlen(e));
+	return eval(0,nr_token-1);
 }
