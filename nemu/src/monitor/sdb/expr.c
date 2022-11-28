@@ -141,7 +141,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	// to the end
 	for(cnt = 0;cnt < 32;++cnt){
 		if(token[cnt].type == 0){
-			printf("To the end!!!\n");
+			Log("To the end!!! the currnet pos is %d\n",cnt);
 			break;
 		}
 
@@ -157,6 +157,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 		if(priority > temp_priority){*pos = cnt;}
 		//if token's priority is same, choose the farther one
 		else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
+		printf("The current pos is %d\n",*pos);
 	}
 	printf("pos is %d\n",*pos);
 	Assert(token[*pos].type, "Token is null!!!\n"); 
