@@ -167,8 +167,8 @@ Token get_main_token(Token *token, uint32_t* pos){
 			printf("The current priority is %d\n",priority);
 		}
 	}
-	printf("pos is %d\n",*pos);
-	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n"); 
+
+	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
 	return token[*pos];
 }
@@ -193,7 +193,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
 			printf("the string is %s\n", tokens[begin].str);
-			printf("the expr's value is %d\n", atoi(tokens[begin].str));
+			printf("the num value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
 	}
