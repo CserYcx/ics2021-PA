@@ -184,6 +184,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		}
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
+			printf("the string is %s\n", tokens[begin].str);
 			printf("the expr's value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
