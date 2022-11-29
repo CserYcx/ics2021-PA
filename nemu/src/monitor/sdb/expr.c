@@ -135,6 +135,11 @@ static bool make_token(char *e) {
  * ****the following is my code*************
  * *****************************************/
 
+/*meet the bug1 : the first input: p 80000000 ,result is ok
+ *but the next time you input any value,like 1+2 , it will show 
+ * 10000000+2 , that's crazy
+ */
+
 //Get the main token and the position
 Token get_main_token(Token *token,uint32_t end, uint32_t* pos){
 	// pos to record the current prior token position
@@ -171,7 +176,7 @@ Token get_main_token(Token *token,uint32_t end, uint32_t* pos){
 	}
 
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
-	printf(" the last pos is %d\n",*pos);
+	printf("The last pos is %d\n",*pos);
 	printf("Get main token is over**********************\n");
 	return token[*pos];
 }
@@ -234,11 +239,12 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-	int cnt = 0;
+	//	int cnt = 0;
+	/*printf("That show the tokens !!!!!\n");
 	printf("nr_token = %d\n", nr_token);	
 	while(tokens[cnt].type != 0){
 	printf("token str is %s\n", tokens[cnt].str);
 	cnt++;
-	}
+	}*/
 	return eval(0,nr_token-1);
 }
