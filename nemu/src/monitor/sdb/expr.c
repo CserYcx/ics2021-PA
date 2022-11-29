@@ -141,7 +141,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	int temp_priority = 0;// record the current priority
 	
 	// to the end
-	for(cnt = 0;cnt < 32;++cnt){
+	for(cnt = 0;cnt < (*pos)+1;++cnt){
 		if(token[cnt].type == 0){
 			Log("To the end!!! the currnet pos is %d\n",cnt);
 			break;
@@ -169,6 +169,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	}
 
 	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
+	printf(" the last pos is %d\n",*pos);
 	printf("Get main token is over**********************\n");
 	return token[*pos];
 }
@@ -207,12 +208,10 @@ uint32_t eval(uint32_t begin, uint32_t end){
 
 	else{
 		Log("Begining find the main token!!\n");
-		Log("tokens first element is %d\n", tokens[0].type);
 		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
 		printf("the current op's position is %d\n",op_pos);
-		uint32_t val1 = eval(begin, op_pos -1);	
-		printf("It can run here!!\n");
+		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
 		printf("val1 = %d, val2 = %d\n", val1,val2);
 		switch (op.type){
