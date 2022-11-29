@@ -144,7 +144,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	int temp_priority = 0;// record the current priority
 	
 	// to the end
-	for(cnt = 0;cnt < 32;++cnt){
+	for(cnt = 0;cnt < *pos+1 ;++cnt){
 		if(token[cnt].type == 0){
 			Log("To the end!!! the currnet pos is %d\n",cnt);
 			break;
