@@ -103,20 +103,19 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
-					case '-': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
-					case '*': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
-					case '/': tokens[nr_token].type = rules[i].token_type;nr_token++;break;
+					case '+': tokens[nr_token].type = rules[i].token_type;;break;
+					case '-': tokens[nr_token].type = rules[i].token_type;break;
+					case '*': tokens[nr_token].type = rules[i].token_type;break;
+					case '/': tokens[nr_token].type = rules[i].token_type;break;
 					case TK_NOTYPE: break;
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
-											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
+											 memcpy(tokens[nr_token].str,substr_start,substr_len); 
 											 printf("str is %s\n", tokens[nr_token].str);
-											 nr_token++;
 											 assert(position <= 32); break;
           default: //TODO();
         }
-
+				nr_token++;
         break;
       }
     }
