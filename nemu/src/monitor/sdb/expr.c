@@ -94,6 +94,9 @@ static bool make_token(char *e) {
 
         position += substr_len;
 				Log("position = %d\n", position);
+				Log("substr_len = %d\n", substr_len);
+				Log("substr_start = %s\n", substr_start);
+
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
@@ -141,7 +144,7 @@ Token get_main_token(Token *token, uint32_t* pos){
 	int temp_priority = 0;// record the current priority
 	
 	// to the end
-	for(cnt = 0;cnt < (*pos)+1;++cnt){
+	for(cnt = 0;cnt < 32;++cnt){
 		if(token[cnt].type == 0){
 			Log("To the end!!! the currnet pos is %d\n",cnt);
 			break;
@@ -174,8 +177,8 @@ Token get_main_token(Token *token, uint32_t* pos){
 	return token[*pos];
 }
 
-
-
+// operator's position
+uint32_t op_pos = 0;
 uint32_t eval(uint32_t begin, uint32_t end){
 	if(begin > end){
 		// Bad expression 
@@ -208,7 +211,6 @@ uint32_t eval(uint32_t begin, uint32_t end){
 
 	else{
 		Log("Begining find the main token!!\n");
-		uint32_t op_pos = 0;
 		Token op = get_main_token(tokens,&op_pos);
 		printf("the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
