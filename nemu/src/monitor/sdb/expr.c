@@ -212,6 +212,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		Token op = get_main_token(tokens,&op_pos);
 		printf("the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos -1);	
+		printf("It can run here!!\n");
 		uint32_t val2 = eval(op_pos + 1,end);	
 		printf("val1 = %d, val2 = %d\n", val1,val2);
 		switch (op.type){
