@@ -141,14 +141,14 @@ static bool make_token(char *e) {
  */
 
 //Get the main token and the position
-Token get_main_token(Token *token,uint32_t end, uint32_t* pos){
+Token get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t* pos){
 	// pos to record the current prior token position
 	int cnt;
 	int priority = 4;			// current main operator priority 
 	int temp_priority= 0;// record the current priority
 	
 	// to the end
-	for(cnt = 0;cnt < end ;++cnt){
+	for(cnt = begin;cnt <= end ;++cnt){
 		if(token[cnt].type == 0){
 			Log("To the end!!! the currnet pos is %d\n",cnt);
 			break;
@@ -216,7 +216,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 
 	else{
 		Log("Begining find the main token!!\n");
-		Token op = get_main_token(tokens,end,&op_pos);
+		Token op = get_main_token(tokens,begin,end,&op_pos);
 		printf("the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
