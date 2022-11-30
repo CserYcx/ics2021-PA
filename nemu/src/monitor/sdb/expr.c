@@ -144,8 +144,8 @@ static bool make_token(char *e) {
 Token get_main_token(Token *token,uint32_t end, uint32_t* pos){
 	// pos to record the current prior token position
 	int cnt;
-	int priority = 0;			// current main operator priority 
-	int temp_priority = 0;// record the current priority
+	int priority = 4;			// current main operator priority 
+	int temp_priority= 0;// record the current priority
 	
 	// to the end
 	for(cnt = 0;cnt < end+1 ;++cnt){
@@ -163,8 +163,9 @@ Token get_main_token(Token *token,uint32_t end, uint32_t* pos){
 			default: 
 			}
 
+		// the main token priority is the lowest 
 		if(token[cnt].type >= 42 && token[cnt].type <=47){
-			if(priority < temp_priority){
+				if(priority > temp_priority){
 				priority = temp_priority;
 				*pos = cnt;
 			}
