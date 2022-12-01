@@ -92,11 +92,11 @@ static bool make_token(char *e) {
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
+				printf("1 str is %s\n", tokens[nr_token].str);
         position += substr_len;
 				Log("position = %d\n", position);
 				Log("substr_len = %d\n", substr_len);
 				Log("substr_start = %s\n", substr_start);
-				printf("nr_token = %d\n", nr_token);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
