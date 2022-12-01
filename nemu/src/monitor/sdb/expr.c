@@ -111,6 +111,7 @@ static bool make_token(char *e) {
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
+											 tokens[nr_token].str[substr_len] = '\0';
 											 printf("str is %s\n", tokens[nr_token].str);
 											 assert(position <= 32); break;
           default: //TODO();
@@ -138,10 +139,13 @@ static bool make_token(char *e) {
 /*meet the bug1 : the first input: p 80000000 ,result is ok
  *but the next time you input any value,like 1+2 , it will show 
  * 10000000+2 , that's crazy
+ * i know the reason because of the damn string copy!!!!!!
+ * remember '\0'!!!!
  *
  * bug2 : if input 2*3+1 , it will do 2*3 + 3+1 , that' sucked!!!
  * the reason is op_pos is real parameter and it can not stay the 
  * data stable(the value will change in every recursion)
+ * 
  */
 
 //Get the main token and the position
