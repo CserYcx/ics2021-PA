@@ -187,7 +187,6 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 }
 
 // operator's position
-uint32_t op_pos = 0;
 uint32_t eval(uint32_t begin, uint32_t end){
 	if(begin > end){
 		// Bad expression 
@@ -219,6 +218,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 	}*/
 
 	else{
+		uint32_t op_pos = 0;
 		Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
 		printf("1  the current op's position is %d\n",op_pos);
