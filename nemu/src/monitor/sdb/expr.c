@@ -221,9 +221,9 @@ uint32_t eval(uint32_t begin, uint32_t end){
 	else{
 		Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
-		printf("the current op's position is %d\n",op_pos);
+		printf("1  the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
-		printf("the current op's position is %d\n",op_pos);
+		printf("2  the current op's position is %d\n",op_pos);
 		uint32_t val2 = eval(op_pos + 1,end);	
 		printf("val1 = %d, val2 = %d\n", val1,val2);
 		printf("type = %c\n",tokens[op_pos].type);
