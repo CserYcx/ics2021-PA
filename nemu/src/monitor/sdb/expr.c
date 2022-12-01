@@ -181,7 +181,6 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	}
 
 	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
-	printf("The last pos is %d\n",pos);
 	printf("Get main token is over**********************\n");
 	return pos;
 }
@@ -221,9 +220,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		uint32_t op_pos = 0;
 		Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
-		printf("1  the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
-		printf("2  the current op's position is %d\n",op_pos);
 		uint32_t val2 = eval(op_pos + 1,end);	
 		printf("val1 = %d, val2 = %d\n", val1,val2);
 		printf("type = %c\n",tokens[op_pos].type);
@@ -246,12 +243,12 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-	//	int cnt = 0;
-	/*printf("That show the tokens !!!!!\n");
+	int cnt = 0;
+	printf("That show the tokens !!!!!\n");
 	printf("nr_token = %d\n", nr_token);	
 	while(tokens[cnt].type != 0){
 	printf("token str is %s\n", tokens[cnt].str);
 	cnt++;
-	}*/
+	}
 	return eval(0,nr_token-1);
 }
