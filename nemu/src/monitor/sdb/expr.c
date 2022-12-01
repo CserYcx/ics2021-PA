@@ -111,7 +111,7 @@ static bool make_token(char *e) {
 					case TK_NOTYPE: break;
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
-											 memcpy(tokens[nr_token].str,substr_start,substr_len); 
+											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
 											 printf("str is %s\n", tokens[nr_token].str);
 											 assert(position <= 32); break;
           default: //TODO();
