@@ -138,10 +138,14 @@ static bool make_token(char *e) {
 /*meet the bug1 : the first input: p 80000000 ,result is ok
  *but the next time you input any value,like 1+2 , it will show 
  * 10000000+2 , that's crazy
+ *
+ * bug2 : if input 2*3+1 , it will do 2*3 + 3+1 , that' sucked!!!
+ * the reason is op_pos is real parameter and it can not stay the 
+ * data stable(the value will change in every recursion)
  */
 
 //Get the main token and the position
-Token get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t* pos){
+uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	// pos to record the current prior token position
 	int cnt;
 	int priority = 4;			// current main operator priority 
@@ -167,19 +171,19 @@ Token get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t* pos){
 		if(token[cnt].type >= 42 && token[cnt].type <=47){
 				if(priority > temp_priority){
 				priority = temp_priority;
-				*pos = cnt;
+				pos = cnt;
 			}
 			//if token's priority is same, choose the farther one
-			else if(priority == temp_priority && *pos <= cnt){*pos = cnt;}
-			printf("The current pos is %d\n",*pos);
+			else if(priority == temp_priority && pos <= cnt){pos = cnt;}
+			printf("The current pos is %d\n",pos);
 			printf("The current priority is %d\n",priority);
 		}
 	}
 
-	Assert(token[*pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
-	printf("The last pos is %d\n",*pos);
+	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
+	printf("The last pos is %d\n",pos);
 	printf("Get main token is over**********************\n");
-	return token[*pos];
+	return pos;
 }
 
 // operator's position
@@ -216,13 +220,13 @@ uint32_t eval(uint32_t begin, uint32_t end){
 
 	else{
 		Log("Begining find the main token!!\n");
-		Token op = get_main_token(tokens,begin,end,&op_pos);
+		op_pos = get_main_token(tokens,begin,end,op_pos);
 		printf("the current op's position is %d\n",op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
 		printf("val1 = %d, val2 = %d\n", val1,val2);
-		printf("op.type = %c\n",op.type);
-		switch (op.type){
+		printf("type = %c\n",tokens[op_pos].type);
+		switch (tokens[op_pos].type){
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
