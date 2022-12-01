@@ -107,7 +107,7 @@ static bool make_token(char *e) {
 					case '-': tokens[nr_token].type = rules[i].token_type;break;
 					case '*': tokens[nr_token].type = rules[i].token_type;break;
 					case '/': tokens[nr_token].type = rules[i].token_type;break;
-					case TK_NOTYPE: break;
+					case TK_NOTYPE: tokens[nr_token].type = rules[i].token_type;break;
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
@@ -168,6 +168,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '-': temp_priority = 1;break;
 			case '*': temp_priority = 2;break;
 			case '/': temp_priority = 2;break;
+			case TK_NOTYPE : break;
 			default: 
 			}
 
