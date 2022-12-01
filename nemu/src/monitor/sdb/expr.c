@@ -244,8 +244,6 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 	int cnt = 0;
-	printf("That show the tokens !!!!!\n");
-	printf("nr_token = %d\n", nr_token);	
 	while(tokens[cnt].type != 0){
 	printf("token str is %s\n", tokens[cnt].str);
 	cnt++;
