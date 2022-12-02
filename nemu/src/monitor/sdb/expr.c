@@ -103,20 +103,20 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[nr_token].type = rules[i].token_type;;break;
-					case '-': tokens[nr_token].type = rules[i].token_type;break;
-					case '*': tokens[nr_token].type = rules[i].token_type;break;
-					case '/': tokens[nr_token].type = rules[i].token_type;break;
-					case TK_NOTYPE: tokens[nr_token].type = rules[i].token_type;break;
+					case '+': tokens[nr_token++].type = rules[i].token_type;;break;
+					case '-': tokens[nr_token++].type = rules[i].token_type;break;
+					case '*': tokens[nr_token++].type = rules[i].token_type;break;
+					case '/': tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_NOTYPE: break;
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
 											 tokens[nr_token].str[substr_len] = '\0';
 											 printf("str is %s\n", tokens[nr_token].str);
+											 nr_token++;
 											 assert(position <= 32); break;
           default: //TODO();
         }
-				nr_token++;
         break;
       }
     }
@@ -152,7 +152,7 @@ static bool make_token(char *e) {
 uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	// pos to record the current prior token position
 	int cnt;
-	int priority = 4;			// current main operator priority 
+	int priority = 0xff;			// current main operator priority 
 	int temp_priority= 0;// record the current priority
 	
 	// to the end
@@ -168,7 +168,6 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '-': temp_priority = 1;break;
 			case '*': temp_priority = 2;break;
 			case '/': temp_priority = 2;break;
-			case TK_NOTYPE : break;
 			default: 
 			}
 
@@ -184,6 +183,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			printf("The current priority is %d\n",priority);
 		}
 	}
+
 
 	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
@@ -202,10 +202,6 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		// The token should be a number
 		// return the number value
 		printf("the begin = %d\n", begin); 
-		if (tokens[begin].type == TK_NOTYPE){
-			printf(" There is a blankspace !!! \n");
-			return 0;
-		}
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
 			return 0;
@@ -238,7 +234,6 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
-			case TK_NOTYPE: return 0;
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
