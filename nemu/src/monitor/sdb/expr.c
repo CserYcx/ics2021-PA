@@ -186,28 +186,33 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 		}
 	}
 
-
 	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
 	return pos;
 }
 
+// the expression should be surrounded with pairs of brackets
 bool check_parentheses(uint32_t begin, uint32_t end){
 	int sum = 0;
 	int bracket[2] = {0};
 	if(tokens[begin].type != '('){
 		return false;
 	}
-	for(int cnt = begin;cnt<=end;cnt++){
-		if(tokens[cnt].type == '('){
-			bracket[0]++;
-			sum++;
+	else{
+		for(int cnt = begin;cnt<=end;cnt++){
+			if(tokens[cnt].type == '('){
+				bracket[0]++;
+				sum++;
+			}
+			else if(tokens[cnt].type == ')'){
+				bracket[1]--;
+				sum--;
+			}
+			if(sum < 0){
+				printf("the expression is illegal\n");
+				return false;
+			}
 		}
-		else if(tokens[cnt].type == ')'){
-			bracket[1]--;
-			sum--;
-		}
-		if(sum < 0){return false;}
 	}
 	if(bracket[0] == 0 || bracket[1] == 0){
 		return false;
@@ -247,11 +252,6 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		//  in the case , throw away the parentheses
 		printf("the current begin is %d, end is %d\n",begin,end);
 		eval(begin+1,end-1);
-	}
-
-	else if(check_parentheses(begin,end) == false){
-		Log("The expression is illegal!!!\n");
-		return -1;
 	}
 
 	else { 
