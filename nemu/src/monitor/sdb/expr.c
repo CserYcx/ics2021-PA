@@ -223,7 +223,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 				return false;
 			}
 			// return true and use get_main_token to the next step
-			if(cnt != end && sum == 0){
+			if(cnt == end && sum == 0){
 				printf("the expression is illegal but can have a value\n");		
 				return true;
 			}
