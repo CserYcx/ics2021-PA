@@ -141,62 +141,62 @@ static int cmd_x(char *args) {
 			sscanf(arg,"%lx",addr_int);
 			printf("addr_int = %lx\n",*addr_int);
 
-			for(int cnt=0;cnt<next;cnt++){
-				printf("The current address is: 0x%lx \n",*addr_int);
-				show = paddr_read((*addr_int),4);
-				printf("show0x16 = 0x%lx   \n",show);
-				(*addr_int)++;
-			}
-  }
-  return 0;
-}
-
-static int cmd_p(char *args){
-	uint32_t show = 0;
-	char* arg = strtok(NULL, " ");
-	bool* success = (bool*)malloc(sizeof(bool));
-	*success = true;
-
-	if(arg == NULL){
-		/* no argument given */
-		printf("%s - %s\n", cmd_table[6].name, cmd_table[6].description);
-  }
-	else{
-		arg[strlen(arg)] = ' ';
-		printf("arg is %s\n", arg);
-		show = expr(arg,success);
-		assert(show != 0);
-		Log("the expression value = %d\n",show);
-		assert(*success == true);
+				for(int cnt=0;cnt<next;cnt++){
+					printf("The current address is: 0x%lx \n",*addr_int);
+					show = paddr_read((*addr_int),4);
+					printf("show0x16 = 0x%lx   \n",show);
+					(*addr_int)++;
+				}
+		}
+		return 0;
 	}
-	return 0;
-}
+
+	static int cmd_p(char *args){
+		uint32_t show = 0;
+		char* arg = strtok(NULL, " ");
+		bool* success = (bool*)malloc(sizeof(bool));
+		*success = true;
+
+		if(arg == NULL){
+			/* no argument given */
+			printf("%s - %s\n", cmd_table[6].name, cmd_table[6].description);
+		}
+		else{
+			arg[strlen(arg)] = ' ';
+			printf("arg is %s\n", arg);
+			show = expr(arg,success);
+			assert(show >=  0);
+			Log("the expression value = %d\n",show);
+			assert(*success == true);
+		}
+		return 0;
+	}
 
 
 
 
-void sdb_set_batch_mode() {
-  is_batch_mode = true;
-}
+	void sdb_set_batch_mode() {
+		is_batch_mode = true;
+	}
 
-void sdb_mainloop() {
-  if (is_batch_mode) {
-    cmd_c(NULL);
-    return;
-  }
+	void sdb_mainloop() {
+		if (is_batch_mode) {
+			cmd_c(NULL);
+			return;
+		}
 
-  for (char *str; (str = rl_gets()) != NULL; ) {
-    char *str_end = str + strlen(str);
+		for (char *str; (str = rl_gets()) != NULL; ) {
+			char *str_end = str + strlen(str);
 
-    /* extract the first token as the command */
-    char *cmd = strtok(str, " ");
-    if (cmd == NULL) { continue; }
+			/* extract the first token as the command */
+			char *cmd = strtok(str, " ");
+			if (cmd == NULL) { continue; }
 
-    /* treat the remaining string as the arguments,
-     * which may need further parsing
-     */
-    char *args = cmd + strlen(cmd) + 1;
-    if (args >= str_end) {
+			/* treat the remaining string as the arguments,
+			 * which may need further parsing
+			 */
+			char *args = cmd + strlen(cmd) + 1;
+			if (args >= str_end) {
       args = NULL;
     }
 
