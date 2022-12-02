@@ -249,6 +249,11 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		eval(begin+1,end-1);
 	}
 
+	else if(check_parentheses(begin,end) == false){
+		Log("The expression is illegal!!!\n");
+		return -1;
+	}
+
 	else { 
 		uint32_t op_pos = 0;
 		Log("Begining find the main token!!\n");
