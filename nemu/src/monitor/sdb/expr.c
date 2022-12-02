@@ -202,6 +202,9 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		// The token should be a number
 		// return the number value
 		printf("the begin = %d\n", begin); 
+		if (tokens[begin].type == TK_NOTYPE){
+			printf(" There is a blankspace !!! \n");
+		}
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
 			return 0;
