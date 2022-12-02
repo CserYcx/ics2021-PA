@@ -209,6 +209,9 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		}
 		if(sum < 0){return false;}
 	}
+	if(bracket[0] == 0 || bracket[1] == 0){
+		return false;
+	}
 	if(sum == 0 && bracket[0]+bracket[1] == 0){
 		return true;
 	}
