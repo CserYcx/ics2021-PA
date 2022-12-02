@@ -204,6 +204,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		printf("the begin = %d\n", begin); 
 		if (tokens[begin].type == TK_NOTYPE){
 			printf(" There is a blankspace !!! \n");
+			return 0;
 		}
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
