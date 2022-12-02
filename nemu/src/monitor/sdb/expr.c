@@ -265,7 +265,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
-	return 0;
+	return 100;
 }
 
 
