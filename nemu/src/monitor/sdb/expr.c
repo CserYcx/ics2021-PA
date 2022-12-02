@@ -103,10 +103,12 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[nr_token++].type = rules[i].token_type;;break;
+					case '+': tokens[nr_token++].type = rules[i].token_type;break;
 					case '-': tokens[nr_token++].type = rules[i].token_type;break;
 					case '*': tokens[nr_token++].type = rules[i].token_type;break;
 					case '/': tokens[nr_token++].type = rules[i].token_type;break;
+					case '(': tokens[nr_token++].type = rules[i].token_type;break;
+					case ')': tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_NOTYPE: break;
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
 					//maybe overflow, remember to rewrite the code 
@@ -190,6 +192,29 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	return pos;
 }
 
+bool check_parentheses(uint32_t begin, uint32_t end){
+	int sum = 0;
+	int bracket[2] = {0};
+	if(tokens[begin].type != '('){
+		return true;
+	}
+	for(int cnt = begin;cnt<=end;cnt++){
+		if(tokens[cnt].type == '('){
+			bracket[0]++;
+			sum++;
+		}
+		else if(tokens[cnt].type == ')'){
+			bracket[1]--;
+			sum--;
+		}
+		if(sum < 0){return false;}
+	}
+	if(sum == 0 && bracket[0]+bracket[1] == 0){
+		return true;
+	}
+	return false;
+}
+
 // operator's position
 uint32_t eval(uint32_t begin, uint32_t end){
 	if(begin > end){
@@ -214,12 +239,12 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		}
 	}
 
-	/*else if(check_parentheses(begin,end) == true){
+	else if(check_parentheses(begin,end) == true){
 		//  Expression is surronded by a matched pair of parentheses
 		//  in the case , throw away the parentheses
-		// 
+		printf("the current begin is %d, end is %d\n",begin,end);
 		eval(begin+1,end-1);
-	}*/
+	}
 
 	else{
 		uint32_t op_pos = 0;
@@ -237,6 +262,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
+	return -1;
 }
 
 
