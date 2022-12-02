@@ -258,14 +258,15 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		printf("val1 = %d, val2 = %d\n", val1,val2);
 		printf("type = %c\n",tokens[op_pos].type);
 		switch (tokens[op_pos].type){
-			case '+': return val1 + val2;
+			case '+':printf("000\n"); return val1 + val2;
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
-	return 100;
+	printf("111\n");
+	return 0;
 }
 
 
