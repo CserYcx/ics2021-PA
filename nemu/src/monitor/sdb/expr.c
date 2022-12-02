@@ -196,7 +196,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 	int sum = 0;
 	int bracket[2] = {0};
 	if(tokens[begin].type != '('){
-		return true;
+		return false;
 	}
 	for(int cnt = begin;cnt<=end;cnt++){
 		if(tokens[cnt].type == '('){
