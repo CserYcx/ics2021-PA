@@ -249,7 +249,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		eval(begin+1,end-1);
 	}
 
-	else{
+	else if(begin < end){
 		uint32_t op_pos = 0;
 		Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
