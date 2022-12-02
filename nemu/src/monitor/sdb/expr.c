@@ -148,12 +148,15 @@ static bool make_token(char *e) {
  * the reason is op_pos is real parameter and it can not stay the 
  * data stable(the value will change in every recursion)
  * 
+ * bug3 : if input ((2+1)*(1+2)), after first checkparentheses,the expression 
+ * will be the (2+1)*(1+2) , then it will get main token and segment fault
  */
 
 //Get the main token and the position
 uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	// pos to record the current prior token position
 	int cnt;
+	int flag = 1;
 	int priority = 0xff;			// current main operator priority 
 	int temp_priority= 0;// record the current priority
 	
@@ -170,21 +173,28 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '-': temp_priority = 1;break;
 			case '*': temp_priority = 2;break;
 			case '/': temp_priority = 2;break;
+			case '(': flag = 0;break;
+			case ')': flag = 1;break;
 			default: 
 			}
 
 		// the main token priority is the lowest 
-		if(token[cnt].type >= 42 && token[cnt].type <=47){
-				if(priority > temp_priority){
-				priority = temp_priority;
-				pos = cnt;
+		if(flag == 1){
+			if(token[cnt].type >= 42 && token[cnt].type <=47){
+					if(priority > temp_priority){
+					priority = temp_priority;
+					pos = cnt;
+				}
+				//if token's priority is same, choose the farther one
+				else if(priority == temp_priority && pos <= cnt){pos = cnt;}
+				printf("The current pos is %d\n",pos);
+				printf("The current priority is %d\n",priority);
 			}
-			//if token's priority is same, choose the farther one
-			else if(priority == temp_priority && pos <= cnt){pos = cnt;}
-			printf("The current pos is %d\n",pos);
-			printf("The current priority is %d\n",priority);
 		}
-	}
+		else if(flag == 0){
+			continue;
+		}
+	}	
 
 	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
@@ -212,8 +222,13 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 				printf("the expression is illegal\n");
 				return false;
 			}
-		}
+			// return true and use get_main_token to the next step
+			if(cnt != end && sum == 0){
+				printf("the expression is illegal but can have a value\n");		
+				return true;
+			}
 	}
+}
 	if(bracket[0] == 0 || bracket[1] == 0){
 		return false;
 	}
@@ -238,6 +253,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
 			return 0;
+
 		}
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
@@ -287,5 +303,6 @@ word_t expr(char *e, bool *success) {
 	printf("token str is %s\n", tokens[cnt].str);
 	cnt++;
 	}
+
 	return eval(0,nr_token-1);
 }
