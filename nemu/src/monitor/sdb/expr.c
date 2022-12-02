@@ -234,6 +234,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
+			case TK_NOTYPE: return 0;
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
