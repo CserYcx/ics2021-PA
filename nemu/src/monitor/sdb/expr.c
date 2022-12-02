@@ -252,8 +252,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		printf("the begin = %d\n", begin); 
 		if (tokens[begin].type != TK_NUM){
 			Log("The token is not a number!!!");
-			return 0;
-
+			Assert(tokens[begin].type == TK_NUM,"The token is error!!!\n");
 		}
 		else{
 			Assert(tokens[begin].str, "The num is none!!!\n");
