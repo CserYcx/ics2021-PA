@@ -233,6 +233,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			// return true and use get_main_token to the next step
 			// like (1+2)*(3+4)
 			if(bracket[inner-1] == ')' && bracket[inner] == '('){
+				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
 				flag = 1;	
 			}
 	}
