@@ -93,9 +93,9 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
-				Log("position = %d\n", position);
-				Log("substr_len = %d\n", substr_len);
-				Log("substr_start = %s\n", substr_start);
+				//Log("position = %d\n", position);
+				//Log("substr_len = %d\n", substr_len);
+				//Log("substr_start = %s\n", substr_start);
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
@@ -114,7 +114,7 @@ static bool make_token(char *e) {
 					//maybe overflow, remember to rewrite the code 
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
 											 tokens[nr_token].str[substr_len] = '\0';
-											 printf("str is %s\n", tokens[nr_token].str);
+											 //printf("str is %s\n", tokens[nr_token].str);
 											 nr_token++;
 											 assert(position <= 32); break;
           default: //TODO();
@@ -302,8 +302,9 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 	int cnt = 0;
+	printf("token str is: \n");
 	while(tokens[cnt].type != 0){
-	printf("token str is %s\n", tokens[cnt].str);
+	printf("%s", tokens[cnt].str);
 	cnt++;
 	}
 
