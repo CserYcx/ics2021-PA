@@ -219,12 +219,10 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		for(int cnt = begin;cnt<=end;cnt++){
 			if(tokens[cnt].type == '('){
 				bracket[inner++] = '('; 
-				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
 				sum++;
 			}
 			else if(tokens[cnt].type == ')'){
 				bracket[inner++] = ')'; 
-				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
 				sum--;
 			}
 			if(sum < 0){
@@ -233,8 +231,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			}
 			// return true and use get_main_token to the next step
 			// like (1+2)*(3+4)
-			if(bracket[inner-1] == ')' && bracket[inner] == '('){
-				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
+			if(bracket[inner-2] == ')' && bracket[inner-1] == '('){
 				flag = 1;	
 			}
 	}
