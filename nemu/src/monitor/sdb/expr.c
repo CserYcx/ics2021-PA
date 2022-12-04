@@ -207,10 +207,10 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 // the expression should be surrounded with pairs of brackets
 bool check_parentheses(uint32_t begin, uint32_t end){
-	
 	if(tokens[begin].type != '('){
 		return false;
 	}
+
 	int sum = 0;
 	char bracket[32] = {'0'};
 	int inner = 0;
@@ -236,7 +236,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		}
 	}
 	
-	if(flag == 1){printf("The expression is illegal but has a value\n");return true;}
+	if(flag == 1 && tokens[begin].type == '(' && tokens[end].type == ')'){printf("The expression is illegal but has a value\n");return true;}
 	if(sum > 0){printf("expression is bad!!!\n");assert(0);}
 	if(sum == 0 && bracket[0] == '0'){return false;}
 	if(sum == 0){return true;}
