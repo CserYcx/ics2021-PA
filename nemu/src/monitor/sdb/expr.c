@@ -218,10 +218,12 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		for(int cnt = begin;cnt<=end;cnt++){
 			if(tokens[cnt].type == '('){
 				bracket[inner++] = '('; 
+				printf("bracket[inner] = %c\n", bracket[inner]); 
 				sum++;
 			}
 			else if(tokens[cnt].type == ')'){
 				bracket[inner++] = ')'; 
+				printf("bracket[inner] = %c\n", bracket[inner]); 
 				sum--;
 			}
 			if(sum < 0){
@@ -233,7 +235,6 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			if(bracket[inner-1] == ')' && bracket[inner] == '('){
 				flag = 1;	
 			}
-			printf("bracket[inner] = %c\n", bracket[inner]); 
 	}
 }
 	//expression like (1+2)*(3+4)
