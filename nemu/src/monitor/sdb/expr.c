@@ -218,12 +218,12 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		for(int cnt = begin;cnt<=end;cnt++){
 			if(tokens[cnt].type == '('){
 				bracket[inner++] = '('; 
-				printf("bracket[inner] = %c\n", bracket[inner-1]); 
+				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
 				sum++;
 			}
 			else if(tokens[cnt].type == ')'){
 				bracket[inner++] = ')'; 
-				printf("bracket[inner] = %c\n", bracket[inner-1]); 
+				printf("bracket[inner] = %c, inner = %d\n", bracket[inner-1],inner); 
 				sum--;
 			}
 			if(sum < 0){
