@@ -158,7 +158,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	int cnt;
 	int flag = 1; //whether the begin is bracket or not, the iteration is ok
 	int priority = 0xff;			// current main operator priority 
-	int temp_priority= 0;// record the current priority
+	int temp_priority= 0xff;// record the current priority
 	
 	// to the end
 	for(cnt = begin;cnt <= end ;++cnt){
@@ -181,7 +181,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 		// the main token priority is the lowest 
 		if(flag == 1){	
 			if(token[cnt].type >= 42 && token[cnt].type <=47){
-					if(priority > temp_priority){
+				if(priority > temp_priority){
 					priority = temp_priority;
 					pos = cnt;
 				}
