@@ -207,7 +207,8 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 // the expression should be surrounded with pairs of brackets
 bool check_parentheses(uint32_t begin, uint32_t end){
-	int flag,inner = 0;
+	int inner = 0;
+	int flag = 0;
 	int sum = 0;
 	char bracket[32] = {'0'};
 	// At the begin must be the left bracket
