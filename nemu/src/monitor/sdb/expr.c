@@ -158,7 +158,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	int cnt;
 	int flag = 1; //whether the begin is bracket or not, the iteration is ok
 	int priority = 0xff;			// current main operator priority 
-	int temp_priority= 0xff;// record the current priority
+	int temp_priority= 0xfff;// record the current priority
 	
 	// to the end
 	for(cnt = begin;cnt <= end ;++cnt){
@@ -231,7 +231,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			// like (1+2)*(3+4)
 			if(cnt == end && sum == 0){
 				printf("the expression is illegal but can have a value\n");		
-				return true;
+				return false;
 			}
 	}
 }
@@ -275,7 +275,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 
 	else { 
 		uint32_t op_pos = 0;
-		Log("Begining find the main token!!\n");
+		//Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
@@ -302,11 +302,11 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
 	int cnt = 0;
-	printf("token str is: \n");
+	printf("token str is: ");
 	while(tokens[cnt].type != 0){
 	printf("%s", tokens[cnt].str);
 	cnt++;
 	}
-
+	printf("\n");
 	return eval(0,nr_token-1);
 }
