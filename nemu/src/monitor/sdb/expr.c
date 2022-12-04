@@ -207,10 +207,10 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 // the expression should be surrounded with pairs of brackets
 bool check_parentheses(uint32_t begin, uint32_t end){
-	if(tokens[begin].type == '(' && tokens[end].type == ')'){
-		return true;
+	
+	if(tokens[begin].type != '('){
+		return false;
 	}
-
 	int sum = 0;
 	char bracket[32] = {'0'};
 	int inner = 0;
