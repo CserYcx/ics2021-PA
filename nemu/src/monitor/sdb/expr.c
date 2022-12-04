@@ -207,44 +207,39 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 // the expression should be surrounded with pairs of brackets
 bool check_parentheses(uint32_t begin, uint32_t end){
-	int inner = 0;
-	int flag = 0;
-	int sum = 0;
-	char bracket[32] = {'0'};
-	// At the begin must be the left bracket
-	if(tokens[begin].type != '('){
-		return false;
-	}
-	else{
-		for(int cnt = begin;cnt<=end;cnt++){
-			if(tokens[cnt].type == '('){
-				bracket[inner++] = '('; 
-				sum++;
-			}
-			else if(tokens[cnt].type == ')'){
-				bracket[inner++] = ')'; 
-				sum--;
-			}
-			if(sum < 0){
-				printf("the expression is illegal\n");
-				return false;
-			}
-			// return true and use get_main_token to the next step
-			// like (1+2)*(3+4)
-			if(bracket[inner-2] == ')' && bracket[inner-1] == '('){
-				flag = 1;	
-			}
-	}
-}
-	//expression like (1+2)*(3+4)
-	if(flag == 1){
-		printf("the expression is illegal but can have a value\n");		
-		return false;
-	}
-	if(sum == 0){
+	if(tokens[begin].type == '(' && tokens[end].type == ')'){
 		return true;
 	}
-	return false;
+
+	int sum = 0;
+	char bracket[32] = {'0'};
+	int inner = 0;
+	int flag = 0;
+	for(int cnt = begin; cnt <= end;cnt++){
+		if(tokens[cnt].type == '('){
+			bracket[inner] = '(';
+			inner++;
+			sum++;
+		}
+		else if(tokens[cnt].type == ')'){
+			bracket[inner] = ')';
+			inner++;
+			sum--;
+		}
+		if(sum < 0){
+			printf("The expression's bracket is bad!!\n");
+			assert(0);
+		}
+		if(bracket[inner-2] == ')' && bracket[inner-1] == '('){
+			flag = 1;
+			return true;
+		}
+	}
+	
+	if(flag == 1){printf("The expression is illegal but has a value\n");return true;}
+	if(sum > 0){printf("expression is bad!!!\n");assert(0);}
+	return true;
+	
 }
 
 // operator's position
