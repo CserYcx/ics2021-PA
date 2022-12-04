@@ -197,7 +197,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	//Error type
 	if(priority == 0xff){
 		Log("The expression has no operator!!!!!\n");
-		return -1;
+		assert(0);
 	}
 
 	Assert(token[pos].type < TK_NOTYPE, "Token is not operator!!!\n");	
