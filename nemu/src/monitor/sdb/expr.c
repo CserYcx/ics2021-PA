@@ -156,7 +156,7 @@ static bool make_token(char *e) {
 uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	// pos to record the current prior token position
 	int cnt;
-	int flag = 1;
+	int flag = 1; //whether the begin is bracket or not, the iteration is ok
 	int priority = 0xff;			// current main operator priority 
 	int temp_priority= 0;// record the current priority
 	
@@ -179,7 +179,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			}
 
 		// the main token priority is the lowest 
-		if(flag == 1){
+		if(flag == 1){	
 			if(token[cnt].type >= 42 && token[cnt].type <=47){
 					if(priority > temp_priority){
 					priority = temp_priority;
@@ -191,12 +191,16 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 				printf("The current priority is %d\n",priority);
 			}
 		}
-		else if(flag == 0){
-			continue;
-		}
+		
 	}	
 
-	Assert(token[pos].type <= TK_NOTYPE, "Token is not operator!!!\n");	
+	//Error type
+	if(priority == 0xff){
+		Log("The expression has no operator!!!!!\n");
+		return -1;
+	}
+
+	Assert(token[pos].type < TK_NOTYPE, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
 	return pos;
 }
@@ -205,6 +209,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 bool check_parentheses(uint32_t begin, uint32_t end){
 	int sum = 0;
 	int bracket[2] = {0};
+	// At the begin must be the left bracket
 	if(tokens[begin].type != '('){
 		return false;
 	}
@@ -223,16 +228,15 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 				return false;
 			}
 			// return true and use get_main_token to the next step
+			// like (1+2)*(3+4)
 			if(cnt == end && sum == 0){
 				printf("the expression is illegal but can have a value\n");		
 				return true;
 			}
 	}
 }
-	if(bracket[0] == 0 || bracket[1] == 0){
-		return false;
-	}
-	if(sum == 0 && bracket[0]+bracket[1] == 0){
+
+	if(sum == 0){
 		return true;
 	}
 	return false;
@@ -266,7 +270,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		//  Expression is surronded by a matched pair of parentheses
 		//  in the case , throw away the parentheses
 		printf("the current begin is %d, end is %d\n",begin,end);
-		eval(begin+1,end-1);
+		return eval(begin+1,end-1);
 	}
 
 	else { 
@@ -275,10 +279,10 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		op_pos = get_main_token(tokens,begin,end,op_pos);
 		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
-		printf("val1 = %d, val2 = %d\n", val1,val2);
+		printf("val1 = %d, val2 = %d\n",val1,val2);
 		printf("type = %c\n",tokens[op_pos].type);
 		switch (tokens[op_pos].type){
-			case '+':printf("000\n"); return val1 + val2;
+			case '+': return val1 + val2;
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
