@@ -233,6 +233,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			if(bracket[inner-1] == ')' && bracket[inner] == '('){
 				flag = 1;	
 			}
+			printf("bracket[inner] = %c\n", bracket[inner]); 
 	}
 }
 	//expression like (1+2)*(3+4)
