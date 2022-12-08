@@ -211,10 +211,16 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		return false;
 	}
 
+	int outer = 0; // outer is to record whether the out lay is cover by parentheses
 	int sum = 0;
 	char bracket[32] = {'0'};
 	int inner = 0;
 	int flag = 0;
+	if (tokens[begin].type == '(' && tokens[end].type == ')'){
+		outer = 1;
+	}
+	
+	//find every pair of parentheses
 	for(int cnt = begin; cnt <= end;cnt++){
 		if(tokens[cnt].type == '('){
 			bracket[inner] = '(';
@@ -232,11 +238,10 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 		}
 		if(bracket[inner-2] == ')' && bracket[inner-1] == '('){
 			flag = 1;
-			return true;
 		}
 	}
 	
-	if(flag == 1 && tokens[begin].type == '(' && tokens[end].type == ')'){printf("The expression is illegal but has a value\n");return true;}
+	if(flag == 1 && outer == 1 && inner >= 1){printf("The expression is illegal but has a value\n");return true;}
 	if(sum > 0){printf("expression is bad!!!\n");assert(0);}
 	if(sum == 0 && bracket[0] == '0'){return false;}
 	if(sum == 0){return true;}
