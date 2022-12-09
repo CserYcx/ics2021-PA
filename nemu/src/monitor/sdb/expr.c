@@ -142,7 +142,7 @@ static bool make_token(char *e) {
  *but the next time you input any value,like 1+2 , it will show 
  * 10000000+2 , that's crazy
  * i know the reason because of the damn string copy!!!!!!
- * remember '\0'!!!!
+ * remember '\0'!!!!false
  *
  * bug2 : if input 2*3+1 , it will do 2*3 + 3+1 , that' sucked!!!
  * the reason is op_pos is real parameter and it can not stay the 
@@ -249,7 +249,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 	if(begin > end){
 		// Bad expression 
 		Log("That is a bad expression");
-		return 0;
+		return -1;
 	}
 	else if(begin == end){
 		// Single tokens
