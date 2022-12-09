@@ -239,7 +239,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 	
 	if(flag == 1 && outer == 1){printf("The expression is illegal but has a value\n");return false;}
 	if(sum > 0){printf("expression is bad!!!\n");assert(0);}
-	if(sum == 0 && bracket[0] == '0'){return false;}
+	if(sum == 0 && bracket[0] == '0'){return true;}
 	if(sum == 0 && flag == 0 && outer == 1){return true;}
 	return false;
 }
