@@ -221,7 +221,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 	}
 	
 	//find every pair of parentheses
-	for(int cnt = begin; cnt <= end;cnt++){
+	for(int cnt = begin+1; cnt <= end-1;cnt++){
 		if(tokens[cnt].type == '('){
 			bracket[inner] = '(';
 			inner++;
@@ -233,18 +233,14 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 			sum--;
 		}
 		if(sum < 0){
-			printf("The expression's bracket is bad!!\n");
-			assert(0);
-		}
-		if(bracket[inner-2] == ')' && bracket[inner-1] == '('){
 			flag = 1;
 		}
 	}
 	
-	if(flag == 1 && outer == 1 && inner >= 2){printf("The expression is illegal but has a value\n");return true;}
+	if(flag == 1 && outer == 1){printf("The expression is illegal but has a value\n");return false;}
 	if(sum > 0){printf("expression is bad!!!\n");assert(0);}
 	if(sum == 0 && bracket[0] == '0'){return false;}
-	if(sum == 0){return true;}
+	if(sum == 0 && flag == 0 && outer == 1){return true;}
 	return false;
 }
 
