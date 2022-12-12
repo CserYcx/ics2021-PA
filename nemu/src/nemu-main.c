@@ -25,6 +25,7 @@ void test(){
       if (buf[length-1] == '\n'){
         buf[length-1] = '\0';
       }   
+			printf("Is here!!!\n");
       show = expr(exp,success); 
       printf("The expr's result is %d\n",show);
     }
