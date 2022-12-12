@@ -169,6 +169,7 @@ static int cmd_x(char *args) {
 			Log("the expression value = %d\n",show);
 			assert(*success == true);
 		}
+		free(success);
 		return 0;
 	}
 
