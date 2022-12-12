@@ -11,9 +11,9 @@ void test();
 
 void test(){
 		static char buf[MAX] = {};
-    unsigned int show = 0;
+    //unsigned int show = 0;
     unsigned int length = 0;
-    bool *success = (bool*)malloc(sizeof(bool));
+    //bool *success = (bool*)malloc(sizeof(bool));
     FILE *fp = fopen("input","r");
     if (fp == NULL){
       printf("Cannot Open The File!!!\n");
@@ -25,9 +25,9 @@ void test(){
       if (buf[length-1] == '\n'){
         buf[length-1] = '\0';
       }   
-			printf("Is here!!!\n");
-      show = expr(exp,success); 
-      printf("The expr's result is %d\n",show);
+			printf("exp is %s!!!\n",exp);
+      //show = expr(exp,success); 
+      //printf("The expr's result is %d\n",show);
     }
 		return; 
 }
