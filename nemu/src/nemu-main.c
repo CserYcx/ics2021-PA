@@ -14,7 +14,7 @@ void test(){
     unsigned int show = 0;
     unsigned int length = 0;
     bool *success = (bool*)malloc(sizeof(bool));
-    FILE *fp = fopen("~/ics2021/nemu/tools/gen-expr/input","r");
+    FILE *fp = fopen("input","r");
     if (fp == NULL){
       printf("Cannot Open The File!!!\n");
       fclose(fp);
