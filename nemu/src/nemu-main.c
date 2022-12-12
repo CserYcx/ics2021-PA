@@ -19,6 +19,7 @@ void test(){
       printf("Cannot Open The File!!!\n");
       fclose(fp);
     }
+		//Line read, buf is a buffer having every line string 
     while(fgets(buf,MAX,fp)){
       strtok(buf," ");
 			char *exp = strtok(NULL," ");
@@ -34,7 +35,7 @@ void test(){
 }
 
 int main(int argc, char *argv[]) {
-	test();
+	//test();
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM
   am_init_monitor();
