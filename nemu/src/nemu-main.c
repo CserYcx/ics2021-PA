@@ -14,11 +14,10 @@ void test(){
     unsigned int show = 0;
     unsigned int length = 0;
     bool *success = (bool*)malloc(sizeof(bool));
-    FILE *fp = fopen("../tools/gen-expr/input","r");
+    FILE *fp = fopen("~/ics2021/nemu/tools/gen-expr/input","r");
     if (fp == NULL){
       printf("Cannot Open The File!!!\n");
       fclose(fp);
-      return ;
     }
     while(fgets(buf,MAX,fp)){
       char *exp = strtok(buf," ");
@@ -29,7 +28,7 @@ void test(){
       show = expr(exp,success); 
       printf("The expr's result is %d\n",show);
     }
-    return ;
+		return; 
 }
 
 int main(int argc, char *argv[]) {
