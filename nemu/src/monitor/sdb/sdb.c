@@ -43,7 +43,7 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args){
 	//cut the string
 	char *arg = strtok(NULL, " ");
-		int num = 0;
+	int num = 0;
   if (arg == NULL) {
     /* no argument given */
 		cpu_exec(1);
@@ -149,9 +149,9 @@ static int cmd_x(char *args) {
 				}
 		}
 		return 0;
-	}
+}
 
-	static int cmd_p(char *args){
+static int cmd_p(char *args){
 		uint32_t show = 0;
 		char* arg = strtok(NULL, " ");
 		bool* success = (bool*)malloc(sizeof(bool));
@@ -171,7 +171,7 @@ static int cmd_x(char *args) {
 		}
 		free(success);
 		return 0;
-	}
+}
 
 
 

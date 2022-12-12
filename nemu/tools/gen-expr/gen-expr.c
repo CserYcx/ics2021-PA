@@ -46,8 +46,14 @@ uint32_t choose(uint32_t num){
 //generate the number
 static void gen_num(){
 	uint32_t rand_num = rand();
-	sprintf(buf+count+length,"%d",rand_num);
-	length = length+len(rand_num);
+	if(*(buf+count+length-1)=='/' && rand_num == 0){
+		sprintf(buf+count+length,"%d",1);
+		length = length+1;
+	}
+	else{
+		sprintf(buf+count+length,"%d",rand_num);
+		length = length+len(rand_num);
+	}
 }
 
 //generate the expression with the parentheses
@@ -117,7 +123,8 @@ int main(int argc, char *argv[]) {
     pclose(fp);
 
     printf("%u %s\n", result, buf+count);
-		count = count + length;
+		if(count + length <= 0xffff-1){count = count + length;} 
+		else{count = 0;}//prevent buf overflow
 		length = 0; // for the next loop to calculate the length
   }
   return 0;

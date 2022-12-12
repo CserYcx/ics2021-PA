@@ -66,7 +66,7 @@ typedef struct token {
 } Token;
 
 //__attribute__((used)) means that the variable must be emitted even if it appears that the variable is not referenced.
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[0xffff] __attribute__((used)) = {};
 //the tokens have been recognized number
 static int nr_token __attribute__((used))  = 0;
 
@@ -303,12 +303,12 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-	int cnt = 0;
+	/*int cnt = 0;
 	printf("token str is: ");
 	while(tokens[cnt].type != 0){
 	printf("%s", tokens[cnt].str);
 	cnt++;
 	}
-	printf("\n");
+	printf("\n");*/
 	return eval(0,nr_token-1);
 }
