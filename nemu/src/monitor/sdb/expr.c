@@ -38,7 +38,7 @@ static struct rule {
 
 //NR_REFEX is haved been recognized token number(means having all the recognized rules) 
 #define NR_REGEX ARRLEN(rules)
-
+#define MAX_LEN 0xFFFF
 //re is to store the token has been recognized and regcomp will compile them
 static regex_t re[NR_REGEX] = {};
 
@@ -66,7 +66,7 @@ typedef struct token {
 } Token;
 
 //__attribute__((used)) means that the variable must be emitted even if it appears that the variable is not referenced.
-static Token tokens[0xffff] __attribute__((used)) = {};
+static Token tokens[MAX_LEN] __attribute__((used)) = {};
 //the tokens have been recognized number
 static int nr_token __attribute__((used))  = 0;
 
@@ -116,7 +116,7 @@ static bool make_token(char *e) {
 											 tokens[nr_token].str[substr_len] = '\0';
 											 //printf("str is %s\n", tokens[nr_token].str);
 											 nr_token++;
-											 assert(position <= 32); break;
+											 assert(position <= MAX_LEN); break;
           default: //TODO();
         }
         break;
