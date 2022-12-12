@@ -20,7 +20,8 @@ void test(){
       fclose(fp);
     }
     while(fgets(buf,MAX,fp)){
-      char *exp = strtok(buf," ");
+      strtok(buf," ");
+			char *exp = strtok(NULL," ");
       length = strlen(exp);
       if (buf[length-1] == '\n'){
         buf[length-1] = '\0';
