@@ -265,11 +265,17 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			Log("The token is not a number!!!");
 			Assert(tokens[begin].type == TK_NUM,"The token is error!!!\n");
 		}
-		else{
+		else if (tokens[begin].type == TK_NUM){
 			Assert(tokens[begin].str, "The num is none!!!\n");
 			printf("the string is %s\n", tokens[begin].str);
 			printf("the nums value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
+		}
+		else if (tokens[begin].type == TK_HEXNUM){
+			Assert(tokens[begin].str, "The num is none!!!\n");
+			printf("the string is %s\n", tokens[begin].str);
+			printf("the nums value is %s\n", tokens[begin].str);
+			return strtol(tokens[begin].str,NULL,16);
 		}
 	}
 
