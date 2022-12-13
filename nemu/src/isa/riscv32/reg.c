@@ -20,7 +20,7 @@ void isa_reg_display() {
 word_t isa_reg_str2val(const char *s, bool *success) {
 	int result = 0;
 	for(int cnt = 0;cnt<32;++cnt){
-		if(strcmp(regs[cnt],s)){
+		if(strcmp(regs[cnt],s)==0){
 			printf("Find the reg!!\n");
 			result = gpr(cnt);	
 		}
