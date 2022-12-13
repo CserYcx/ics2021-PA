@@ -1,5 +1,6 @@
 #include <isa.h>
 #include "local-include/reg.h"
+#include "string.h"
 
 const char *regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
@@ -18,9 +19,8 @@ void isa_reg_display() {
 
 word_t isa_reg_str2val(const char *s, bool *success) {
 	int result = 0;
-	printf("s = %s\n",s);
 	for(int cnt = 0;cnt<32;++cnt){
-		printf("regs[cnt] = %s\n",regs[cnt]);
+		printf("regs[cnt] = %s\n",regs[cnt]+2);
 		if(regs[cnt] == s){
 			printf("Find the reg!!\n");
 			result = gpr(cnt);	
