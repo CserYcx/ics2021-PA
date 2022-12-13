@@ -23,7 +23,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	strcpy(temp,s);
 	for(int cnt = 0;cnt<32;++cnt){
 		printf("regs[cnt] = %s\n",s);
-		if(regs[cnt] == temp){
+		if(strcmp(regs[cnt],temp)){
 			printf("Find the reg!!\n");
 			result = gpr(cnt);	
 		}
