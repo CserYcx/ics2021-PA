@@ -21,13 +21,13 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 	int result = 0;
 	char  temp[10] = {};
 	strcpy(temp,s);
-	printf("temp  %s\n",temp);
 	for(int cnt = 0;cnt<32;++cnt){
 		printf("regs[cnt] = %s\n",s);
 		if(regs[cnt] == temp){
 			printf("Find the reg!!\n");
 			result = gpr(cnt);	
 		}
+		else{printf("%s\n",regs[cnt]);}
 	}
 	printf("Is here!\n");
   return result;
