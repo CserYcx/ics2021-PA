@@ -10,6 +10,7 @@
 //rules type: use the type value to judge which token is what
 enum {
   TK_NOTYPE = 256, 
+	TK_NOTEQ,
 	TK_EQ,
 	TK_NUM,
 	TK_HEXNUM,
@@ -28,8 +29,9 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
+	{"!=", TK_NOTEQ},     // not equal
+  {"\\+", '+'},         // plus
 	{"\\-", '-'},					// sub
 	{"\\*", '*'},					// multiple
 	{"\\/", '/'},					// divide
@@ -113,7 +115,8 @@ static bool make_token(char *e) {
 					case '/':  tokens[nr_token++].type = rules[i].token_type;break;
 					case '(':  tokens[nr_token++].type = rules[i].token_type;break;
 					case ')':  tokens[nr_token++].type = rules[i].token_type;break;
-					case TK_EQ:tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_EQ:		tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_NOTEQ:tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_NOTYPE: break;
 					// the decial number
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
@@ -192,12 +195,13 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '(': flag = 0;break;
 			case ')': flag = 1;break;
 			case TK_EQ: temp_priority = 1;break;
+			case TK_NOTEQ: temp_priority = 1;break;
 			default: 
 			}
 
 		// the main token priority is the lowest 
 		if(flag == 1){	
-			if(token[cnt].type <=47||token[cnt].type == TK_EQ){
+			if(token[cnt].type <=47||token[cnt].type == TK_EQ||token[cnt].type == TK_NOTEQ){
 				if(priority > temp_priority){
 					priority = temp_priority;
 					pos = cnt;
