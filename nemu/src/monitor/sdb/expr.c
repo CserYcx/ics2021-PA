@@ -107,12 +107,13 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-					case '+': tokens[nr_token++].type = rules[i].token_type;break;
-					case '-': tokens[nr_token++].type = rules[i].token_type;break;
-					case '*': tokens[nr_token++].type = rules[i].token_type;break;
-					case '/': tokens[nr_token++].type = rules[i].token_type;break;
-					case '(': tokens[nr_token++].type = rules[i].token_type;break;
-					case ')': tokens[nr_token++].type = rules[i].token_type;break;
+					case '+':  tokens[nr_token++].type = rules[i].token_type;break;
+					case '-':  tokens[nr_token++].type = rules[i].token_type;break;
+					case '*':  tokens[nr_token++].type = rules[i].token_type;break;
+					case '/':  tokens[nr_token++].type = rules[i].token_type;break;
+					case '(':  tokens[nr_token++].type = rules[i].token_type;break;
+					case ')':  tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_EQ:tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_NOTYPE: break;
 					// the decial number
 					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
