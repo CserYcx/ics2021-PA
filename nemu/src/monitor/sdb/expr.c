@@ -33,7 +33,7 @@ static struct rule {
 	{"\\-", '-'},					// sub
 	{"\\*", '*'},					// multiple
 	{"\\/", '/'},					// divide
-	{"[1-9][0-9]*", TK_NUM},		// number
+	{"[1-9][0-9]*|[0-9]", TK_NUM},		// number
 	{"^0x[0-9a-fA-F]+", TK_HEXNUM},  // hex number
 	{"[\\$]([a-z]|[\\$])+([0-9]+|[a-z]*)", TK_REG}, // reg value
 	{"\\(", '('},					// left bracket
