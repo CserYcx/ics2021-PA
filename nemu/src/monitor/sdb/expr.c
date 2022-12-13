@@ -9,7 +9,7 @@
 
 //rules type: use the type value to judge which token is what
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUM
+  TK_NOTYPE = 256, TK_EQ,TK_NUM,TK_HEXNUM
 
   /* TODO: Add more token types */
 
@@ -32,6 +32,7 @@ static struct rule {
 	{"\\*", '*'},					// multiple
 	{"\\/", '/'},					// divide
 	{"[0-9]+", TK_NUM},		// number
+	{"^0x[0-9a-fA-F]+", TK_HEXNUM},  // hex number
 	{"\\(", '('},					// left bracket
 	{"\\)", ')'},					// right bracket
 };
@@ -117,6 +118,10 @@ static bool make_token(char *e) {
 											 //printf("str is %s\n", tokens[nr_token].str);
 											 nr_token++;
 											 assert(position <= MAX_LEN); break;
+					case TK_HEXNUM: tokens[nr_token].type = rules[i].token_type;
+													strncpy(tokens[nr_token].str,substr_start,substr_len); 
+													tokens[nr_token].str[substr_len] = '\0';
+													nr_token++;break;
           default: //TODO();
         }
         break;
@@ -256,7 +261,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 		// The token should be a number
 		// return the number value
 		printf("the begin = %d\n", begin); 
-		if (tokens[begin].type != TK_NUM){
+		if (tokens[begin].type != TK_NUM && tokens[begin].type != TK_HEXNUM){
 			Log("The token is not a number!!!");
 			Assert(tokens[begin].type == TK_NUM,"The token is error!!!\n");
 		}
