@@ -288,7 +288,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			*success = true;
 			Assert(tokens[begin].str, "The num is none!!!\n");
 			printf("the string is %s\n", tokens[begin].str);
-			printf("the nums value is %s\n", tokens[begin].str);
+			printf("the nums value is %s\n", tokens[begin].str+1);
 			return isa_reg_str2val(tokens[begin].str+1,success); 
 		}
 		else{ 
