@@ -284,10 +284,12 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			return strtol(tokens[begin].str,NULL,16);
 		}
 		else if (tokens[begin].type == TK_REG){
+			bool* success = (bool*)malloc(sizeof(bool));
+			*success = true;
 			Assert(tokens[begin].str, "The num is none!!!\n");
 			printf("the string is %s\n", tokens[begin].str);
 			printf("the nums value is %s\n", tokens[begin].str);
-			return 1; 
+			return isa_reg_str2val(tokens[begin].str+1,success); 
 		}
 		else{ 
 			Log("The token is not a number!!!");
