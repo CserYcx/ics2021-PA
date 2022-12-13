@@ -185,13 +185,13 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 		// to get the token priority 
 		switch(token[cnt].type){
-			case '+': temp_priority = 1;break;
-			case '-': temp_priority = 1;break;
-			case '*': temp_priority = 2;break;
-			case '/': temp_priority = 2;break;
+			case '+': temp_priority = 2;break;
+			case '-': temp_priority = 2;break;
+			case '*': temp_priority = 4;break;
+			case '/': temp_priority = 4;break;
 			case '(': flag = 0;break;
 			case ')': flag = 1;break;
-			case TK_EQ: temp_priority = 4;break;
+			case TK_EQ: temp_priority = 1;break;
 			default: 
 			}
 
