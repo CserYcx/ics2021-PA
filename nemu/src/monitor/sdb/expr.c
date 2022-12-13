@@ -191,6 +191,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '/': temp_priority = 2;break;
 			case '(': flag = 0;break;
 			case ')': flag = 1;break;
+			case TK_EQ: temp_priority = 4;break;
 			default: 
 			}
 
