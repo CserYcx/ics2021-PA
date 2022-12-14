@@ -162,6 +162,7 @@ static int cmd_p(char *args){
 			printf("%s - %s\n", cmd_table[6].name, cmd_table[6].description);
 		}
 		else{
+			printf("strlen is %ld\n", strlen(arg));
 			arg[strlen(arg)] = ' ';
 			printf("arg is %s\n", arg);
 			show = expr(arg,success);
