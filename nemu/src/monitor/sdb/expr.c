@@ -113,6 +113,7 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
 					case '+':  tokens[nr_token++].type = rules[i].token_type;break;
+					// the sign '-' may be the sub or the minus 
 					case '-': if(position == 1|| tokens[nr_token-1].type <= TK_EQ){
 										 tokens[nr_token++].type = MINUS;break;}
 										 tokens[nr_token++].type = rules[i].token_type;break;
@@ -201,6 +202,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case TK_EQ:    temp_priority = 1;break;
 			case TK_AND:	 temp_priority = 1;break;
 			case TK_NOTEQ: temp_priority = 1;break;
+			case MINUS:    temp_priority = 6;break;
 			default: 
 			}
 
@@ -273,8 +275,8 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 uint32_t eval(uint32_t begin, uint32_t end){
 	if(begin > end){
 		// Bad expression 
-		Log("That is a bad expression");
-		return -1;
+		Log("That may be the MINUS or the DEREF");
+		return 0;
 	}
 	else if(begin == end){
 		// Single tokens
@@ -330,6 +332,7 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			case TK_EQ:    return val1 == val2;
 			case TK_NOTEQ: return val1 != val2;
 			case TK_AND:   return val1 && val2;
+			case MINUS:    return -val2;
 			default:Log("The damn fault!"); assert(0);
 			}
 	}

@@ -163,7 +163,6 @@ static int cmd_p(char *args){
 		}
 		else{
 			arg[strlen(arg)] = ' ';
-			arg[strlen(arg)] = ' ';
 			printf("arg is %s\n", arg);
 			show = expr(arg,success);
 			assert(show >=  0);
