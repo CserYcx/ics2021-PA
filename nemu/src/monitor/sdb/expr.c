@@ -11,6 +11,7 @@
 enum {
   TK_NOTYPE = 256, 
 	TK_NOTEQ,
+	TK_AND,
 	TK_EQ,
 	TK_NUM,
 	TK_HEXNUM,
@@ -31,6 +32,7 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"==", TK_EQ},        // equal
 	{"!=", TK_NOTEQ},     // not equal
+	{"&&", TK_AND},				// and 
   {"\\+", '+'},         // plus
 	{"\\-", '-'},					// sub
 	{"\\*", '*'},					// multiple
@@ -117,10 +119,9 @@ static bool make_token(char *e) {
 					case ')':  tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_EQ:		tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_NOTEQ:tokens[nr_token++].type = rules[i].token_type;break;
-					case TK_NOTYPE: break;
-					// the decial number
-					case TK_NUM: tokens[nr_token].type = rules[i].token_type;
+					case TK_AND:  tokens[nr_token++].type = rules[i].token_type;break;
 					//maybe overflow, remember to rewrite the code 
+					case TK_NUM: tokens[nr_token++].type = rules[i].token_type;break;
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
 											 tokens[nr_token].str[substr_len] = '\0';
 											 //printf("str is %s\n", tokens[nr_token].str);
@@ -194,7 +195,8 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case '/': temp_priority = 4;break;
 			case '(': flag = 0;break;
 			case ')': flag = 1;break;
-			case TK_EQ: temp_priority = 1;break;
+			case TK_EQ:    temp_priority = 1;break;
+			case TK_AND:	 temp_priority = 1;break;
 			case TK_NOTEQ: temp_priority = 1;break;
 			default: 
 			}
@@ -323,8 +325,9 @@ uint32_t eval(uint32_t begin, uint32_t end){
 			case '-': return val1 - val2;
 			case '*': return val1 * val2;
 			case '/': return val1 / val2;
-			case TK_EQ: return val1 == val2;
+			case TK_EQ:    return val1 == val2;
 			case TK_NOTEQ: return val1 != val2;
+			case TK_AND:   return val1 && val2;
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
