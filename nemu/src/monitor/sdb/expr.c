@@ -121,7 +121,7 @@ static bool make_token(char *e) {
 					case TK_NOTEQ:tokens[nr_token++].type = rules[i].token_type;break;
 					case TK_AND:  tokens[nr_token++].type = rules[i].token_type;break;
 					//maybe overflow, remember to rewrite the code 
-					case TK_NUM: tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_NUM: tokens[nr_token].type = rules[i].token_type;break;
 											 strncpy(tokens[nr_token].str,substr_start,substr_len); 
 											 tokens[nr_token].str[substr_len] = '\0';
 											 //printf("str is %s\n", tokens[nr_token].str);
