@@ -230,6 +230,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 	Assert(token[pos].type != TK_NOTYPE && token[pos].type <= TK_EQ, "Token is not operator!!!\n");	
 	printf("Get main token is over**********************\n");
+	printf("the return token type is %d\n", token[pos].type);
 	return pos;
 }
 
