@@ -188,6 +188,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	for(cnt = begin;cnt <= end ;++cnt){
 		if(token[cnt].type == 0){
 			Log("To the end!!! the currnet pos is %d\n",cnt);
+			assert(0);
 			break;
 		}
 
