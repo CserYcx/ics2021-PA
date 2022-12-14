@@ -203,7 +203,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 
 		// the main token priority is the lowest 
 		if(flag == 1){	
-			if(token[cnt].type <=47||token[cnt].type == TK_EQ || token[cnt].type == TK_NOTEQ || token[cnt].type == TK_AND){
+			if((token[cnt].type > 41 &&token[cnt].type <=47)||token[cnt].type == TK_EQ || token[cnt].type == TK_NOTEQ || token[cnt].type == TK_AND){
 				if(priority > temp_priority){
 					priority = temp_priority;
 					pos = cnt;
