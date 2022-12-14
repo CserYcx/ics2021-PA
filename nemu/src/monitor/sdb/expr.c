@@ -274,7 +274,7 @@ bool check_parentheses(uint32_t begin, uint32_t end){
 }
 
 // operator's position
-uint32_t eval(uint32_t begin, uint32_t end){
+uint32_t eval(int begin, int end){
 	if(begin > end){
 		// Bad expression 
 		Log("That may be the MINUS or the DEREF");
