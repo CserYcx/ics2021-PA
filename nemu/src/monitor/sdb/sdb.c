@@ -64,6 +64,8 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_w(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -78,6 +80,7 @@ static struct {
 	{"info", "Print the register state, or print the watchpoint information.", cmd_info},
 	{"x", "Calculate the expression's value and make it to be the start of memory address. Then outputs N 4-bytes in hex form.", cmd_x},
 	{"p", "It focuses on how the expression will be calculated.", cmd_p},
+	{"w", "Set the watch point.When the expression's value changed, the program stop", cmd_w},
 
 };
 
@@ -173,7 +176,17 @@ static int cmd_p(char *args){
 		return 0;
 }
 
+static int cmd_w(char *args) {
+  /* extract the first argument */
+  char *arg = strtok(NULL, " ");
 
+  if (arg == NULL) {
+    /* no argument given */
+      printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
+  }
+	return 0;
+}
+ 
 
 
 	void sdb_set_batch_mode() {

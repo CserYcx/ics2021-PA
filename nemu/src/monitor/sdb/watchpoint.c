@@ -1,5 +1,13 @@
 #include "sdb.h"
+/******* The Task**********
+ * to write two functions 
+ * WP* new_wp();
+ * void free_wp(WP *wp)
+ * new_wp is to return a spare function from the free list
+ * free_wp return the wp to the free_
+ * *************************/
 
+//Linked list size
 #define NR_WP 32
 
 typedef struct watchpoint {
@@ -11,6 +19,8 @@ typedef struct watchpoint {
 } WP;
 
 static WP wp_pool[NR_WP] = {};
+//head is to organize the using node
+//free_ is to organize the spare node
 static WP *head = NULL, *free_ = NULL;
 
 void init_wp_pool() {
