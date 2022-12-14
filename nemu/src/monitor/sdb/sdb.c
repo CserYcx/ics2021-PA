@@ -167,7 +167,6 @@ static int cmd_p(char *args){
 			show = expr(arg,success);
 			assert(show >=  0);
 			Log("the expression value = %d\n",show);
-			assert(*success == true);
 		}
 		free(success);
 		return 0;
