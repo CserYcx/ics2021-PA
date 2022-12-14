@@ -148,6 +148,7 @@ static int cmd_x(char *args) {
 					(*addr_int)++;
 				}
 		}
+		free(addr_int);
 		return 0;
 }
 

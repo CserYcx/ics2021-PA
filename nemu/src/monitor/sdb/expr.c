@@ -1,5 +1,6 @@
 #include <isa.h>
 #include <stdlib.h>
+#include <memory/paddr.h>
 //POSIX: Portable Operating System Interface
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -13,6 +14,7 @@ enum {
 	TK_NOTEQ,
 	TK_AND,
 	MINUS,
+	DEREF,
 	TK_EQ,
 	TK_NUM,
 	TK_HEXNUM,
@@ -117,7 +119,10 @@ static bool make_token(char *e) {
 					case '-': if(position == 1|| tokens[nr_token-1].type <= TK_EQ){
 										 tokens[nr_token++].type = MINUS;break;}
 										 tokens[nr_token++].type = rules[i].token_type;break;
-					case '*':  tokens[nr_token++].type = rules[i].token_type;break;
+					// the sign '*' may be the mul or the pointer dereference 
+					case '*':  if(position == 1|| tokens[nr_token-1].type <= TK_EQ){
+											 tokens[nr_token++].type = DEREF;break;}
+										 tokens[nr_token++].type = rules[i].token_type;break;
 					case '/':  tokens[nr_token++].type = rules[i].token_type;break;
 					case '(':  tokens[nr_token++].type = rules[i].token_type;break;
 					case ')':  tokens[nr_token++].type = rules[i].token_type;break;
@@ -203,6 +208,7 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 			case TK_EQ:    temp_priority = 1;break;
 			case TK_AND:	 temp_priority = 1;break;
 			case TK_NOTEQ: temp_priority = 1;break;
+			case DEREF:    temp_priority = 6;break;
 			case MINUS:    temp_priority = 6;break;
 			default: 
 			}
@@ -336,6 +342,7 @@ uint32_t eval(int begin, int end){
 			case TK_NOTEQ: return val1 != val2;
 			case TK_AND:   return val1 && val2;
 			case MINUS:    return -val2;
+			case DEREF:		 return paddr_read((val2),4);
 			default:Log("The damn fault!"); assert(0);
 			}
 	}
