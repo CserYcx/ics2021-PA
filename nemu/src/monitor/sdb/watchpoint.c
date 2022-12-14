@@ -35,4 +35,14 @@ void init_wp_pool() {
 }
 
 /* TODO: Implement the functionality of watchpoint */
-
+//From the free_ 
+WP* new_wp(){
+	WP* wp = (WP*)malloc(sizeof(WP));
+	if (free_ != NULL){
+		wp = free_;
+		free_ = free_->next;
+	}
+	assert(free!=NULL);
+	Assert(wp != NULL," the wp is null!!!");
+	return wp;
+}
