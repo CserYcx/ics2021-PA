@@ -12,6 +12,7 @@ enum {
   TK_NOTYPE = 256, 
 	TK_NOTEQ,
 	TK_AND,
+	MINUS,
 	TK_EQ,
 	TK_NUM,
 	TK_HEXNUM,
@@ -112,7 +113,9 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
 					case '+':  tokens[nr_token++].type = rules[i].token_type;break;
-					case '-':  tokens[nr_token++].type = rules[i].token_type;break;
+					case '-': if(position == 1|| tokens[nr_token-1].type <= TK_EQ){
+										 tokens[nr_token++].type = MINUS;break;}
+										 tokens[nr_token++].type = rules[i].token_type;break;
 					case '*':  tokens[nr_token++].type = rules[i].token_type;break;
 					case '/':  tokens[nr_token++].type = rules[i].token_type;break;
 					case '(':  tokens[nr_token++].type = rules[i].token_type;break;
