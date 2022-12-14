@@ -167,7 +167,7 @@ static int cmd_p(char *args){
 			printf("arg is %s\n", arg);
 			show = expr(arg,success);
 			assert(show >=  0);
-			Log("the expression value = %x\n",show);
+			Log("the expression value = 0x%x\n",show);
 		}
 		free(success);
 		return 0;
