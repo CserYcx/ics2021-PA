@@ -40,7 +40,6 @@ WP* new_wp(){
 
 	WP* wp = (WP*)malloc(sizeof(WP));
 	assert(wp != NULL);
-	printf("is ok!!\n");
 	if (free_ != NULL){
 		wp = free_;
 		free_ = free_->next;
@@ -48,11 +47,14 @@ WP* new_wp(){
 	assert(free!=NULL);
 	assert(wp != NULL);
 	//make the wp to the head next and the head has same value with current pointing wp
-	WP *temp = head;
-	while(temp != NULL && temp->next != NULL){
-		temp = temp->next;
+	if(head != NULL){
+		WP *temp = head;
+		assert(temp != NULL);
+		while(temp != NULL && temp->next != NULL){
+			temp = temp->next;
+			temp->next = wp;
+		}
 	}
-	temp->next = wp;
 	if (head == NULL){
 		head = wp;
 		wp->next = NULL;
