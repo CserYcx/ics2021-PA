@@ -51,6 +51,7 @@ WP* new_wp(){
 		assert(temp != NULL);
 		while(temp != NULL && temp->next != NULL){
 			temp = temp->next;
+			printf("temp NO is %d\n",temp->NO);
 		}
 		temp->next = wp;
 	}
