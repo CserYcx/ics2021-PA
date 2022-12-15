@@ -186,7 +186,8 @@ static int cmd_w(char *args) {
   }
 	else{
 		for(int i = 0;i<32;++i){
-			new_wp();
+			WP* wp = new_wp();
+			printf("wp NO is %d\n", wp->NO);
 		}
 	}
 	return 0; 
