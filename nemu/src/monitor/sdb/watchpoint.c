@@ -29,7 +29,7 @@ void init_wp_pool() {
     wp_pool[i].NO = i;
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
   }
-
+	printf("IS here\n");
   head = NULL;
   free_ = wp_pool;
 }
@@ -37,6 +37,7 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 //From the free_ 
 WP* new_wp(){
+
 	WP* wp = (WP*)malloc(sizeof(WP));
 	if (free_ != NULL){
 		wp = free_;
