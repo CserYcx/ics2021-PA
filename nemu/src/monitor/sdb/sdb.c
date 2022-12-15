@@ -185,6 +185,7 @@ static int cmd_w(char *args) {
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
 	else{
+		assert(arg != NULL);
 		for(int i = 0;i<32;++i){
 			WP* wp = new_wp();
 			printf("wp NO is %d\n", wp->NO);
