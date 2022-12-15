@@ -39,6 +39,7 @@ void init_wp_pool() {
 WP* new_wp(){
 
 	WP* wp = (WP*)malloc(sizeof(WP));
+	assert(wp != NULL);
 	if (free_ != NULL){
 		wp = free_;
 		free_ = free_->next;
