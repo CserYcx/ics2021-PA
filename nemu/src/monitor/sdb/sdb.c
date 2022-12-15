@@ -188,7 +188,7 @@ static int cmd_w(char *args) {
 		for(int i = 0;i<32;++i){
 			WP* wp = new_wp();
 			assert(wp != NULL);
-			printf("wp NO is %d\n", wp->NO);
+			printf("(%d, %s) -> \n", wp->NO,wp->next != NULL?"True":"NULL");
 		}
 	}
 	return 0; 

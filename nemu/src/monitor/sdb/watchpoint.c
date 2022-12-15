@@ -50,7 +50,7 @@ WP* new_wp(){
 		assert(temp != NULL);
 		while(temp != NULL && temp->next != NULL){
 			temp = temp->next;
-			printf("temp NO is %d\n",temp->NO);
+			//printf("temp NO is %d\n",temp->NO);
 		}
 		temp->next = wp;
 	}
@@ -60,7 +60,7 @@ WP* new_wp(){
 		head->next = wp;
 	}
 	assert(head != NULL);
-	printf("(%d, %s) -> ",head->NO,head->next != NULL?"True":"NULL");
+	//printf("(%d, %s) -> ",wp->NO,wp->next != NULL?"True":"NULL");
 	return wp;
 }
 
