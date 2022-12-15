@@ -189,7 +189,7 @@ static int cmd_w(char *args) {
 			WP* wp = new_wp();
 			assert(wp != NULL);
 			printf("(%d, %s) -> ", wp->NO,wp->next != NULL?"True":"NULL");
-			if(i%4==0){printf("\n");}
+			if((i+1)%4==0){printf("\n");}
 		}
 	}
 	return 0; 
