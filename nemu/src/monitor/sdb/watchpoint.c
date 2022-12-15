@@ -40,6 +40,7 @@ WP* new_wp(){
 
 	WP* wp = (WP*)malloc(sizeof(WP));
 	assert(wp != NULL);
+	printf("is ok!!\n");
 	if (free_ != NULL){
 		wp = free_;
 		free_ = free_->next;
