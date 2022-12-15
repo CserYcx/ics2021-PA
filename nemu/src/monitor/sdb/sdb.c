@@ -186,7 +186,9 @@ static int cmd_w(char *args) {
   }
 	else{
 		assert(arg != NULL);
+		printf("arg is %s\n", arg);
 		for(int i = 0;i<32;++i){
+			printf("is here!\n");
 			WP* wp = new_wp();
 			printf("wp NO is %d\n", wp->NO);
 		}
