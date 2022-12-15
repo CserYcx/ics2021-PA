@@ -184,9 +184,13 @@ static int cmd_w(char *args) {
     /* no argument given */
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
-	return 0;
+	else{
+		for(int i = 0;i<32;++i){
+			new_wp();
+		}
+	}
+	return 0; 
 }
- 
 
 
 	void sdb_set_batch_mode() {

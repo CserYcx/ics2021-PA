@@ -10,13 +10,13 @@
 //Linked list size
 #define NR_WP 32
 
-typedef struct watchpoint {
-  int NO;
-  struct watchpoint *next;
+//typedef struct watchpoint {
+ // int NO;
+  //struct watchpoint *next;
 
   /* TODO: Add more members if necessary */
 
-} WP;
+//} WP;
 
 static WP wp_pool[NR_WP] = {};
 //head is to organize the using node
@@ -43,6 +43,23 @@ WP* new_wp(){
 		free_ = free_->next;
 	}
 	assert(free!=NULL);
-	Assert(wp != NULL," the wp is null!!!");
+	assert(wp != NULL);
+	//make the wp to the head next and the head has same value with current pointing wp
+	WP *temp = head;
+	while(temp != NULL && temp->next != NULL){
+		temp = temp->next;
+	}
+	temp->next = wp;
+	if (head == NULL){
+		head = wp;
+		wp->next = NULL;
+		head->next = wp;
+	}
+	assert(head != NULL);
+	printf("(%d, %s) -> ",head->NO,head->next != NULL?"True":"NULL");
 	return wp;
+}
+
+//free the wp return to the free_
+void free_wp(WP *wp){
 }
