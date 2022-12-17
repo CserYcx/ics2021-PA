@@ -65,6 +65,7 @@ WP* new_wp(){
 
 //free the wp return to the free_
 void free_wp(WP *wp,int NO){
+	assert(free_ != NULL);
 	WP* fr = free_;		
 	WP* new_fr = (WP*)malloc(sizeof(WP));
 	new_fr->NO = -1;
@@ -93,6 +94,7 @@ bool find_wp(int NO){
 }
 
 WP* pop_wp(int NO){
+	assert(head != NULL);
 	WP* h = head;
 	while(h != NULL){
 		if (NO == h->next->NO){
@@ -110,6 +112,7 @@ WP* pop_wp(int NO){
 
 
 void show(){
+	assert(head != NULL);
 	WP* wp = head;
 	int i = 0;
 	printf("That's the head linked list:\n");
