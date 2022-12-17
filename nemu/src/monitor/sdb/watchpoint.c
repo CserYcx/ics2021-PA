@@ -47,7 +47,6 @@ WP* new_wp(){
 	//make the wp to the head next and the head has same value with current pointing wp
 	if(head != NULL){
 		WP *temp = head;
-		assert(temp != NULL);
 		while(temp != NULL && temp->next != NULL){
 			temp = temp->next;
 			//printf("temp NO is %d\n",temp->NO);
@@ -66,4 +65,5 @@ WP* new_wp(){
 
 //free the wp return to the free_
 void free_wp(WP *wp){
+	
 }
