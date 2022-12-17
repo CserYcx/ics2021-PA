@@ -97,6 +97,7 @@ WP* pop_wp(int NO){
 			printf("pop wp is (%d, %s)\n",wp->NO,"NULL");
 			return wp;
 		}
+		h = h->next;
 	}
 	printf("The pop is error!\n");
 	return NULL;
