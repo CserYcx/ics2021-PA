@@ -185,12 +185,13 @@ static int cmd_w(char *args) {
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
 	else{
-		for(int i = 0;i<32;++i){
+		for(int i = 0;i<16;++i){
 			WP* wp = new_wp();
 			assert(wp != NULL);
 			printf("(%d, %s) -> ", wp->NO,wp->next != NULL?"True":"NULL");
 			if((i+1)%4==0){printf("\n");}
 		}
+		if (find_wp(8))
 		show();
 	}
 	return 0; 

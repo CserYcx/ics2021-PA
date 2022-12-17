@@ -64,13 +64,44 @@ WP* new_wp(){
 }
 
 //free the wp return to the free_
-void free_wp(WP *wp){
+void free_wp(WP *wp,int NO){
+	WP* fr = free_;		
+	while(fr != NULL){
+		if (wp->NO > fr->NO){
+			fr = fr->next;
+		}
+		else{
+			wp->next = fr->next;	
+			fr->next = wp;
+			break;
+		}
+	}
+}
+
+bool find_wp(int NO){
+	WP* h = head;
+	while(h != NULL){
+		if (NO == h->NO){
+			return true;
+		}
+	}
+	return false;
 }
 
 void show(){
 	WP* wp = head;
+	int i = 0;
+	printf("That's the head linked list:\n");
 	while(wp != NULL){
 		printf("(%d, %d) -> \n",wp->NO,(wp->next != NULL? (wp->next->NO):-1));
 		wp = wp->next;
+		if((i+1)%4 == 0){printf("\n");}
+	}
+	
+	printf("That's the free_ linked list:\n"); 
+	while(wp != NULL){
+		printf("(%d, %d) -> \n",wp->NO,(wp->next != NULL? (wp->next->NO):-1));
+		wp = wp->next;
+		if((i+1)%4 == 0){printf("\n");}
 	}
 }
