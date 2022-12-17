@@ -84,6 +84,7 @@ bool find_wp(int NO){
 		if (NO == h->NO){
 			return true;
 		}
+		h = h->next;
 	}
 	return false;
 }
