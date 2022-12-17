@@ -65,5 +65,11 @@ WP* new_wp(){
 
 //free the wp return to the free_
 void free_wp(WP *wp){
-	
+}
+
+void show(){
+	WP* wp = head;
+	while(wp != NULL){
+		printf("(%d, %d) -> \n",wp->NO,(wp->next? -1:wp->next->NO));
+	}
 }
