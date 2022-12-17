@@ -179,14 +179,17 @@ static int cmd_p(char *args){
 static int cmd_w(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
 
   if (arg == NULL) {
     /* no argument given */
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
 	else{
+		int num = expr(arg,success);
 		printf("The new wp linked list:\n");
-		for(int i = 0;i<16;++i){
+		for(int i = 0;i<num;++i){
 			WP* wp = new_wp();
 			assert(wp != NULL);
 			printf("(%d, %s) -> ", wp->NO,wp->next != NULL?"True":"NULL");
