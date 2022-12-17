@@ -70,11 +70,12 @@ void free_wp(WP *wp,int NO){
 	new_fr->NO = -1;
 	new_fr->next = fr;	
 	free_ = new_fr;
+	fr = free_;
 	while(fr != NULL){
 		if (wp->NO > fr->NO){fr = fr->next;}
 		else{
 			wp->next = fr->next;	
-			fr->NO = wp->NO;
+			fr->next = wp;
 			break;
 		}
 	}
