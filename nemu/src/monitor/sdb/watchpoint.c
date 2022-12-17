@@ -67,9 +67,7 @@ WP* new_wp(){
 void free_wp(WP *wp,int NO){
 	WP* fr = free_;		
 	while(fr != NULL){
-		if (wp->NO > fr->NO){
-			fr = fr->next;
-		}
+		if (wp->NO > fr->NO){fr = fr->next;}
 		else{
 			wp->next = fr->next;	
 			fr->next = wp;
@@ -88,6 +86,22 @@ bool find_wp(int NO){
 	}
 	return false;
 }
+
+WP* pop_wp(int NO){
+	WP* h = head;
+	while(h != NULL){
+		if (NO == h->next->NO){
+			WP* wp = h->next;
+			h->next = h->next->next;
+			wp->next = NULL;
+			printf("pop wp is (%d, %s)\n",wp->NO,"NULL");
+			return wp;
+		}
+	}
+	printf("The pop is error!\n");
+	return NULL;
+}
+
 
 void show(){
 	WP* wp = head;

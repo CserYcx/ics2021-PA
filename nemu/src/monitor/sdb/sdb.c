@@ -191,7 +191,9 @@ static int cmd_w(char *args) {
 			printf("(%d, %s) -> ", wp->NO,wp->next != NULL?"True":"NULL");
 			if((i+1)%4==0){printf("\n");}
 		}
-		if (find_wp(8))
+		if (find_wp(8)){
+			free_wp(pop_wp(8),8);
+		}
 		show();
 	}
 	return 0; 
