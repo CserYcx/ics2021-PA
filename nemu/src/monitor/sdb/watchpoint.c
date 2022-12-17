@@ -71,5 +71,6 @@ void show(){
 	WP* wp = head;
 	while(wp != NULL){
 		printf("(%d, %d) -> \n",wp->NO,(wp->next? -1:wp->next->NO));
+		wp = wp->next;
 	}
 }
