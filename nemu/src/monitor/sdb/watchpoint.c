@@ -99,6 +99,7 @@ void show(){
 		if((i+1)%4 == 0){printf("\n");}
 		i++;
 	}
+	printf("\n");
 	
 	WP* fr = free_;
 	printf("That's the free_ linked list:\n"); 
@@ -108,4 +109,5 @@ void show(){
 		if((i+1)%4 == 0){printf("\n");}
 		i++;
 	}
+	printf("\n");
 }
