@@ -81,7 +81,16 @@ void free_wp(WP *wp,int NO){
 	}
 }
 
-
+bool find_wp(int NO){
+	WP* h = head;
+	while(h != NULL){
+		if (NO == h->NO){
+			return true;
+		}
+		h = h->next;
+	}
+	return false;
+}
 
 WP* pop_wp(int NO){
 	WP* h = head;
