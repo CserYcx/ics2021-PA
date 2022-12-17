@@ -185,6 +185,7 @@ static int cmd_w(char *args) {
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
 	else{
+		printf("The new wp linked list:\n");
 		for(int i = 0;i<16;++i){
 			WP* wp = new_wp();
 			assert(wp != NULL);
