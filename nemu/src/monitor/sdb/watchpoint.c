@@ -65,19 +65,28 @@ WP* new_wp(){
 
 //free the wp return to the free_
 void free_wp(WP *wp,int NO){
-	assert(free_ != NULL);
-	WP* fr = free_;		
-	WP* new_fr = (WP*)malloc(sizeof(WP));
-	new_fr->NO = -1;
-	new_fr->next = fr;	
-	free_ = new_fr;
-	fr = free_;
-	while(fr != NULL){
-		if (wp->NO > fr->next->NO && fr->next != NULL){fr = fr->next;}
-		else{
-			wp->next = fr->next;	
-			fr->next = wp;
-			break;
+	// if free_ is NULL 
+	if (free_ == NULL){
+		WP* new_fr = (WP*)malloc(sizeof(WP));
+		new_fr->NO = -1;
+		new_fr->next = wp;	
+		free_ = new_fr;
+	}
+	//free_ is not NULL
+	else{
+		WP* fr = free_;		
+		WP* new_fr = (WP*)malloc(sizeof(WP));
+		new_fr->NO = -1;
+		new_fr->next = fr;	
+		free_ = new_fr;
+		fr = free_;
+		while(fr != NULL){
+			if (wp->NO > fr->next->NO && fr->next != NULL){fr = fr->next;}
+			else{
+				wp->next = fr->next;	
+				fr->next = wp;
+				break;
+			}
 		}
 	}
 }
