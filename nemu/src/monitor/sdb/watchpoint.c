@@ -97,6 +97,7 @@ void show(){
 		printf("(%d, %d) -> \n",wp->NO,(wp->next != NULL? (wp->next->NO):-1));
 		wp = wp->next;
 		if((i+1)%4 == 0){printf("\n");}
+		i++;
 	}
 	
 	WP* fr = free_;
@@ -105,5 +106,6 @@ void show(){
 		printf("(%d, %d) -> \n",fr->NO,(fr->next != NULL? (fr->next->NO):-1));
 		fr = fr->next;
 		if((i+1)%4 == 0){printf("\n");}
+		i++;
 	}
 }
