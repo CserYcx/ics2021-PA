@@ -74,7 +74,7 @@ void free_wp(WP *wp,int NO){
 		if (wp->NO > fr->NO){fr = fr->next;}
 		else{
 			wp->next = fr->next;	
-			fr->next = wp;
+			fr = wp;
 			break;
 		}
 	}
