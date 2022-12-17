@@ -99,10 +99,11 @@ void show(){
 		if((i+1)%4 == 0){printf("\n");}
 	}
 	
+	WP* fr = free_;
 	printf("That's the free_ linked list:\n"); 
-	while(wp != NULL){
-		printf("(%d, %d) -> \n",wp->NO,(wp->next != NULL? (wp->next->NO):-1));
-		wp = wp->next;
+	while(fr != NULL){
+		printf("(%d, %d) -> \n",fr->NO,(fr->next != NULL? (fr->next->NO):-1));
+		fr = fr->next;
 		if((i+1)%4 == 0){printf("\n");}
 	}
 }
