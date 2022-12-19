@@ -190,6 +190,7 @@ static int cmd_w(char *args) {
 		arg[strlen(arg)] = ' ';
 		printf("The new wp linked list:\n");
 		WP* wp = new_wp();
+		printf("here!");
 		strcpy(wp->expr,arg);
 		assert(wp != NULL);
 		printf("(%d, %s , %s) -> ", wp->NO,wp->expr,wp->next != NULL?"True":"NULL");
