@@ -3,6 +3,7 @@
 #include <cpu/difftest.h>
 #include <isa-all-instr.h>
 #include <locale.h>
+#include "../monitor/sdb/sdb.h"
 
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
@@ -17,9 +18,35 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 const rtlreg_t rzero = 0;
 rtlreg_t tmp_reg[4];
+static uint32_t expr_value[32] ;// Expression's value
 
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
+void scan_and_print(WP* wp);
+
+
+
+
+
+void scan_and_print(WP* head){
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
+	WP* temp = head;
+	assert(temp !=NULL);
+	int cnt = 0;
+	//Compare every list expression value in head list
+	while(temp != NULL){
+		uint32_t value = expr(temp->expr,success);
+		if(value!= expr_value[cnt]){
+			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
+			printf("Old value == %d\n",expr_value[cnt]);
+			printf("New value == %d\n",value);
+			expr_value[cnt] = value;
+		}
+		temp = temp -> next;
+	}
+}
+
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
@@ -28,6 +55,8 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 	// scan all watchpoint YOU CODE IS HERE:
+	WP* wp = send_head();
+	scan_and_print(wp);
 }
 
 #include <isa-exec.h>
