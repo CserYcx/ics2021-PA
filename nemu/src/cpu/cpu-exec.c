@@ -42,6 +42,7 @@ void scan_and_print(WP* head){
 			printf("Old value == %d\n",expr_value[cnt]);
 			printf("New value == %d\n",value);
 			expr_value[cnt] = value;
+			cnt++;
 		}
 		temp = temp -> next;
 	}
