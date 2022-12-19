@@ -46,6 +46,7 @@ void scan_and_print(WP* head){
 		}
 		temp = temp -> next;
 	}
+	nemu_state.state = NEMU_STOP;
 }
 
 
