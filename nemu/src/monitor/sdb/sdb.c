@@ -187,17 +187,12 @@ static int cmd_w(char *args) {
       printf("%s - %s\n", cmd_table[7].name, cmd_table[7].description);
   }
 	else{
-		int num = expr(arg,success);
+		arg[strlen(arg)] = ' ';
 		printf("The new wp linked list:\n");
-		for(int i = 0;i<num;++i){
-			WP* wp = new_wp();
-			assert(wp != NULL);
-			printf("(%d, %s) -> ", wp->NO,wp->next != NULL?"True":"NULL");
-			if((i+1)%4==0){printf("\n");}
-		}
-		if (find_wp(20)){
-			free_wp(pop_wp(20),20);
-		}
+		WP* wp = new_wp();
+		strcpy(wp->expr,arg);
+		assert(wp != NULL);
+		printf("(%d, %s , %s) -> ", wp->NO,wp->expr,wp->next != NULL?"True":"NULL");
 		show();
 	}
 	return 0; 
