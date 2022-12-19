@@ -119,6 +119,10 @@ WP* pop_wp(int NO){
 	return NULL;
 }
 
+WP* send_head(){
+	WP* wp = head;
+	return wp;
+}
 
 void show(){
 	assert(head != NULL);
