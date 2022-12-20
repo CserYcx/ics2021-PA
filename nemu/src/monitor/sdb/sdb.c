@@ -120,7 +120,7 @@ static int cmd_info(char *args){
 		isa_reg_display();
 		}
 	else if (strcmp(arg,"w")==0){
-		show();
+		show_head();
 	}
 	return 0;
 }
@@ -197,7 +197,7 @@ static int cmd_w(char *args) {
 		strcpy(wp->expr,arg);
 		assert(wp != NULL);
 		printf("(%d, %s , %s) -> ", wp->NO,wp->expr,wp->next != NULL?"True":"NULL");
-		show();
+		show_head();
 	}
 	return 0; 
 }
