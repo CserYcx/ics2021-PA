@@ -178,8 +178,9 @@ void print_watchpoint(){
 		Log("No watchpoint ");
 		return;
 	}
-	WP* wp = head;
+	WP* wp = head->next;
 	int i = 0;
+	assert(wp != NULL);
 	printf("That's the head linked list:\n");
 	while(wp != NULL){
 		printf("Watchpoint %d: %s\n", wp->NO, wp->expr);
