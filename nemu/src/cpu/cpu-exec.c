@@ -37,7 +37,7 @@ void scan_and_print(WP* head){
 	//Compare every list expression value in head list
 	while(temp != NULL){
 		uint32_t value = expr(temp->expr,success);
-		if(value!= expr_value[cnt]){
+		if(value!= expr_value[cnt] && temp->expr != NULL){
 			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
 			printf("Old value == %d\n",expr_value[cnt]);
 			printf("New value == %d\n",value);
@@ -47,6 +47,7 @@ void scan_and_print(WP* head){
 		temp = temp -> next;
 	}
 	nemu_state.state = NEMU_STOP;
+	printf("here\n");
 }
 
 
@@ -57,7 +58,6 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 	// scan all watchpoint YOU CODE IS HERE:
-	printf("diff here\n");
 	WP* wp = send_head();
 	scan_and_print(wp);
 }
