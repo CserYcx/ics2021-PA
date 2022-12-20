@@ -18,41 +18,9 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 const rtlreg_t rzero = 0;
 rtlreg_t tmp_reg[4];
-//static uint32_t expr_value[32] ;// Expression's value
 
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
-//void scan_and_print(WP* wp);
-
-
-
-
-
-/*void scan_and_print(WP* head){
-	bool* success = (bool*)malloc(sizeof(bool));
-	*success = true;
-	assert(head!=NULL);
-	WP* temp = head->next;
-	if(temp ==NULL){
-		Log("No watchpoint can show");
-		return ;
-	}
-	int cnt = 0;
-	//Compare every list expression value in head list
-	while(temp != NULL){
-		uint32_t value = expr(temp->expr,success);
-		if(value!= expr_value[cnt] && temp->expr != NULL){
-			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
-			printf("Old value == %x\n",expr_value[cnt]);
-			printf("New value == %x\n",value);
-			expr_value[cnt] = value;
-			cnt++;
-		}
-		temp = temp -> next;
-	}
-	nemu_state.state = NEMU_STOP;
-}*/
-
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND

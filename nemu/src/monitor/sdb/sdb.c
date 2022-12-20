@@ -120,7 +120,7 @@ static int cmd_info(char *args){
 		isa_reg_display();
 		}
 	else if (strcmp(arg,"w")==0){
-		printf("here\n");
+		show();
 	}
 	return 0;
 }
