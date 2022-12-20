@@ -40,9 +40,9 @@ void scan_and_print(WP* head){
 	while(temp != NULL){
 		uint32_t value = expr(temp->expr,success);
 		if(value!= expr_value[cnt] && temp->expr != NULL){
-			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
-			printf("Old value == %d\n",expr_value[cnt]);
-			printf("New value == %d\n",value);
+			printf("Watchpoint %x: %s\n",temp->NO,temp->expr);
+			printf("Old value == %x\n",expr_value[cnt]);
+			printf("New value == %x\n",value);
 			expr_value[cnt] = value;
 			cnt++;
 		}
