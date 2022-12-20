@@ -208,11 +208,16 @@ static int cmd_w(char *args) {
 static int cmd_d(char* args){
 	/* extract the first argument */
   char *arg = strtok(NULL, " ");
+	int num = atoi(arg);
 
   if (arg == NULL) {
     /* no argument given */
       printf("%s - %s\n", cmd_table[8].name, cmd_table[8].description);
   }
+	else{
+		free_wp(pop_wp(num),num);
+	}
+
 	return 0;
 }
 		
