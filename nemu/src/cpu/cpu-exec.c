@@ -34,6 +34,7 @@ void scan_and_print(WP* head){
 	WP* temp = head;
 	if(temp ==NULL){
 		Log("No watchpoint can show");
+		return; 
 	}
 	int cnt = 0;
 	//Compare every list expression value in head list
