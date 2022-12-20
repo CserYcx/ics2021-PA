@@ -34,14 +34,13 @@ void scan_and_print(WP* head){
 	WP* temp = head;
 	if(temp ==NULL){
 		Log("No watchpoint can show");
-		return; 
 	}
 	int cnt = 0;
 	//Compare every list expression value in head list
 	while(temp != NULL){
 		uint32_t value = expr(temp->expr,success);
 		if(value!= expr_value[cnt] && temp->expr != NULL){
-			printf("Watchpoint %x: %s\n",temp->NO,temp->expr);
+			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
 			printf("Old value == %x\n",expr_value[cnt]);
 			printf("New value == %x\n",value);
 			expr_value[cnt] = value;
