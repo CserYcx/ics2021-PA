@@ -32,7 +32,7 @@ void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	WP* temp = head;
-	if(temp !=NULL){
+	if(temp ==NULL){
 		Log("No watchpoint can show");
 	}
 	int cnt = 0;
@@ -134,7 +134,6 @@ void cpu_exec(uint64_t n) {
   uint64_t timer_start = get_time();
 
   Decode s;
-	printf("here\n");
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
