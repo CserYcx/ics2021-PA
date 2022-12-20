@@ -120,7 +120,7 @@ static int cmd_info(char *args){
 		isa_reg_display();
 		}
 	else if (strcmp(arg,"w")==0){
-		show_head();
+		print_watchpoint();
 	}
 	return 0;
 }

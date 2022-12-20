@@ -18,6 +18,7 @@ void show_head();     // print head list and free_ list
 bool find_wp(int NO); //judge whether a watchpoint is in head
 WP* pop_wp(int NO);   //pop a watchpoint in head
 void scan_and_print(WP* wp); // scan all watchpoints and print the watchpoints whose value changed
+void print_watchpoint(); // print all watchpoint information
 
 
 #endif

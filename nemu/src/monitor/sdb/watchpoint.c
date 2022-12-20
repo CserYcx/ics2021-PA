@@ -173,3 +173,20 @@ void scan_and_print(WP* head){
 	nemu_state.state = NEMU_STOP;
 }
 
+void print_watchpoint(){
+	if(head != NULL){
+		Log("No watchpoint ");
+		return;
+	}
+	WP* wp = head;
+	int i = 0;
+	printf("That's the head linked list:\n");
+	while(wp != NULL){
+		printf("Watchpoint %d: %s\n", wp->NO, wp->expr);
+		wp = wp->next;
+		if((i+1)%4 == 0){printf("\n");}
+		i++;
+	}
+	printf("\n");
+}	
+
