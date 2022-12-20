@@ -130,7 +130,7 @@ void show_head(){
 	int i = 0;
 	printf("That's the head linked list:\n");
 	while(wp != NULL){
-		printf("(%d, %s, %d) -> ",wp->NO,(wp->expr!=NULL?wp->expr:"NULL"),(wp->next != NULL? (wp->next->NO):-1));
+		printf("(%d, %s, %d) -> ",wp->NO,(wp->expr != NULL? (wp->expr):"NULL"),(wp->next != NULL? (wp->next->NO):-1));
 		wp = wp->next;
 		if((i+1)%4 == 0){printf("\n");}
 		i++;
