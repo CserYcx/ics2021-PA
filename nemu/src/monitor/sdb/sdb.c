@@ -51,6 +51,7 @@ static int cmd_si(char *args){
   else {
 		num = atoi(arg);
 		cpu_exec(num);
+		printf("num is %d\n",num);
 		assert(num);
   }
   return 0;
