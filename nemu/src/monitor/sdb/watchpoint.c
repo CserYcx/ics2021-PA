@@ -130,7 +130,7 @@ void show_head(){
 	int i = 0;
 	printf("That's the head linked list:\n");
 	while(wp != NULL){
-		printf("(NO:%d,Expr: %s,Next:%d) -> ",wp->NO,(wp->expr != NULL? (wp->expr):"NULL"),(wp->next != NULL? (wp->next->NO):-1));
+		printf("(NO:%d,Expr:%s,Next:%d) -> ",wp->NO,(wp->expr != NULL? (wp->expr):"NULL"),(wp->next != NULL? (wp->next->NO):-1));
 		wp = wp->next;
 		if((i+1)%4 == 0){printf("\n");}
 		i++;
@@ -180,7 +180,6 @@ void print_watchpoint(){
 	}
 	WP* wp = head->next;
 	assert(wp != NULL);
-	printf("That's the head linked list:\n");
 	while(wp != NULL){
 		printf("Watchpoint %d: %s\n", wp->NO, wp->expr);
 		wp = wp->next;
