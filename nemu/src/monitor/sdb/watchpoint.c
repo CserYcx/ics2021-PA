@@ -17,7 +17,7 @@
   /* TODO: Add more members if necessary */
 
 //} WP;
-
+static uint32_t expr_value[32] ;// Expression's value
 static WP wp_pool[NR_WP] = {};
 //head is to organize the using node
 //free_ is to organize the spare node
@@ -147,3 +147,29 @@ void show(){
 	}
 	printf("\n");
 }
+
+void scan_and_print(WP* head){
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
+	assert(head!=NULL);
+	WP* temp = head->next;
+	if(temp ==NULL){
+		Log("No watchpoint can show");
+		return ;
+	}
+	int cnt = 0;
+	//Compare every list expression value in head list
+	while(temp != NULL){
+		uint32_t value = expr(temp->expr,success);
+		if(value!= expr_value[cnt] && temp->expr != NULL){
+			printf("Watchpoint %d: %s\n",temp->NO,temp->expr);
+			printf("Old value == %x\n",expr_value[cnt]);
+			printf("New value == %x\n",value);
+			expr_value[cnt] = value;
+							cnt++;
+		}
+		temp = temp -> next;
+	}
+	nemu_state.state = NEMU_STOP;
+}
+

@@ -18,17 +18,17 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 const rtlreg_t rzero = 0;
 rtlreg_t tmp_reg[4];
-static uint32_t expr_value[32] ;// Expression's value
+//static uint32_t expr_value[32] ;// Expression's value
 
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
-void scan_and_print(WP* wp);
+//void scan_and_print(WP* wp);
 
 
 
 
 
-void scan_and_print(WP* head){
+/*void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	assert(head!=NULL);
@@ -51,7 +51,7 @@ void scan_and_print(WP* head){
 		temp = temp -> next;
 	}
 	nemu_state.state = NEMU_STOP;
-}
+}*/
 
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
