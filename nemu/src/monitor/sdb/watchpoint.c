@@ -174,7 +174,7 @@ void scan_and_print(WP* head){
 }
 
 void print_watchpoint(){
-	if(head != NULL){
+	if(head == NULL){
 		Log("No watchpoint ");
 		return;
 	}
