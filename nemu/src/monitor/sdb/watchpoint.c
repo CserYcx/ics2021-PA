@@ -141,7 +141,7 @@ void show_head(){
 	
 }
 
-void show_free_(){
+void show_free(){
 	int i = 0;
 	WP* fr = free_;
 	printf("That's the free_ linked list:\n"); 

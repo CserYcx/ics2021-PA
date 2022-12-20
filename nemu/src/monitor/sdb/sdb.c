@@ -216,6 +216,7 @@ static int cmd_d(char* args){
   }
 	else{
 		free_wp(pop_wp(num),num);
+		show_free();
 	}
 
 	return 0;
