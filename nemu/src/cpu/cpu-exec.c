@@ -32,7 +32,9 @@ void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
 	WP* temp = head;
-	assert(temp !=NULL);
+	if(temp !=NULL){
+		Log("No watchpoint can show");
+	}
 	int cnt = 0;
 	//Compare every list expression value in head list
 	while(temp != NULL){
