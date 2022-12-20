@@ -31,7 +31,8 @@ void scan_and_print(WP* wp);
 void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
-	WP* temp = head;
+	assert(head!=NULL);
+	WP* temp = head->next;
 	if(temp ==NULL){
 		Log("No watchpoint can show");
 		return ;
