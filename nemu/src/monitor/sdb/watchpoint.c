@@ -71,6 +71,7 @@ void free_wp(WP *wp,int NO){
 		new_fr->NO = -1;
 		new_fr->next = wp;	
 		free_ = new_fr;
+		memset(wp->expr,0,sizeof(wp->expr));
 	}
 	//free_ is not NULL
 	else{
@@ -85,6 +86,7 @@ void free_wp(WP *wp,int NO){
 			else{
 				wp->next = fr->next;	
 				fr->next = wp;
+				memset(wp->expr,0,sizeof(wp->expr));
 				break;
 			}
 		}
@@ -109,8 +111,8 @@ WP* pop_wp(int NO){
 		if (NO == h->next->NO){
 			WP* wp = h->next;
 			h->next = h->next->next;
-			wp->next = NULL;
-			printf("pop wp is (%d, %s)\n",wp->NO,"NULL");
+			memset(wp->expr,0,sizeof(wp->expr));
+			printf("pop wp is (NO:%d,Expr:%s,Next:%s)\n",wp->NO,wp->expr,"NULL");
 			return wp;
 		}
 		h = h->next;
@@ -137,16 +139,22 @@ void show_head(){
 	}
 	printf("\n");
 	
-	/*WP* fr = free_;
+}
+
+void show_free_(){
+	int i = 0;
+	WP* fr = free_;
 	printf("That's the free_ linked list:\n"); 
 	while(fr != NULL){
-		printf("(%d, %d) -> ",fr->NO,(fr->next != NULL? (fr->next->NO):-1));
+		printf("(NO:%d,Expr:%s,Next:%d) -> ",fr->NO,fr->expr,(fr->next != NULL? (fr->next->NO):-1));
 		fr = fr->next;
 		if((i+1)%4 == 0){printf("\n");}
 		i++;
 	}
-	printf("\n");*/
+	printf("\n");
 }
+
+
 
 void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
