@@ -159,7 +159,7 @@ static bool make_token(char *e) {
     }
   }
 	
-	printf("Make token is over*******************\n");
+	//printf("Make token is over*******************\n");
   return true;
 }
 
@@ -222,8 +222,8 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 				}
 				//if token's priority is same, choose the farther one
 				else if(priority == temp_priority && pos <= cnt){pos = cnt;}
-				printf("The current pos is %d\n",pos);
-				printf("The current priority is %d\n",priority);
+				//printf("The current pos is %d\n",pos);
+				//printf("The current priority is %d\n",priority);
 			}
 		}
 	}
@@ -235,8 +235,8 @@ uint32_t get_main_token(Token *token,uint32_t begin,uint32_t end, uint32_t pos){
 	}
 
 	Assert(token[pos].type != TK_NOTYPE && token[pos].type <= TK_EQ, "Token is not operator!!!\n");	
-	printf("Get main token is over**********************\n");
-	printf("the return token type is %d\n", token[pos].type);
+	//printf("Get main token is over**********************\n");
+	//printf("the return token type is %d\n", token[pos].type);
 	return pos;
 }
 
@@ -290,25 +290,25 @@ uint32_t eval(int begin, int end){
 		// Single tokens
 		// The token should be a number
 		// return the number value
-		printf("the begin = %d\n", begin); 
+		//printf("the begin = %d\n", begin); 
 		if (tokens[begin].type == TK_NUM){
 			Assert(tokens[begin].str, "The num is none!!!\n");
-			printf("the string is %s\n", tokens[begin].str);
-			printf("the nums value is %d\n", atoi(tokens[begin].str));
+			//printf("the string is %s\n", tokens[begin].str);
+			//printf("the nums value is %d\n", atoi(tokens[begin].str));
 			return atoi(tokens[begin].str);
 		}
 		else if (tokens[begin].type == TK_HEXNUM){
 			Assert(tokens[begin].str, "The num is none!!!\n");
-			printf("the string is %s\n", tokens[begin].str);
-			printf("the nums value is %s\n", tokens[begin].str);
+			//printf("the string is %s\n", tokens[begin].str);
+			//printf("the nums value is %s\n", tokens[begin].str);
 			return strtol(tokens[begin].str,NULL,16);
 		}
 		else if (tokens[begin].type == TK_REG){
 			bool* success = (bool*)malloc(sizeof(bool));
 			*success = true;
 			Assert(tokens[begin].str, "The num is none!!!\n");
-			printf("the string is %s\n", tokens[begin].str);
-			printf("the nums value is %s\n", tokens[begin].str+1);
+			//printf("the string is %s\n", tokens[begin].str);
+			//printf("the nums value is %s\n", tokens[begin].str+1);
 			return isa_reg_str2val(tokens[begin].str+1,success); 
 		}
 		else{ 
@@ -320,7 +320,7 @@ uint32_t eval(int begin, int end){
 	else if(check_parentheses(begin,end) == true){
 		//  Expression is surronded by a matched pair of parentheses
 		//  in the case , throw away the parentheses
-		printf("the current begin is %d, end is %d\n",begin,end);
+		//printf("the current begin is %d, end is %d\n",begin,end);
 		return eval(begin+1,end-1);
 	}
 
@@ -328,11 +328,11 @@ uint32_t eval(int begin, int end){
 		uint32_t op_pos = 0;
 		//Log("Begining find the main token!!\n");
 		op_pos = get_main_token(tokens,begin,end,op_pos);
-		printf("!!!pos is %d, begin is %d, end is %d\n",op_pos,begin,end);
+		//printf("!!!pos is %d, begin is %d, end is %d\n",op_pos,begin,end);
 		uint32_t val1 = eval(begin, op_pos-1);	
 		uint32_t val2 = eval(op_pos + 1,end);	
-		printf("val1 = %d, val2 = %d\n",val1,val2);
-		printf("type = %c\n",tokens[op_pos].type);
+		//printf("val1 = %d, val2 = %d\n",val1,val2);
+		//printf("type = %c\n",tokens[op_pos].type);
 		switch (tokens[op_pos].type){
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;

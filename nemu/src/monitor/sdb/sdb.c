@@ -188,7 +188,7 @@ static int cmd_w(char *args) {
   }
 	else{
 		arg[strlen(arg)] = ' ';
-		printf("The new wp linked list:\n");
+		//printf("The new wp linked list:\n");
 		WP* wp = new_wp();
 		strcpy(wp->expr,arg);
 		assert(wp != NULL);
