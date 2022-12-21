@@ -29,8 +29,10 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 	// scan all watchpoint YOU CODE IS HERE:
+#ifdef CONFIG_WATCHPOINT
 	WP* wp = send_head();
 	scan_and_print(wp);
+#endif
 }
 
 #include <isa-exec.h>
