@@ -53,7 +53,7 @@ WP* new_wp(){
 		}
 		temp->next = wp;
 	}
-	if (head == NULL){
+	else{
 		head = (WP*)malloc(sizeof(WP));
 		head->NO = -1;
 		head->next = wp;
@@ -71,22 +71,19 @@ void free_wp(WP *wp,int NO){
 		new_fr->NO = -1;
 		new_fr->next = wp;	
 		free_ = new_fr;
-		memset(wp->expr,0,sizeof(wp->expr));
 	}
 	//free_ is not NULL
 	else{
 		WP* fr = free_;		
-		WP* new_fr = (WP*)malloc(sizeof(WP));
-		new_fr->NO = -1;
-		new_fr->next = fr;	
-		free_ = new_fr;
-		fr = free_;
-		while(fr != NULL){
-			if (wp->NO > fr->next->NO && fr->next != NULL){fr = fr->next;}
+		//WP* new_fr = (WP*)malloc(sizeof(WP));
+		//new_fr->NO = -1;
+		//new_fr->next = fr;	
+		//free_ = new_fr;
+		while(fr->next != NULL){
+			if (wp->NO > fr->next->NO){fr = fr->next;}
 			else{
 				wp->next = fr->next;	
 				fr->next = wp;
-				memset(wp->expr,0,sizeof(wp->expr));
 				break;
 			}
 		}
