@@ -150,6 +150,7 @@ static int cmd_x(char *args) {
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 
+			//Calculate the expression's value
 			*addr_int = expr(arg,success);
 
 			printf("addr_int = %lx\n",*addr_int);
