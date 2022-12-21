@@ -134,6 +134,8 @@ static int cmd_x(char *args) {
   int next = 0;
 	uint64_t show = 0;
 	uint64_t *addr_int = (uint64_t*)malloc(sizeof(uint64_t));
+	bool* success = (bool*)malloc(sizeof(bool));
+	*success = true;
 
   if (arg == NULL) {
     /* no argument given */
@@ -148,7 +150,8 @@ static int cmd_x(char *args) {
 			arg = strtok(NULL, " ");
 			assert(arg != NULL);
 
-			sscanf(arg,"%lx",addr_int);
+			*addr_int = expr(arg,success);
+
 			printf("addr_int = %lx\n",*addr_int);
 
 				for(int cnt=0;cnt<next;cnt++){
@@ -159,6 +162,7 @@ static int cmd_x(char *args) {
 				}
 		}
 		free(addr_int);
+		free(success);
 		return 0;
 }
 

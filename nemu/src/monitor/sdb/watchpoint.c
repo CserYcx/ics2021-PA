@@ -17,6 +17,7 @@
   /* TODO: Add more members if necessary */
 
 //} WP;
+
 static uint32_t expr_value[32] ;// Expression's value
 static WP wp_pool[NR_WP] = {};
 //head is to organize the using node
@@ -41,15 +42,13 @@ WP* new_wp(){
 		wp = free_->next;
 		free_->next = wp->next;
 	}
-	assert(free!=NULL);
-	assert(wp != NULL);
+	assert(free_!=NULL);
 	wp->next = NULL;
 	//make the wp to the head next and the head has same value with current pointing wp
 	if(head != NULL){
 		WP *temp = head;
 		while(temp != NULL && temp->next != NULL){
 			temp = temp->next;
-			//printf("temp NO is %d\n",temp->NO);
 		}
 		temp->next = wp;
 	}
@@ -59,7 +58,6 @@ WP* new_wp(){
 		head->next = wp;
 	}
 	assert(head != NULL);
-	//printf("(%d, %s) -> ",wp->NO,wp->next != NULL?"True":"NULL");
 	return wp;
 }
 
@@ -75,10 +73,6 @@ void free_wp(WP *wp,int NO){
 	//free_ is not NULL
 	else{
 		WP* fr = free_;		
-		//WP* new_fr = (WP*)malloc(sizeof(WP));
-		//new_fr->NO = -1;
-		//new_fr->next = fr;	
-		//free_ = new_fr;
 		while(fr->next != NULL){
 			if (wp->NO > fr->next->NO){fr = fr->next;}
 			else{
@@ -101,6 +95,7 @@ bool find_wp(int NO){
 	return false;
 }
 
+//pop a list from head
 WP* pop_wp(int NO){
 	assert(head != NULL);
 	WP* h = head;
@@ -118,11 +113,13 @@ WP* pop_wp(int NO){
 	return NULL;
 }
 
+// as a interface to send a linked list
 WP* send_head(){
 	WP* wp = head;
 	return wp;
 }
 
+//As a test programme, to show all element in the head
 void show_head(){
 	assert(head != NULL);
 	WP* wp = head;
@@ -138,6 +135,7 @@ void show_head(){
 	
 }
 
+//As a test to show all element in free_
 void show_free(){
 	int i = 0;
 	WP* fr = free_;
@@ -151,8 +149,7 @@ void show_free(){
 	printf("\n");
 }
 
-
-
+//In the end of the trace_and_difftest to judge whether every expression's value changed
 void scan_and_print(WP* head){
 	bool* success = (bool*)malloc(sizeof(bool));
 	*success = true;
@@ -178,6 +175,7 @@ void scan_and_print(WP* head){
 	nemu_state.state = NEMU_STOP;
 }
 
+//As a interface in cmd_info, print all watchpoint
 void print_watchpoint(){
 	if(head == NULL){
 		Log("No watchpoint ");
