@@ -6,6 +6,10 @@
 
 /* RTL basic instructions */
 
+/* Some Tips: 
+ * The inline keyword is like the macro, you can think its work is to replace the code
+*/
+
 #define def_rtl_compute_reg(name) \
   static inline def_rtl(name, rtlreg_t* dest, const rtlreg_t* src1, const rtlreg_t* src2) { \
     *dest = concat(c_, name) (*src1, *src2); \
@@ -21,6 +25,8 @@
   def_rtl_compute_imm(name) \
 
 // compute
+// Macro expansion like: rtl_add
+// 32 bits reg-reg or reg-imm
 
 def_rtl_compute_reg_imm(add)
 def_rtl_compute_reg_imm(sub)
@@ -54,6 +60,13 @@ static inline def_rtl(setrelopi, uint32_t relop, rtlreg_t *dest,
 }
 
 // mul/div
+// Macro expansion like: rtl_mulu_lo
+// 32 bits reg-reg
+// mulu is unsigned multiply
+
+// Solve the quiz in PA2.2(Why we don't have the muls_lo)
+// muls_lo can be replaced by the mulu_lo
+// Here a puzzle to handle: what's the q/r
 
 def_rtl_compute_reg(mulu_lo)
 def_rtl_compute_reg(mulu_hi)
@@ -120,6 +133,7 @@ static inline def_rtl(lms, rtlreg_t *dest, const rtlreg_t* addr, word_t offset, 
   }
 }
 
+// hose memory request
 static inline def_rtl(host_lm, rtlreg_t* dest, const void *addr, int len) {
   switch (len) {
     case 4: *dest = *(uint32_t *)addr; return;

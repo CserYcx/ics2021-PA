@@ -43,6 +43,7 @@ typedef struct Decode {
 
 
 // --- prototype of decode helpers ---
+// The macro expansion may like decode_I
 #define def_DHelper(name) void concat(decode_, name) (Decode *s, int width)
 // empty decode helper
 static inline def_DHelper(empty) {}

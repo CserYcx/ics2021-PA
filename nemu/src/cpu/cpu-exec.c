@@ -67,6 +67,9 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   int idx = isa_fetch_decode(s);
   s->dnpc = s->snpc;
+
+  // Use the index to find the Execution helper function
+  // We use the RTL instruction to do the instruction real work
   s->EHelper = g_exec_table[idx];
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;

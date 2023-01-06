@@ -7,6 +7,8 @@
 
 /* RTL pseudo instructions */
 
+// Maybe PA2.2 key is here: 
+// The first instruction i have to write is li(load immediate)
 static inline def_rtl(li, rtlreg_t* dest, const rtlreg_t imm) {
   rtl_addi(s, dest, rz, imm);
 }

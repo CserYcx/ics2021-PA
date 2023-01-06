@@ -3,6 +3,8 @@
 
 #include <cpu/decode.h>
 
+// The temporary registers
+
 extern const rtlreg_t rzero;
 extern rtlreg_t tmp_reg[4];
 

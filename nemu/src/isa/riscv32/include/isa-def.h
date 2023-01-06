@@ -3,6 +3,8 @@
 
 #include <common.h>
 
+// ISA general registers
+
 typedef struct {
   struct {
     rtlreg_t _32;
