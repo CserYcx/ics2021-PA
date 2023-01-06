@@ -45,6 +45,7 @@ static const void* g_exec_table[TOTAL_INSTR] = {
 static void fetch_decode_exec_updatepc(Decode *s) {
   fetch_decode(s, cpu.pc);
   s->EHelper(s);
+  printf("Do the EHelper\n");
   cpu.pc = s->dnpc;
 }
 
