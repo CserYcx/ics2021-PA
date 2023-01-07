@@ -91,7 +91,6 @@ int isa_fetch_decode(Decode *s) {
   s->isa.instr.val = instr_fetch(&s->snpc, 4);
   // return the index to repetory the g_exec_table
   int idx = table_main(s);
-  printf("Return a index!\n");
   return idx;
 }
 

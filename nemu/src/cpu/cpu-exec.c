@@ -72,6 +72,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   // Use the index to find the Execution helper function
   // We use the RTL instruction to do the instruction real work
   s->EHelper = g_exec_table[idx];
+  // My test code
   printf("Execution Helper function\n");
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
