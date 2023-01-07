@@ -17,6 +17,7 @@ extern rtlreg_t tmp_reg[4];
 #define t0    (&tmp_reg[3])
 #define rz (&rzero)
 
+// Here make rules to define how the EHelper function is built and how they work
 #define def_rtl(name, ...) void concat(rtl_, name)(Decode *s, __VA_ARGS__)
 
 // relation operation
