@@ -42,6 +42,7 @@ static def_DHelper(U) {
   decode_op_r(s, id_dest, s->isa.instr.u.rd, true);
 }
 
+// Maybe has a bug here: why all the flag state is true
 static def_DHelper(J){
   decode_op_i(s, id_src1, s->isa.instr.j.imm19_12 & 0x000ff000, true);
   decode_op_i(s, id_src1, s->isa.instr.j.imm11 & 0x00000800, true);
