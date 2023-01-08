@@ -1,5 +1,5 @@
 //jal 
 def_EHelper(jal){
     // in the rtl-basic.h
-    rtl_j(s,*ddest);
+    rtl_jr(s,ddest);
 }
