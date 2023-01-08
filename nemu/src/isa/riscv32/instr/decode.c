@@ -42,6 +42,14 @@ static def_DHelper(U) {
   decode_op_r(s, id_dest, s->isa.instr.u.rd, true);
 }
 
+static def_DHelper(J){
+  decode_op_i(s, id_src1, s->isa.instr.j.imm19_12 & 0x000ff000, true);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm11 & 0x00000800, true);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm10_1 & 0x00000402, true);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm20 & 0x00010000, true);
+  decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
+}
+
 static def_DHelper(S) {
   decode_op_r(s, id_src1, s->isa.instr.s.rs1, false);
   sword_t simm = (s->isa.instr.s.simm11_5 << 5) | s->isa.instr.s.imm4_0;
@@ -79,12 +87,16 @@ def_THelper(main) {
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 01000 11", S     , store);
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 01101 11", U     , lui);
 
-  /* Here are my complementary instructions
-  */
+  /**
+   *Here are my complementary instructions
+  **/
   // li instruction (Pseudo, need to be extended  Fixed:maybe not, just use the addi to implement)
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 00100 11", I     , li);
   // auipc instruction(Add Upper Immediate to pc)
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 00101 11", U     , auipc);
+  // jal instruction
+  def_INSTR_IDTAB("??????? ????? ????? ??? ????? 11011 11", J     , jal);
+  
   def_INSTR_TAB  ("??????? ????? ????? ??? ????? 11010 11",         nemu_trap);
   // Macro expansion is like table_lui, return EXEC_ID_lui
   // A little confuse here: where use the inv?
