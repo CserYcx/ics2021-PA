@@ -45,7 +45,7 @@ static const void* g_exec_table[TOTAL_INSTR] = {
 static void fetch_decode_exec_updatepc(Decode *s) {
   fetch_decode(s, cpu.pc);
   s->EHelper(s);
-  printf("Do the EHelper\n");
+  //printf("Do the EHelper\n");
   cpu.pc = s->dnpc;
 }
 
@@ -73,7 +73,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   // We use the RTL instruction to do the instruction real work
   s->EHelper = g_exec_table[idx];
   // My test code
-  printf("Execution Helper function\n");
+  //printf("Execution Helper function\n");
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
