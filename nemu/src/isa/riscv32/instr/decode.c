@@ -42,12 +42,12 @@ static def_DHelper(U) {
   decode_op_r(s, id_dest, s->isa.instr.u.rd, true);
 }
 
-// Maybe has a bug here: why all the flag state is true
+// Maybe has a bug here: why all the flag state are true
 static def_DHelper(J){
-  decode_op_i(s, id_src1, s->isa.instr.j.imm19_12 & 0x000ff000, true);
-  decode_op_i(s, id_src1, s->isa.instr.j.imm11 & 0x00000800, true);
-  decode_op_i(s, id_src1, s->isa.instr.j.imm10_1 & 0x00000402, true);
-  decode_op_i(s, id_src1, s->isa.instr.j.imm20 & 0x00010000, true);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm19_12 & 0x000ff000, false);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm11 & 0x00000800, false);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm10_1 & 0x00000402, false);
+  decode_op_i(s, id_src1, s->isa.instr.j.imm20 & 0x00010000, false);
   decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
 }
 
@@ -75,7 +75,6 @@ def_THelper(store) {
 def_THelper(li) {
   //            imm[11:0]      rs1   func3 rd    opcode
   def_INSTR_TAB("??????? ????? ????? 000 ????? ????? ??", addi);
-  //def_INSTR_TAB("??????? ????? ????? ??? ????? 01101 11", lui);
   return EXEC_ID_inv;
 }
 
