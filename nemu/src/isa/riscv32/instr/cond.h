@@ -1,7 +1,7 @@
 //jal 
 def_EHelper(jal){
     // in the rtl-basic.h
-    sword_t simm = (s->isa.instr.j.simm20 << 20) | (s->isa.instr.j.imm10_1 << 10) |
+    sword_t simm = (s->isa.instr.j.simm20 << 19) | (s->isa.instr.j.imm10_1 << 10) |
                  (s->isa.instr.j.imm11 << 8) | (s->isa.instr.j.imm19_12);
     printf("imm20 = %x\n",s->isa.instr.j.simm20);
     printf("imm10 = %x\n",s->isa.instr.j.imm10_1);
