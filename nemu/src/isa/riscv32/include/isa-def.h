@@ -50,7 +50,8 @@ typedef struct {
       uint32_t imm19_12  : 8;
       uint32_t imm11     : 1;
       uint32_t imm10_1   : 10;
-      uint32_t imm20     : 1;
+      // have to signed-extended
+      int32_t  simm20    : 1;
     } j;
     uint32_t val;
   } instr;
