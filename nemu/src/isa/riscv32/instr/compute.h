@@ -3,6 +3,11 @@ def_EHelper(lui) {
   rtl_li(s, ddest, id_src1->imm);
 }
 
+def_EHelper(li){
+  printf("li: imm is 0x%x\n",id_src1->imm);
+  rtl_li(s, ddest, id_src1->imm);
+}
+
 // addi
 def_EHelper(addi){
   printf("addi : imm is 0x%x\n",id_src1->imm);
