@@ -36,6 +36,7 @@ static def_DopHelper(r)
 static def_DHelper(I)
 {
   // the source registers(src1, src2) and the destination register(dest)
+  // the addi cann't load the ture immediate
   decode_op_r(s, id_src1, s->isa.instr.i.rs1, false);
   decode_op_i(s, id_src2, s->isa.instr.i.simm11_0, false);
   decode_op_r(s, id_dest, s->isa.instr.i.rd, true);
