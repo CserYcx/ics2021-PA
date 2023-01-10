@@ -5,6 +5,7 @@ def_EHelper(jal){
                  (s->isa.instr.j.imm11 << 8) | (s->isa.instr.j.imm19_12);
     simm = simm>>8;
     printf("simm = %x\n",simm);
+    printf("next pc = %x\n",simm + s->pc);
     *ddest = s->pc+4;
     rtl_j(s,s->pc += simm);
 }
