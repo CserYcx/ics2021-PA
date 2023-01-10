@@ -12,7 +12,7 @@ const char *regs[] = {
 void isa_reg_display() {
 	// print the registers' value
 	for(int cnt = 0;cnt<32;++cnt){
-		printf("%4s = %x  \n",regs[cnt],gpr(cnt));
+		printf("%4s = 0x%x  \n",regs[cnt],gpr(cnt));
 	}
 
 }
