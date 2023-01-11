@@ -8,7 +8,7 @@ def_EHelper(jal){
     simm = simm<<1;
     // if destion is 0(rz), jal is j instruction
     if(s->isa.instr.j.rd == 0){
-        printf("jal: j = %x\n",simm);
+        printf("j: jal = %x\n",simm);
         printf("next pc = %x\n",simm + s->pc);
         rtl_j(s,s->pc += simm);
     }
