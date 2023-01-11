@@ -4,17 +4,18 @@ def_EHelper(lui) {
 }
 
 // I should provide the li
+/*
 def_EHelper(li){
   printf("li : imm is 0x%x\n",id_src2->imm);
   sword_t simm = id_src2->imm << 20;
   rtl_addi(s,ddest,rz,simm);
   printf("addi : ddest is 0x%x\n",*ddest);
-}
+}*/
 
 // addi
 def_EHelper(addi){
   printf("addi : imm is 0x%x\n",id_src2->imm);
-  sword_t simm = id_src2->imm << 20;
+  sword_t simm = id_src2->imm ;
   rtl_addi(s,ddest,dsrc1,simm);
   printf("addi : ddest is 0x%x\n",*ddest);
 
