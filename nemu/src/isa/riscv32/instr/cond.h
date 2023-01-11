@@ -3,7 +3,7 @@ def_EHelper(jal){
     // in the rtl-basic.h
     // need to relocate the imm and move left 1 bit
     sword_t simm = (s->isa.instr.j.simm20 << 19) | (s->isa.instr.j.imm19_12) << 11
-    | (s->isa.instr.j.imm11 << 2) | (s->isa.instr.j.imm10_1 ) ;
+    | (s->isa.instr.j.imm11 << 10) | (s->isa.instr.j.imm10_1 ) ;
     printf("jal: imm20 is %x\n",s->isa.instr.j.simm20<<19);
     printf("jal: imm19 is %x\n",s->isa.instr.j.imm19_12<<11);
     printf("jal: imm11 is %x\n",s->isa.instr.j.imm11<<2);
