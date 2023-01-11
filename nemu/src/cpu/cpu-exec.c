@@ -111,14 +111,15 @@ void cpu_exec(uint64_t n) {
   uint64_t timer_start = get_time();
 
   Decode s;
+  Log("Execute the file!!!");
   for (;n > 0; n --) {
+    printf("-----------------\n");
     printf("That' the %ldth instruction\n",g_nr_guest_instr);
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
     printf("The current pc is %x\n",cpu.pc);
-    printf("-----------------\n");
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
