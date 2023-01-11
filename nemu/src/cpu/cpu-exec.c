@@ -114,6 +114,7 @@ void cpu_exec(uint64_t n) {
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
+    printf("That' the %ldth instruction\n",g_nr_guest_instr);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
     printf("The current pc is %x\n",cpu.pc);
