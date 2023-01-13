@@ -2,6 +2,11 @@
 #include <cpu/ifetch.h>
 #include <isa-all-instr.h>
 
+/**
+ * Some Tips:
+ * Do not care the pesudo instructions, just focusing on how they expand
+*/
+
 def_all_THelper();
 
 static uint32_t get_instr(Decode *s)
