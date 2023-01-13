@@ -22,6 +22,7 @@ typedef struct Decode {
   vaddr_t dnpc; // dynamic next pc
   void (*EHelper)(struct Decode *);
   Operand dest, src1, src2;
+  // macro expansion is like: riscv32_ISADecodeInfo(record the information of instructions)
   ISADecodeInfo isa;
   IFDEF(CONFIG_ITRACE, char logbuf[128]);
 } Decode;

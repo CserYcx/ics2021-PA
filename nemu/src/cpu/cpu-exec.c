@@ -112,6 +112,7 @@ void cpu_exec(uint64_t n) {
 
   Decode s;
   Log("Execute the file!!!");
+  printf("Instructions number = %ld!!!\n",n);
   for (;n > 0; n --) {
     printf("-----------------\n");
     printf("That' the %ldth instruction\n",g_nr_guest_instr);
