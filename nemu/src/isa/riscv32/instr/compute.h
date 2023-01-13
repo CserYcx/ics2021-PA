@@ -15,6 +15,7 @@ def_EHelper(li){
 // addi
 def_EHelper(addi){
   printf("addi : imm is 0x%x\n",id_src2->imm);
+  printf("instruction is %s\n",s->logbuf);
   sword_t simm = id_src2->imm ;
   rtl_addi(s,ddest,dsrc1,simm);
   printf("addi : ddest is 0x%x\n",*ddest);
