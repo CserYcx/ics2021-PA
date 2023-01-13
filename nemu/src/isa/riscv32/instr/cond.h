@@ -13,7 +13,6 @@ def_EHelper(jal){
         rtl_j(s,s->pc += simm);
     }
     else{
-        printf("instruction is %s\n",s->logbuf);
         printf("jal: simm = %x\n",simm);
         printf("next pc = %x\n",simm + s->pc);
         *ddest = s->pc+4;
