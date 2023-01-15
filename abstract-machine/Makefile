@@ -1,6 +1,7 @@
 # Makefile for AbstractMachine Kernels and Libraries
 
 ### *Get a more readable version of this Makefile* by `make html` (requires python-markdown)
+### sed command can edit file or create the copy of file in stdout and we can use the regular expression in sed
 html:
 	cat Makefile | sed 's/^\([^#]\)/    \1/g' | markdown_py > Makefile.html
 .PHONY: html
@@ -14,23 +15,32 @@ ifeq ($(MAKECMDGOALS),)
 endif
 
 ### Override checks when `make clean/clean-all/html`
+#		findstring <string> <in>
 ifeq ($(findstring $(MAKECMDGOALS),clean|clean-all|html),)
 
 ### Print build info message
+#		info is to print the information
 $(info # Building $(NAME)-$(MAKECMDGOALS) [$(ARCH)])
 
 ### Check: environment variable `$AM_HOME` looks sane
+#		wildcard Usage: $(wildcard PATTERN..)
+#		wildcard will expand all the file existing and matching the pattern
 ifeq ($(wildcard $(AM_HOME)/am/include/am.h),)
   $(error $$AM_HOME must be an AbstractMachine repo)
 endif
 
 ### Check: environment variable `$ARCH` must be in the supported list
+#		notdir is to delete the file path
+#		basename is to get the prefix of the file, example: if file is hello.txt, prefix is hello
+#		filter Usage: $(filter PATTERN... TEXT) filter is to filterate words unmatching PATTERNin TEXT
 ARCHS = $(basename $(notdir $(shell ls $(AM_HOME)/scripts/*.mk)))
 ifeq ($(filter $(ARCHS), $(ARCH)), )
   $(error Expected $$ARCH in {$(ARCHS)}, Got "$(ARCH)")
 endif
 
 ### Extract instruction set architecture (`ISA`) and platform from `$ARCH`. Example: `ARCH=x86_64-qemu -> ISA=x86_64; PLATFORM=qemu`
+#		subst Usage: $(subst FROM,TO,TEXT) subst is to make the TEXT's substring to be the TO
+#		word is to get the nth string
 ARCH_SPLIT = $(subst -, ,$(ARCH))
 ISA        = $(word 1,$(ARCH_SPLIT))
 PLATFORM   = $(word 2,$(ARCH_SPLIT))
@@ -51,11 +61,17 @@ DST_DIR   = $(WORK_DIR)/build/$(ARCH)
 $(shell mkdir -p $(DST_DIR))
 
 ### Compilation targets (a binary image or archive)
+# 	abspath is to get the absolute path
 IMAGE_REL = build/$(NAME)-$(ARCH)
 IMAGE     = $(abspath $(IMAGE_REL))
 ARCHIVE   = $(WORK_DIR)/build/$(NAME)-$(ARCH).a
 
 ### Collect the files to be linked: object files (`.o`) and libraries (`.a`)
+#		addprefix Usage: $(addprefix _prefix,_names) addprefix is to add each name with a prefix, and return the list with prefix names
+#		addsuffix is similar to the addprefix
+#		sort Usage: $(sort LIST) sort the LIST by the alphabet, and delete the duplicate letter 
+#		join Usage: $(join LIST1,LIST2), concat two list, example: $(join a b,.c .o), it will return a.c and b.o
+#		:= means that the variable will expand when be defined
 OBJS      = $(addprefix $(DST_DIR)/, $(addsuffix .o, $(basename $(SRCS))))
 LIBS     := $(sort $(LIBS) am klib) # lazy evaluation ("=") causes infinite recursions
 LINKAGE   = $(OBJS) \
@@ -78,6 +94,8 @@ READELF   = $(CROSS_COMPILE)readelf
 INC_PATH += $(WORK_DIR)/include $(addsuffix /include/, $(addprefix $(AM_HOME)/, $(LIBS)))
 INCFLAGS += $(addprefix -I, $(INC_PATH))
 
+# 	tr is a command to replace, delete and compress the string
+# 	tr a-z A-Z is to make the string from the lower to upper
 CFLAGS   += -O2 -MMD -Wall -Werror $(INCFLAGS) \
             -D__ISA__=\"$(ISA)\" -D__ISA_$(shell echo $(ISA) | tr a-z A-Z)__ \
             -D__ARCH__=$(ARCH) -D__ARCH_$(shell echo $(ARCH) | tr a-z A-Z | tr - _) \
@@ -100,6 +118,11 @@ ifeq ($(wildcard $(shell which $(CC))),)
 endif
 
 ## 5. Compilation Rules
+## '@' as a prefix in the command line is make the make setence do not show the command line
+## '$@' means the target file
+## '$^' means all dependent files
+## '$<' means the first dependent file
+## '$?' means the lateset the file list of the dependent files
 
 ### Rule (compile): a single `.c` -> `.o` (gcc)
 $(DST_DIR)/%.o: %.c

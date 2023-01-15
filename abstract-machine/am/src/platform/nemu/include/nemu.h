@@ -11,6 +11,7 @@
 #elif defined(__ISA_MIPS32__)
 # define nemu_trap(code) asm volatile ("move $v0, %0; .word 0xf0000000" : :"r"(code))
 #elif defined(__ISA_RISCV32__) || defined(__ISA_RISCV64__)
+// That's a embeded inline setence
 # define nemu_trap(code) asm volatile("mv a0, %0; .word 0x0000006b" : :"r"(code))
 #elif
 # error unsupported ISA __ISA__
