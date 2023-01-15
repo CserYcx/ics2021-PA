@@ -70,6 +70,14 @@ static def_DHelper(S)
   decode_op_r(s, id_dest, s->isa.instr.s.rs2, false);
 }
 
+// (R-type, read the rs1 and rs2 registers as source operands
+// and write the result into register rd)
+static def_DHelper(R){
+  decode_op_r(s, id_src1, s->isa.instr.r.rs1,false);
+  decode_op_r(s, id_src2, s->isa.instr.r.rs2,false);
+  decode_op_r(s, id_dest, s->isa.instr.r.rd, false);
+}
+
 // The THelper function is to make sure which type of the instruction
 // The example is use the funt3(010) to confirm is lw
 def_THelper(load)
@@ -107,8 +115,10 @@ def_THelper(main)
    *Here are my complementary instructions
    **/
   // li instruction (Pseudo, need to be extended  Fixed:maybe not, just use the addi to implement)
-  // add instruction
+  // addi instruction
   def_INSTR_IDTAB("??????? ????? ????? 000 ????? 00100 11", I, addi);
+  // add instruction 
+  def_INSTR_IDTAB("0000000 ????? ????? 000 ????? 01100 11", R, add);
   // auipc instruction(Add Upper Immediate and pc to dest)
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 00101 11", U, auipc);
   // jal instruction
