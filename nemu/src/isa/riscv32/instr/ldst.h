@@ -6,8 +6,8 @@ def_EHelper(lw) {
 }
 
 def_EHelper(sw) {
-  printf("sw : src1 is 0x%x\n", *dsrc1);
-  printf("sw : src2 is 0x%x\n", id_src2->imm);
+  printf("sw : src is 0x%x\n", *dsrc1);
+  printf("sw : offset is 0x%x\n", id_src2->imm);
   rtl_sm(s, ddest, dsrc1, id_src2->imm, 4);
   printf("sw : ddest is 0x%x\n", *ddest);
 }
