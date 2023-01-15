@@ -34,3 +34,11 @@ def_EHelper(add){
   rtl_add(s,ddest,dsrc1,dsrc2);
   printf("add : dest is 0x%x\n",*ddest);
 }
+
+// sub 
+def_EHelper(sub){
+  printf("sub : src1 is 0x%x\n",*dsrc1);
+  printf("sub : src2 is 0x%x\n",*dsrc2);
+  rtl_sub(s,ddest,dsrc1,dsrc2);
+  printf("sub : dest is 0x%x\n",*ddest);
+}
