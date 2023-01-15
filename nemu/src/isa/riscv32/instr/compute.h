@@ -30,7 +30,7 @@ def_EHelper(auipc){
 // add (src1 + src2 -> dest)
 def_EHelper(add){
   printf("add : src1 is 0x%x\n",id_src1->imm);
-  printf("add : src2 is 0x%x\n",*dsrc2);
+  printf("add : src2 is 0x%x\n",id_src2->imm);
   rtl_add(s,ddest,dsrc1,dsrc2);
-  printf("add : dest is 0x%x\n",*ddest);
+  printf("add : dest is 0x%x\n",id_dest->imm);
 }
