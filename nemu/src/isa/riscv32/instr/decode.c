@@ -75,7 +75,7 @@ static def_DHelper(S)
 static def_DHelper(R){
   decode_op_r(s, id_src1, s->isa.instr.r.rs1,false);
   decode_op_r(s, id_src2, s->isa.instr.r.rs2,false);
-  decode_op_r(s, id_dest, s->isa.instr.r.rd, false);
+  decode_op_r(s, id_dest, s->isa.instr.r.rd, true);
 }
 
 // The THelper function is to make sure which type of the instruction
