@@ -54,3 +54,15 @@ def_EHelper(slti){
   }
   printf("slti : dest is 0x%x\n",*ddest);
 }
+
+// slli
+def_EHelper(slli){
+  printf("slli : shamt is 0x%x\n",id_src2->imm);
+  if((id_src2->imm & 0x10) == 0){
+    printf("slli : src1 is 0x%x\n",*dsrc1);
+    rtl_slli(s,ddest,dsrc1,id_src2->imm);
+    printf("slli : dest is 0x%x\n",*ddest);
+  }else{
+    printf("The instruction is invalid!");
+  }
+}
