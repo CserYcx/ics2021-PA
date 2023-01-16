@@ -24,7 +24,7 @@ def_EHelper(bne){
     printf("bne : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
     }else{
-        printf("bne : src1 not equal to src2\n");
+        printf("bne : src1 equal to src2\n");
     }
 }
 

@@ -47,6 +47,7 @@ def_EHelper(sub){
 def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
   printf("slti : src2 is 0x%x\n",id_src2->imm);
+  // may be bug here(i don't treat the id_src2->imm as a signed numbers)
   if(*dsrc1 < id_src2->imm){
     rtl_li(s,ddest,1);
   }else{
