@@ -59,6 +59,7 @@ def_THelper(main) {
 };
 
 int isa_fetch_decode(Decode *s) {
+  // update the snpc (snpc depend on current pc and the len)
   s->isa.instr.val = instr_fetch(&s->snpc, 4);
   int idx = table_main(s);
   return idx;

@@ -78,6 +78,13 @@ static def_DHelper(R){
   decode_op_r(s, id_dest, s->isa.instr.r.rd, true);
 }
 
+// B-type
+static def_DHelper(B){
+  decode_op_r(s, id_src1, s->isa.instr.s.rs1, false);
+  decode_op_r(s, id_src2, s->isa.instr.s.rs2, false);
+}
+
+
 // The THelper function is to make sure which type of the instruction
 // The example is use the funt3(010) to confirm is lw
 def_THelper(load)
@@ -107,6 +114,12 @@ def_THelper(arith)
   return EXEC_ID_inv;
 }
 
+def_THelper(bq){
+  // take the branch if rs1 == rs2 
+  def_INSTR_TAB("??????? ????? ????? 000 ????? ????? ??", beq);
+  return EXEC_ID_inv;
+}
+
 // I write some comment to make me understand the structure of the instruction deeper
 // The U-type: imm[31:12], rd, opcode (The lui is an example)
 // lui: is to load higher 20-bits to the dest register and the lower 12-bits filled with zero
@@ -131,6 +144,9 @@ def_THelper(main)
   def_INSTR_IDTAB("??????? ????? ????? ??? ????? 11011 11", J, jal);
   // ret instruction(is expanded to jalr)
   def_INSTR_IDTAB("??????? ????? ????? 000 ????? 11001 11", I, jalr);
+  // branch instruction (eq/not)
+  def_INSTR_IDTAB("??????? ????? ????? ??? ????? 11000 11", B, bq);
+  
 
   def_INSTR_TAB("??????? ????? ????? ??? ????? 11010 11", nemu_trap);
   // Macro expansion is like table_lui, return EXEC_ID_lui
@@ -140,6 +156,7 @@ def_THelper(main)
 
 int isa_fetch_decode(Decode *s)
 {
+  // update the snpc (snpc's value depends on current pc and len)
   s->isa.instr.val = instr_fetch(&s->snpc, 4);
   // return the index to repetory the g_exec_table
   int idx = table_main(s);

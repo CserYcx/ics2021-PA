@@ -2,3 +2,4 @@
 #include "../instr/ldst.h"
 #include "../instr/special.h"
 #include "../instr/cond.h"
+#include "../instr/branch.h"
