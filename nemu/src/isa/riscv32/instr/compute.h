@@ -43,7 +43,7 @@ def_EHelper(sub){
   printf("sub : dest is 0x%x\n",*ddest);
 }
 
-// slti
+// slti (signed)
 def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
   printf("slti : src2 is 0x%x\n",id_src2->imm);
