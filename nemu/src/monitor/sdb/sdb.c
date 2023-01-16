@@ -266,7 +266,7 @@ static int cmd_d(char* args){
         break;
       }
     }
-    if (cmd_table[i].handler(args) < 0) { break; }
+    if (cmd_table[i].handler(args) < 0) { break;}
 
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
