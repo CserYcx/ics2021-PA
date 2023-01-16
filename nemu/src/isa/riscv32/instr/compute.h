@@ -42,3 +42,15 @@ def_EHelper(sub){
   rtl_sub(s,ddest,dsrc1,dsrc2);
   printf("sub : dest is 0x%x\n",*ddest);
 }
+
+// slti
+def_EHelper(slti){
+  printf("slti : src1 is 0x%x\n",*dsrc1);
+  printf("slti : src2 is 0x%x\n",*dsrc2);
+  if(*dsrc1 < *dsrc2){
+    rtl_li(s,ddest,0);
+  }else{
+    rtl_li(s,ddest,1);
+  }
+  printf("slti : dest is 0x%x\n",*ddest);
+}
