@@ -117,6 +117,9 @@ void cpu_exec(uint64_t n) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
     printf("That' the %ldth instruction\n",g_nr_guest_instr);
+    printf("src1 is 0x%x\n",s.src1.imm);
+    printf("src2 is 0x%x\n",s.src2.imm);
+    printf("ddest is 0x%x\n",s.dest.imm);
     printf("instruction is %s\n",s.logbuf);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
