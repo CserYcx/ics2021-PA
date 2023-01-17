@@ -48,7 +48,7 @@ def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
   printf("slti : src2 is 0x%x\n",id_src2->imm);
   // may be bug here(i don't treat the id_src2->imm as a signed numbers)
-  if(*dsrc1 < id_src2->imm){
+  if(*dsrc1 < (int32_t)id_src2->imm){
     rtl_li(s,ddest,1);
   }else{
     rtl_li(s,ddest,0);
@@ -56,6 +56,17 @@ def_EHelper(slti){
   printf("slti : dest is 0x%x\n",*ddest);
 }
 
+// sltiu (unsigned)
+def_EHelper(sltiu){
+  printf("sltiu : src1 is 0x%x\n",*dsrc1);
+  printf("sltiu : src2 is 0x%x\n",id_src2->imm);
+  if(*dsrc1 < id_src2->imm){
+    rtl_li(s,ddest,1);
+  }else{
+    rtl_li(s,ddest,0);
+  }
+  printf("slti : dest is 0x%x\n",*ddest);
+}
 // slli
 def_EHelper(slli){
   printf("slli : shamt is 0x%x\n",id_src2->imm);
