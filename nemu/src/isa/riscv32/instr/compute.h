@@ -67,6 +67,7 @@ def_EHelper(sltiu){
   }
   printf("slti : dest is 0x%x\n",*ddest);
 }
+
 // slli
 def_EHelper(slli){
   printf("slli : shamt is 0x%x\n",id_src2->imm);
