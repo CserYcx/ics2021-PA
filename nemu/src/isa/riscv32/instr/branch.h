@@ -3,8 +3,8 @@ def_EHelper(beq){
     printf("beq : dsrc1 is 0x%x\n",*dsrc1);
     printf("beq : dsrc2 is 0x%x\n",*dsrc2);
     if(*dsrc1 == *dsrc2){
-    sword_t simm = (s->isa.instr.b.simm12 << 11)|(s->isa.instr.b.imm11 << 10)|
-                   (s->isa.instr.b.imm10_5 << 6)|(s->isa.instr.b.imm4_1 << 1);
+    sword_t simm = (s->isa.instr.b.simm12 << 12)|(s->isa.instr.b.imm11 << 11)|
+                   (s->isa.instr.b.imm10_5 << 5)|(s->isa.instr.b.imm4_1 << 1);
     printf("beq : offset is 0x%x\n",simm);
     printf("beq : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
@@ -33,8 +33,8 @@ def_EHelper(bge){
     printf("bge : dsrc1 is 0x%x\n",*dsrc1);
     printf("bge : dsrc2 is 0x%x\n",*dsrc2);
     if(*dsrc1 >= *dsrc2){
-    sword_t simm = (s->isa.instr.b.simm12 << 11)|(s->isa.instr.b.imm11 << 10)|
-                   (s->isa.instr.b.imm10_5 << 6)|(s->isa.instr.b.imm4_1 << 1);
+    sword_t simm = (s->isa.instr.b.simm12 << 12)|(s->isa.instr.b.imm11 << 11)|
+                   (s->isa.instr.b.imm10_5 << 5)|(s->isa.instr.b.imm4_1 << 1);
     printf("bge : offset is 0x%x\n",simm);
     printf("bge : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
@@ -48,8 +48,8 @@ def_EHelper(blt){
     printf("blt : dsrc1 is 0x%x\n",*dsrc1);
     printf("blt : dsrc2 is 0x%x\n",*dsrc2);
     if(*dsrc1 < *dsrc2){
-    sword_t simm = (s->isa.instr.b.simm12 << 11)|(s->isa.instr.b.imm11 << 10)|
-                   (s->isa.instr.b.imm10_5 << 6)|(s->isa.instr.b.imm4_1 << 1);
+    sword_t simm = (s->isa.instr.b.simm12 << 12)|(s->isa.instr.b.imm11 << 11)|
+                   (s->isa.instr.b.imm10_5 << 5)|(s->isa.instr.b.imm4_1 << 1);
     printf("blt : offset is 0x%x\n",simm);
     printf("blt : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
