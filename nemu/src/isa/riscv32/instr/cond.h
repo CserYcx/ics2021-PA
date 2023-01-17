@@ -10,6 +10,7 @@ def_EHelper(jal){
     if(s->isa.instr.j.rd == 0){
         printf("j: jal = %x\n",simm);
         printf("next pc = %x\n",simm + s->pc);
+        *ddest = s->pc+4;
         rtl_j(s,s->pc += simm);
     }
     else{
