@@ -56,9 +56,11 @@ static def_DHelper(U)
 // Maybe has a bug here: why all the flag state are true
 static def_DHelper(J)
 {
+  /*
   sword_t simm = (s->isa.instr.j.simm20 << 19) | (s->isa.instr.j.imm19_12) << 11
                 |(s->isa.instr.j.imm11 << 10)   | (s->isa.instr.j.imm10_1 ) ;
   decode_op_i(s, id_src1, simm<<1, false);
+  */
   decode_op_r(s, id_dest, s->isa.instr.j.rd, true);
 }
 
