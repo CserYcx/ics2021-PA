@@ -25,8 +25,7 @@ def_EHelper(jalr){
     // (src1->imm + simm11_0) & 0xfffffffe -> pc
     *ddest = s->pc+4;
     s->pc = (*dsrc1+id_src2->imm) & 0xfffffffe;
-    *dsrc1 = s->pc;
     printf("jalr: next pc = %x\n",s->pc);
-    rtl_jr(s,dsrc1);
+    rtl_j(s,s->pc);
 }
 
