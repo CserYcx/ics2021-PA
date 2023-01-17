@@ -3,20 +3,11 @@ def_EHelper(lui) {
   rtl_li(s, ddest, id_src1->imm);
 }
 
-// I should provide the li
-/*
-def_EHelper(li){
-  printf("li : imm is 0x%x\n",id_src2->imm);
-  sword_t simm = id_src2->imm << 20;
-  rtl_addi(s,ddest,rz,simm);
-  printf("addi : ddest is 0x%x\n",*ddest);
-}*/
 
 // addi
 def_EHelper(addi){
-  printf("addi : imm is 0x%x\n",id_src2->imm);
-  sword_t simm = id_src2->imm ;
-  rtl_addi(s,ddest,dsrc1,simm);
+  printf("addi : imm is 0x%x\n",id_src2->simm);
+  rtl_addi(s,ddest,dsrc1,id_src2->simm);
   printf("addi : ddest is 0x%x\n",*ddest);
 }
 
@@ -46,9 +37,9 @@ def_EHelper(sub){
 // slti (signed)
 def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
-  printf("slti : src2 is 0x%x\n",(int32_t)id_src2->imm);
+  printf("slti : src2 is 0x%x\n",(int32_t)id_src2->simm);
   // may be bug here(i don't treat the id_src2->imm as a signed numbers)
-  if(*dsrc1 < (int32_t)id_src2->imm){
+  if(*dsrc1 < (int32_t)id_src2->simm){
     rtl_li(s,ddest,1);
   }else{
     rtl_li(s,ddest,0);
@@ -59,8 +50,8 @@ def_EHelper(slti){
 // sltiu (unsigned)
 def_EHelper(sltiu){
   printf("sltiu : src1 is 0x%x\n",*dsrc1);
-  printf("sltiu : src2 is 0x%x\n",id_src2->imm);
-  if(*dsrc1 < id_src2->imm){
+  printf("sltiu : src2 is 0x%x\n",id_src2->simm);
+  if(*dsrc1 < id_src2->simm){
     rtl_li(s,ddest,1);
   }else{
     rtl_li(s,ddest,0);
