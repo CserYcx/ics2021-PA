@@ -93,3 +93,12 @@ def_EHelper(xor){
   printf("xor : dest is 0x%x\n",*ddest);
   
 }
+
+// or (R-type)
+def_EHelper(or){
+  printf("or : src1 is 0x%x\n",*dsrc1);
+  printf("or : src2 is 0x%x\n",*dsrc2);
+  rtl_or(s,ddest,dsrc1,dsrc2);
+  printf("or : dest is 0x%x\n",*ddest);
+  
+}
