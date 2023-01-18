@@ -33,6 +33,15 @@ def_EHelper(sub){
   printf("sub : dest is 0x%x\n",*ddest);
 }
 
+// rem (signed)
+def_EHelper(rem){
+  printf("rem : src1 is 0x%x\n",*dsrc1);
+  printf("rem : src2 is 0x%x\n",*dsrc2);
+  sword_t simm = ((int32_t)(*dsrc1)) % ((int32_t)(*dsrc2));
+  rtl_li(s,ddest,simm);
+  printf("rem : dest is 0x%x\n",*ddest);
+}
+
 // slti (signed)
 def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
