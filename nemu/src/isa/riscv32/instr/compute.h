@@ -3,7 +3,6 @@ def_EHelper(lui){
   rtl_li(s, ddest, id_src1->imm);
 }
 
-
 // addi
 def_EHelper(addi){
   printf("addi : imm is 0x%x\n",id_src2->simm);
@@ -102,3 +101,12 @@ def_EHelper(or){
   printf("or : dest is 0x%x\n",*ddest);
   
 }
+
+// andi (I-type , signed-extended)
+def_EHelper(andi){
+  printf("andi : src1 is 0x%x\n",*dsrc1);
+  printf("andi : src2 is 0x%x\n",id_src2->simm);
+  rtl_andi(s,ddest,dsrc1,id_src2->simm);
+  printf("or : dest is 0x%x\n",*ddest);
+}
+  
