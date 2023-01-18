@@ -59,6 +59,18 @@ def_EHelper(sltiu){
   printf("slti : dest is 0x%x\n",*ddest);
 }
 
+// sltu (unsigned)
+def_EHelper(sltu){
+  printf("sltu : src1 is 0x%x\n",*dsrc1);
+  printf("sltu : src2 is 0x%x\n",*dsrc2);
+  if(*dsrc1 < *dsrc2){
+    rtl_li(s,ddest,1);
+  }else{
+    rtl_li(s,ddest,0);
+  }
+  printf("sltu : dest is 0x%x\n",*ddest);
+}
+
 // slli (I-type)
 def_EHelper(slli){
   // shamt[5] == 0, the instruction is valid
