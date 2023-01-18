@@ -83,3 +83,13 @@ def_EHelper(slli){
     printf("the slli instruction is invalid");
   }
 }
+
+// move bit operation 
+// xor (R-type)
+def_EHelper(xor){
+  printf("xor : src1 is 0x%x\n",*dsrc1);
+  printf("xor : src2 is 0x%x\n",*dsrc2);
+  rtl_xor(s,ddest,dsrc1,dsrc2);
+  printf("xor : dest is 0x%x\n",*ddest);
+  
+}
