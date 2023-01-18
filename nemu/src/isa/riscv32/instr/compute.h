@@ -1,4 +1,4 @@
-def_EHelper(lui) {
+def_EHelper(lui){
   printf("lui: imm is 0x%x\n",id_src1->imm);
   rtl_li(s, ddest, id_src1->imm);
 }
@@ -59,10 +59,15 @@ def_EHelper(sltiu){
   printf("slti : dest is 0x%x\n",*ddest);
 }
 
-// slli
+// slli (I-type)
 def_EHelper(slli){
-  printf("slli : shamt(src2) is 0x%x\n",id_src2->imm);
-  printf("slli : src1 is 0x%x\n",*dsrc1);
-  rtl_slli(s,ddest,dsrc1,id_src2->imm);
-  printf("slli : dest is 0x%x\n",*ddest);
+  // shamt[5] == 0, the instruction is valid
+  if ((id_src2->imm & 0x20) == 0){
+    printf("slli : shamt(src2) is 0x%x\n",id_src2->imm);
+    printf("slli : src1 is 0x%x\n",*dsrc1);
+    rtl_slli(s,ddest,dsrc1,id_src2->imm);
+    printf("slli : dest is 0x%x\n",*ddest);
+  }else{
+    printf("the slli instruction is invalid");
+  }
 }
