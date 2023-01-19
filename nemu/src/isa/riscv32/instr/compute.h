@@ -135,10 +135,17 @@ def_EHelper(or){
   printf("or : src2 is 0x%x\n",*dsrc2);
   rtl_or(s,ddest,dsrc1,dsrc2);
   printf("or : dest is 0x%x\n",*ddest);
-  
 }
 
-// andi (I-type , signed-extended)
+// and 
+def_EHelper(and){
+  printf("and : src1 is 0x%x\n",*dsrc1);
+  printf("and : src2 is 0x%x\n",*dsrc2);
+  rtl_and(s,ddest,dsrc1,dsrc2);
+  printf("and : dest is 0x%x\n",*ddest);
+}
+
+// andi (I-type , immediate)
 def_EHelper(andi){
   printf("andi : src1 is 0x%x\n",*dsrc1);
   printf("andi : src2 is 0x%x\n",id_src2->simm);
