@@ -54,6 +54,21 @@ def_EHelper(blt){
     printf("blt : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
     }else{
-        printf("blt : src1 less than src2\n");
+        printf("blt : src1 not less than src2\n");
+    }
+}
+
+// bltu (unsigned)
+def_EHelper(bltu){
+    printf("bltu : dsrc1 is 0x%x\n",*dsrc1);
+    printf("bltu : dsrc2 is 0x%x\n",*dsrc2);
+    if(*dsrc1 < *dsrc2){
+    sword_t simm = (s->isa.instr.b.simm12 << 12)|(s->isa.instr.b.imm11 << 11)|
+                   (s->isa.instr.b.imm10_5 << 5)|(s->isa.instr.b.imm4_1 << 1);
+    printf("bltu : offset is 0x%x\n",simm);
+    printf("bltu : next pc is 0x%x\n",s->pc + simm);
+        rtl_j(s,s->pc += simm);
+    }else{
+        printf("bltu : src1 not less than src2\n");
     }
 }
