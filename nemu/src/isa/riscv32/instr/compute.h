@@ -100,6 +100,19 @@ def_EHelper(slli){
   }
 }
 
+// srai 
+def_EHelper(srai){
+  if ((id_src2->imm & 0x20) == 0){
+    printf("srai : shamt(src2) is 0x%x\n",id_src2->imm);
+    printf("srai : src1 is 0x%x\n",*dsrc1);
+    rtl_srai(s,ddest,dsrc1,id_src2->imm);
+    printf("srai : dest is 0x%x\n",*ddest);
+  }else{
+    printf("the srai instruction is invalid");
+  }
+
+}
+
 // move bit operation 
 // xor (R-type)
 def_EHelper(xor){
@@ -107,7 +120,6 @@ def_EHelper(xor){
   printf("xor : src2 is 0x%x\n",*dsrc2);
   rtl_xor(s,ddest,dsrc1,dsrc2);
   printf("xor : dest is 0x%x\n",*ddest);
-  
 }
 
 // or (R-type)
