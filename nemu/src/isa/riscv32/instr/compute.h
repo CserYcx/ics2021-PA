@@ -152,4 +152,11 @@ def_EHelper(andi){
   rtl_andi(s,ddest,dsrc1,id_src2->simm);
   printf("or : dest is 0x%x\n",*ddest);
 }
-  
+
+// xori (I-type , immediate)
+def_EHelper(xori){
+  printf("xori : src1 is 0x%x\n",*dsrc1);
+  printf("xori : src2 is 0x%x\n",id_src2->simm);
+  rtl_xori(s,ddest,dsrc1,id_src2->simm);
+  printf("xori : dest is 0x%x\n",*ddest);
+} 
