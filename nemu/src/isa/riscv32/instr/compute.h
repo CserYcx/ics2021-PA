@@ -33,12 +33,20 @@ def_EHelper(sub){
   printf("sub : dest is 0x%x\n",*ddest);
 }
 
+// div (signed)
+def_EHelper(div){
+  printf("div : src1 is 0x%x\n",*dsrc1);
+  printf("div : src2 is 0x%x\n",*dsrc2);
+  rtl_divs_q(s,ddest,dsrc1,dsrc2);
+  printf("div : dest is 0x%x\n",*ddest);
+
+}
+
 // rem (signed)
 def_EHelper(rem){
   printf("rem : src1 is 0x%x\n",*dsrc1);
   printf("rem : src2 is 0x%x\n",*dsrc2);
-  sword_t simm = ((int32_t)(*dsrc1)) % ((int32_t)(*dsrc2));
-  rtl_li(s,ddest,simm);
+  rtl_divs_r(s,ddest,dsrc1,dsrc2);
   printf("rem : dest is 0x%x\n",*ddest);
 }
 
