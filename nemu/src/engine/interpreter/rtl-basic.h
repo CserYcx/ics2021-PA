@@ -134,6 +134,7 @@ static inline def_rtl(lms, rtlreg_t *dest, const rtlreg_t* addr, word_t offset, 
 }
 
 // hose memory request
+// we will not use these functions in PA
 static inline def_rtl(host_lm, rtlreg_t* dest, const void *addr, int len) {
   switch (len) {
     case 4: *dest = *(uint32_t *)addr; return;
