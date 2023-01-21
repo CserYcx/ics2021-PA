@@ -97,6 +97,14 @@ def_EHelper(sra){
   rtl_sra(s,ddest,dsrc1,dsrc2);
   printf("sra : dest is 0x%x\n",*ddest);
 }
+
+def_EHelper(srl){
+  printf("srl : src1 is 0x%x\n",*dsrc1);
+  printf("srl : src2 is 0x%x\n",*dsrc2);
+  rtl_srl(s,ddest,dsrc1,dsrc2);
+  printf("srl : dest is 0x%x\n",*ddest);
+}
+
 // slli (I-type)
 def_EHelper(slli){
   // shamt[5] == 0, the instruction is valid
