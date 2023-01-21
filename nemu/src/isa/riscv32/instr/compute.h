@@ -33,6 +33,14 @@ def_EHelper(sub){
   printf("sub : dest is 0x%x\n",*ddest);
 }
 
+// mul
+def_EHelper(mul){
+  printf("mul : src1 is 0x%x\n",*dsrc1);
+  printf("mul : src2 is 0x%x\n",*dsrc2);
+  rtl_mulu_lo(s,ddest,dsrc1,dsrc2);
+  printf("mul : dest is 0x%x\n",*ddest);
+}
+
 // div (signed)
 def_EHelper(div){
   printf("div : src1 is 0x%x\n",*dsrc1);
