@@ -22,3 +22,9 @@ def_EHelper(sh) {
   printf("sh : offset is 0x%x\n", id_src2->imm);
   rtl_sm(s, ddest, dsrc1, id_src2->imm, 2);
 }
+
+// store 8-bit
+def_EHelper(sb) {
+  printf("sb : offset is 0x%x\n", id_src2->imm);
+  rtl_sm(s, ddest, dsrc1, id_src2->imm, 1);
+}
