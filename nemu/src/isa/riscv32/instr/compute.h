@@ -50,16 +50,21 @@ def_EHelper(rem){
   printf("rem : dest is 0x%x\n",*ddest);
 }
 
+// slt
+def_EHelper(slt){
+  printf("slt : src1 is 0x%x\n",*dsrc1);
+  printf("slt : src2 is 0x%x\n",*dsrc2);
+  rtl_setrelop(s,RELOP_LT,ddest,dsrc1,dsrc2);
+  printf("sltu : dest is 0x%x\n",*ddest);
+
+}
+
 // slti (signed)
 def_EHelper(slti){
   printf("slti : src1 is 0x%x\n",*dsrc1);
   printf("slti : src2 is 0x%x\n",(int32_t)id_src2->simm);
   // may be bug here(i don't treat the id_src2->imm as a signed numbers)
-  if(*dsrc1 < (int32_t)id_src2->simm){
-    rtl_li(s,ddest,1);
-  }else{
-    rtl_li(s,ddest,0);
-  }
+  rtl_setrelopi(s,RELOP_LT,ddest,dsrc1,id_src2->simm);
   printf("slti : dest is 0x%x\n",*ddest);
 }
 
@@ -67,11 +72,7 @@ def_EHelper(slti){
 def_EHelper(sltiu){
   printf("sltiu : src1 is 0x%x\n",*dsrc1);
   printf("sltiu : src2 is 0x%x\n",id_src2->simm);
-  if(*dsrc1 < id_src2->simm){
-    rtl_li(s,ddest,1);
-  }else{
-    rtl_li(s,ddest,0);
-  }
+  rtl_setrelopi(s,RELOP_LTU,ddest,dsrc1,id_src2->simm);
   printf("slti : dest is 0x%x\n",*ddest);
 }
 
@@ -79,11 +80,7 @@ def_EHelper(sltiu){
 def_EHelper(sltu){
   printf("sltu : src1 is 0x%x\n",*dsrc1);
   printf("sltu : src2 is 0x%x\n",*dsrc2);
-  if(*dsrc1 < *dsrc2){
-    rtl_li(s,ddest,1);
-  }else{
-    rtl_li(s,ddest,0);
-  }
+  rtl_setrelop(s,RELOP_LTU,ddest,dsrc1,dsrc2);
   printf("sltu : dest is 0x%x\n",*ddest);
 }
 
