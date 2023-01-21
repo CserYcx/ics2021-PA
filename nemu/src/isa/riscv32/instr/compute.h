@@ -104,6 +104,18 @@ def_EHelper(slli){
   }
 }
 
+// srli
+def_EHelper(srli){
+  if ((id_src2->imm & 0x20) == 0){
+    printf("srli : shamt(src2) is 0x%x\n",id_src2->imm);
+    printf("srli : src1 is 0x%x\n",*dsrc1);
+    rtl_srli(s,ddest,dsrc1,id_src2->imm);
+    printf("srli : dest is 0x%x\n",*ddest);
+  }else{
+    printf("the srli instruction is invalid");
+  }
+}
+
 // srai 
 def_EHelper(srai){
   if ((id_src2->imm & 0x20) == 0){
