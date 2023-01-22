@@ -21,13 +21,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 
 char *strcat(char *dst, const char *src) {
   assert(dst != NULL && src != NULL);
-  int srclen = sizeof(src);
-  int dstlen = sizeof(dst);
-  int i = 0;
-  for(;i<srclen && src[i] != '\0';++i){
-    dst[dstlen + i] = src[i];
-  }
-  dst[dstlen + i] = '\0';
+  
   return dst;
 }
 
