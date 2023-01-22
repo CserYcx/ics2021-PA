@@ -41,25 +41,19 @@ char *strcat(char *dst, const char *src) {
  */
 int strcmp(const char *s1, const char *s2) {
   assert(s1 != NULL && s2 != NULL);
-  int s1len = sizeof(s1);
-  int s2len = sizeof(s2);
-  if (s1len < s2len){
-    return ' '-s2[s1len];
-  }
-  else if (s1len > s2len){
-    return s1[s2len];
-  }
-  else{
-    for(int i = 0;i<s1len;++i){
-      if(s1[i] == s2[i]){
-        continue;
-      }
-      else {
-        return s1[i] - s2[i];
-      }
+  const unsigned char *p1 = (const unsigned char *)s1; 
+  const unsigned char *p2 = (const unsigned char *)s2; 
+  unsigned char c1, c2;
+
+  do{
+    c1 = (unsigned char)*p1++;
+    c2 = (unsigned char)*p2++;
+    if(c1 == '\0'){
+      return c1 - c2;
     }
-  }
-  return 0;
+  }while(c1 == c2);
+
+  return c1-c2;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
