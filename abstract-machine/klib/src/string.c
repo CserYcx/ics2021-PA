@@ -21,7 +21,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 
 char *strcat(char *dst, const char *src) {
   assert(dst != NULL && src != NULL);
-  
+  strcpy(dst + sizeof(dst),src);
   return dst;
 }
 
