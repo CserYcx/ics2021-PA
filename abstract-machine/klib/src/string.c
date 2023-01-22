@@ -10,10 +10,9 @@ size_t strlen(const char *s) {
 
 char *strcpy(char *dst, const char *src) {
   assert(src != NULL && dst != NULL);
-  char *ret = dst;
   // original function will be overflow, here is similar
   while((*dst++ = *src++) != '\0');
-  return ret;
+  return dst;
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
