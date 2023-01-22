@@ -58,9 +58,10 @@ void *memset(void *s, int c, size_t n) {
   if(!n){
     return 0;
   }
-  char *xs = (char *)s;
+  const unsigned char uc = (const unsigned char)c;
+  unsigned char *xs = (unsigned char *)s;
   while(n--){
-    *xs++ = c;
+    *xs++ = uc;
   }
   return s;
 }
