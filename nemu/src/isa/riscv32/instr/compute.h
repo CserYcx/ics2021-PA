@@ -48,6 +48,7 @@ def_EHelper(mulh){
   rtl_muls_hi(s,ddest,dsrc1,dsrc2);
   printf("mulh : dest is 0x%x\n",*ddest);
 }
+
 // div (signed)
 def_EHelper(div){
   printf("div : src1 is 0x%x\n",*dsrc1);
