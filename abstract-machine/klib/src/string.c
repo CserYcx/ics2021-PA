@@ -65,8 +65,8 @@ void *memset(void *s, int c, size_t n) {
     return 0;
   }
   char *xs = (char *)s;
-  for(int i=0;i<n;++i){
-    *(xs+i) = c;
+  while(n--){
+    *xs++ = c;
   }
   return s;
 }
