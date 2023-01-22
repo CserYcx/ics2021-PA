@@ -10,6 +10,14 @@ def_EHelper(lh) {
   rtl_lms(s, ddest, dsrc1, id_src2->imm, 2);
   printf("lh : ddest is 0x%x\n", *ddest);
 }
+
+// lhu
+def_EHelper(lhu) {
+  printf("lhu : offset is 0x%x\n", id_src2->imm);
+  rtl_lm(s, ddest, dsrc1, id_src2->imm, 2);
+  printf("lhu : ddest is 0x%x\n", *ddest);
+}
+
 // lbu (load 8 bit from the memory but then zero extended before storing in rd)
 def_EHelper(lbu) {
   printf("lbu : offset is 0x%x\n", id_src2->imm);
