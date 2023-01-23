@@ -49,11 +49,11 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  if(!n){
+  if(n == 0){
     return 0;
   }
-  const unsigned char uc = (const unsigned char)c;
-  unsigned char *xs = (unsigned char *)s;
+  char uc = (char)c;
+  char *xs = (char *)s;
   while(n--){
     *xs++ = uc;
   }
@@ -69,7 +69,7 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  if(!n){
+  if(n == 0){
     return 0;
   }
   char *xs1 = (char *)s1;
@@ -78,7 +78,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
     xs1 += 1;
     xs2 += 1;
   }
-  return (*(unsigned char *)xs1 - *(unsigned char *)xs2);
+  return (*xs1 - *xs2);
 }
 
 #endif
