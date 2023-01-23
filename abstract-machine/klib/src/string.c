@@ -14,7 +14,6 @@ char *strcpy(char *dst, const char *src) {
   char *ret = dst;
   while((*dst++ = *src++) != '\0');
   return ret;
-  
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
@@ -23,12 +22,11 @@ char *strncpy(char *dst, const char *src, size_t n) {
 
 char *strcat(char *dst, const char *src) {
   char *ret = dst;
-  while(*ret) 
-    ret++;
-  while((*ret++ = *src++) != '\0');
+  while(*dst) 
+    dst++;
+  while((*dst++ = *src++) != '\0');
   
   return ret;
-  
 }
 
 /*
