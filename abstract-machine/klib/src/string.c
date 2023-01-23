@@ -51,8 +51,7 @@ int strcmp(const char *s1, const char *s2) {
       return c1 - c2;
     }
   }while(c1 == c2);
-  printf("the first test\n");
-  return 1;
+  return 0;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
