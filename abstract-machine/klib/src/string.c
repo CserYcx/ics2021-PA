@@ -52,7 +52,7 @@ int strcmp(const char *s1, const char *s2) {
     }
   }while(c1 == c2);
 
-  return c1-c2;
+  return 1;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
