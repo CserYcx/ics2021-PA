@@ -9,7 +9,7 @@ def_EHelper(beq){
     printf("beq : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
     }else{
-        printf("beq : src1 not equal to src2\n");
+        printf("beq : src1 not equals to src2\n");
     }
 }
 
@@ -24,7 +24,7 @@ def_EHelper(bne){
     printf("bne : next pc is 0x%x\n",s->pc + simm);
         rtl_j(s,s->pc += simm);
     }else{
-        printf("bne : src1 equal to src2\n");
+        printf("bne : src1 equals to src2\n");
     }
 }
 

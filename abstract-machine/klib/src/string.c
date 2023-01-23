@@ -40,6 +40,8 @@ char *strcat(char *dst, const char *src) {
  * 3. a positive value if s1 is greater than s2
  */
 int strcmp(const char *s1, const char *s2) {
+  panic("Not implemented");
+  /*
   assert(s1 != NULL && s2 != NULL);
   const unsigned char *p1 = (const unsigned char *)s1; 
   const unsigned char *p2 = (const unsigned char *)s2; 
@@ -52,7 +54,8 @@ int strcmp(const char *s1, const char *s2) {
     }
   }while(c1 == c2);
 
-  return 1;
+  return 0;
+  */
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
