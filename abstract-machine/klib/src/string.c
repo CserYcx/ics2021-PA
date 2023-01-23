@@ -41,19 +41,11 @@ char *strcat(char *dst, const char *src) {
  * 3. a positive value if s1 is greater than s2
  */
 int strcmp(const char *s1, const char *s2) {
-  assert(s1 != NULL && s2 != NULL);
-  const char *p1 = (const char *)s1; 
-  const char *p2 = (const char *)s2; 
-  char c1, c2;
-  do{
-    c1 = (char) *p1++;
-    c2 = (char) *p2++;
-    if(c1 == '\0'){
-      return c1 - c2;
-    }
-  }while(c1 == c2);
-
-  return c1 - c2;
+  while(*s1 && (*s1 == *s2)){
+    ++s1;
+    ++s2;
+  }
+  return *s1 - *s2;
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
