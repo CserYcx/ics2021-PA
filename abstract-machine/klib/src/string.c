@@ -75,7 +75,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   }
   const unsigned char *xs1 = s1;
   const unsigned char *xs2 = s2;
-  while(n-- && *xs1 == *xs2){
+  while(--n && *xs1 == *xs2){
     xs1 ++;
     xs2 ++;
   }
