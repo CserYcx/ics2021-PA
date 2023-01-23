@@ -52,10 +52,11 @@ void *memset(void *s, int c, size_t n) {
   if(n == 0){
     return 0;
   }
-  char uc = (char)c;
-  char *xs = (char *)s;
+  const unsigned char uc = c;
+  unsigned char *xs = s;
   while(n--){
-    *xs++ = uc;
+    *xs = uc;
+    xs++;
   }
   return s;
 }
@@ -72,11 +73,11 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   if(n == 0){
     return 0;
   }
-  char *xs1 = (char *)s1;
-  char *xs2 = (char *)s2;
+  const unsigned char *xs1 = s1;
+  const unsigned char *xs2 = s2;
   while(n-- && *xs1 == *xs2){
-    xs1 += 1;
-    xs2 += 1;
+    xs1 ++;
+    xs2 ++;
   }
   return (*xs1 - *xs2);
 }
