@@ -9,7 +9,6 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char *dst, const char *src) {
-  panic("Not implemented");
   assert(src != NULL || dst != NULL);
   // original function will be overflow, here is similar
   char *ret = dst;
@@ -23,7 +22,6 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  panic("Not implemented");
   char *ret = dst;
   while(*ret) 
     ret++;
