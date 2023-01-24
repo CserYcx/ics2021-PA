@@ -16,25 +16,23 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 int sprintf(char *out, const char *fmt, ...) {
   // variadic list
   va_list ap;
-  char *ret = out;
+  char *ret; 
   va_start(ap,fmt);
-  for(int i = 0;i<sizeof(fmt);++i){
+  for(ret = out;*fmt;++fmt){
     char *s;
-    if(fmt[i] == '%'){
-      switch (fmt[i+1])
+    if(*fmt == '%'){
+      switch (*(++fmt))
       {
       case 'd':
         s = va_arg(ap,char *);
         for(int j=0;j<sizeof(s);++j)
           *ret++ = *s++;
-        ++i;
         break;
       
       case 's':
         s = va_arg(ap,char *);
         for(int j=0;j<sizeof(s);++j)
           *ret++ = *s++;
-        ++i;
         break;
       
       default:
@@ -43,7 +41,7 @@ int sprintf(char *out, const char *fmt, ...) {
       }
     }
     else{
-      *ret++ = fmt[i];
+      *ret++ = *fmt;
     }
   }
   *ret = '\0';
