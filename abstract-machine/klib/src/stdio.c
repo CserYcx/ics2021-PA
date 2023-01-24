@@ -25,15 +25,15 @@ int sprintf(char *out, const char *fmt, ...) {
       {
       case 'd':
         s = va_arg(ap,char *);
-        strcpy(ret,s);
-        ret += sizeof(s);
+        for(int j=0;j<sizeof(s);++j)
+          *ret++ = *s++;
         ++i;
         break;
       
       case 's':
         s = va_arg(ap,char *);
-        strcpy(ret,s);
-        ret += sizeof(s);
+        for(int j=0;j<sizeof(s);++j)
+          *ret++ = *s++;
         ++i;
         break;
       
@@ -46,6 +46,7 @@ int sprintf(char *out, const char *fmt, ...) {
       *ret++ = fmt[i];
     }
   }
+  *ret = '\0';
   va_end(ap);
   return 0;
 }
