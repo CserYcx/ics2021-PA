@@ -8,7 +8,7 @@ size_t strlen(const char *s) {
   const char *p = s;
   while(*p != '\0')
     p++;
-  return ((size_t)(p-s));
+  return ((size_t)(p-s)-1);
 }
 
 char *strcpy(char *dst, const char *src) {
