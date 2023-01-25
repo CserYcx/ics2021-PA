@@ -19,18 +19,24 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     else{
       fmt++;
+      char *s;
+      int len;
       switch (*fmt)
       {
       case 's':
-        char *s1 = va_arg(ap,char *);
-        for(int i = 0;i<strlen(s1);++i)
-          *str++ = *s1++;
+        s = va_arg(ap,char *);
+        len = strlen(s);
+        for(int i = 0;i<len;++i){
+          *str++ = *s++;
+        }
         break;
       
       case 'd':
-        char *s2 = va_arg(ap,char *);
-        for(int i = 0;i<strlen(s2);++i)
-          *str++ = *s2++;
+        s = va_arg(ap,char *);
+        len = strlen(s);
+        for(int i = 0;i<len;++i){
+          *str++ = *s++;
+        }
         break;
       
       default:
