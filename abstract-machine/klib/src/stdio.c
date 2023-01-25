@@ -31,13 +31,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         break;
       
-      case 'd':
+      /*case 'd':
         s = va_arg(ap,char *);
         len = strlen(s);
         for(int i = 0;i<len;++i){
           *str++ = *s++;
         }
         break;
+      */
       
       default:
         break;
