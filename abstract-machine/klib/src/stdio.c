@@ -10,43 +10,49 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  panic("Not implemented");
+  char *str;
+
+  for(str = out;*fmt;fmt++){
+    if(*fmt != '%'){
+      *str++ = *fmt;
+      continue;
+    }
+    else{
+      fmt++;
+      switch (*fmt)
+      {
+      case 's':
+        char *s1 = va_arg(ap,char *);
+        for(int i = 0;i<strlen(s1);++i)
+          *str++ = *s1++;
+        break;
+      
+      case 'd':
+        char *s2 = va_arg(ap,char *);
+        for(int i = 0;i<strlen(s2);++i)
+          *str++ = *s2++;
+        break;
+      
+      default:
+        break;
+      }
+    }
+  }
+
+  *str = '\0';
+  return str - out;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
   // variadic list
   va_list ap;
-  char *ret; 
+  int val;
+
   va_start(ap,fmt);
-  for(ret = out;*fmt;++fmt){
-    char *s;
-    if(*fmt == '%'){
-      switch (*(++fmt))
-      {
-      case 'd':
-        s = va_arg(ap,char *);
-        for(int j=0;j<sizeof(s);++j)
-          *ret++ = *s++;
-        break;
-      
-      case 's':
-        s = va_arg(ap,char *);
-        for(int j=0;j<sizeof(s);++j)
-          *ret++ = *s++;
-        break;
-      
-      default:
-        panic("To be completed");
-        break;
-      }
-    }
-    else{
-      *ret++ = *fmt;
-    }
-  }
-  *ret = '\0';
+  val = vsprintf(out,fmt,ap);
   va_end(ap);
-  return 0;
+  
+  return val;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
