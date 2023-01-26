@@ -74,6 +74,10 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   s->EHelper = g_exec_table[idx];
   // My test code
   //printf("Execution Helper function\n");
+
+  /**
+   * itrace is to trace the instruction working trail
+  */
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
