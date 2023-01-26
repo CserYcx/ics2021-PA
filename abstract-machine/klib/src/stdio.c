@@ -19,23 +19,20 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     else{
       fmt++;
-      char *s;
-      int val;
-      int len;
       switch (*fmt)
       {
       case 's':
-        s = va_arg(ap,char *);
-        len = strlen(s);
+        char *s = va_arg(ap,char *);
+        int len = strlen(s);
         for(int i = 0;i<len;++i){
           *str++ = *s++;
         }
         break;
 
       case 'd':
-        val = va_arg(ap,int);
+        int val = va_arg(ap,int);
         for(int i = 1000000000;i>0;i/=10){
-          if(val/i == 0){
+          if(val/i == 0 && val != 0){
             continue;
           }
           else{
