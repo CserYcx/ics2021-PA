@@ -118,7 +118,7 @@ void cpu_exec(uint64_t n) {
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
-    printf("instruction is %s\n",s.logbuf);
+    printf("%s\n",s.logbuf);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
