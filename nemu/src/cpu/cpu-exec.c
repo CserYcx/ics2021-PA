@@ -60,7 +60,7 @@ void iringbuf(Decode s){
       if(i == flag){
         printf("-->%s\n",point[i]);
       }else{
-        printf("%10s\n",point[i]);
+        printf("   %s\n",point[i]);
       }
     }
   }
@@ -147,9 +147,10 @@ void cpu_exec(uint64_t n) {
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
-    printf("%-100s\n",s.logbuf);
+    //printf("%s\n",s.logbuf);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
+    iringbuf(s);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
