@@ -8,14 +8,14 @@ def_EHelper(jal){
     simm = simm<<1;
     // if destion is 0(rz), jal is j instruction
     if(s->isa.instr.j.rd == 0){
-        printf("j: jal = %x\n",simm);
-        printf("next pc = %x\n",simm + s->pc);
+        //printf("j: jal = %x\n",simm);
+        //printf("next pc = %x\n",simm + s->pc);
         *ddest = s->pc+4;
         rtl_j(s,s->pc += simm);
     }
     else{
-        printf("jal: simm = %x\n",simm);
-        printf("next pc = %x\n",simm + s->pc);
+        //printf("jal: simm = %x\n",simm);
+        //printf("next pc = %x\n",simm + s->pc);
         *ddest = s->pc+4;
         rtl_j(s,s->pc += simm);
     }
@@ -26,7 +26,7 @@ def_EHelper(jalr){
     // (src1->imm + simm11_0) & 0xfffffffe -> pc
     *ddest = s->pc+4;
     s->pc = (*dsrc1+id_src2->imm) & 0xfffffffe;
-    printf("jalr: next pc = %x\n",s->pc);
+    //printf("jalr: next pc = %x\n",s->pc);
     rtl_j(s,s->pc);
 }
 

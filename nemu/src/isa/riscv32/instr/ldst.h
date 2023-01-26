@@ -1,44 +1,44 @@
 def_EHelper(lw) {
-  printf("lw : offset is 0x%x\n", id_src2->imm);
+  //printf("lw : offset is 0x%x\n", id_src2->imm);
   rtl_lm(s, ddest, dsrc1, id_src2->imm, 4);
-  printf("lw : ddest is 0x%x\n", *ddest);
+  //printf("lw : ddest is 0x%x\n", *ddest);
 }
 
 // lh (load 16-bits from memory, then signed-extended to 32-bits before storing into rd)
 def_EHelper(lh) {
-  printf("lh : offset is 0x%x\n", id_src2->imm);
+  //printf("lh : offset is 0x%x\n", id_src2->imm);
   rtl_lms(s, ddest, dsrc1, id_src2->imm, 2);
-  printf("lh : ddest is 0x%x\n", *ddest);
+  //printf("lh : ddest is 0x%x\n", *ddest);
 }
 
 // lhu
 def_EHelper(lhu) {
-  printf("lhu : offset is 0x%x\n", id_src2->imm);
+  //printf("lhu : offset is 0x%x\n", id_src2->imm);
   rtl_lm(s, ddest, dsrc1, id_src2->imm, 2);
-  printf("lhu : ddest is 0x%x\n", *ddest);
+  //printf("lhu : ddest is 0x%x\n", *ddest);
 }
 
 // lbu (load 8 bit from the memory but then zero extended before storing in rd)
 def_EHelper(lbu) {
-  printf("lbu : offset is 0x%x\n", id_src2->imm);
+  //printf("lbu : offset is 0x%x\n", id_src2->imm);
   rtl_lm(s, ddest, dsrc1, id_src2->imm, 1);
-  printf("lbu : ddest is 0x%x\n", *ddest);
+  //printf("lbu : ddest is 0x%x\n", *ddest);
 }
 
 // store word
 def_EHelper(sw) {
-  printf("sw : offset is 0x%x\n", id_src2->imm);
+  //printf("sw : offset is 0x%x\n", id_src2->imm);
   rtl_sm(s, ddest, dsrc1, id_src2->imm, 4);
 }
 
 // store 16-bit
 def_EHelper(sh) {
-  printf("sh : offset is 0x%x\n", id_src2->imm);
+  //printf("sh : offset is 0x%x\n", id_src2->imm);
   rtl_sm(s, ddest, dsrc1, id_src2->imm, 2);
 }
 
 // store 8-bit
 def_EHelper(sb) {
-  printf("sb : offset is 0x%x\n", id_src2->imm);
+  //printf("sb : offset is 0x%x\n", id_src2->imm);
   rtl_sm(s, ddest, dsrc1, id_src2->imm, 1);
 }
