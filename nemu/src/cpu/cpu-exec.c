@@ -42,6 +42,35 @@ static const void* g_exec_table[TOTAL_INSTR] = {
   MAP(INSTR_LIST, FILL_EXEC_TABLE)
 };
 
+/**
+ * The PA's assignment
+ * My complementary:
+*/
+
+// 1.iringbuf
+int begin = 0;
+void iringbuf(Decode s){
+  int flag ;
+  char *point[20];
+  // if instruction is error
+  if(nemu_state.state == NEMU_ABORT && nemu_state.halt_ret != 0){
+    flag = begin;
+    (point[begin++%20]) = s.logbuf;
+    for(int i = 0;i<20;++i){
+      if(i == flag){
+        printf("-->%s\n",point[i]);
+      }else{
+        printf("%10s\n",point[i]);
+      }
+    }
+  }
+  // if instruction is right
+  else{
+    (point[begin++%20]) = s.logbuf;
+  }
+}
+
+
 static void fetch_decode_exec_updatepc(Decode *s) {
   fetch_decode(s, cpu.pc);
   s->EHelper(s);
@@ -118,12 +147,14 @@ void cpu_exec(uint64_t n) {
   for (;n > 0; n --) {
     fetch_decode_exec_updatepc(&s);
     g_nr_guest_instr ++;
-    printf("%s\n",s.logbuf);
+    printf("%10s\n",s.logbuf);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
+
+  // if nemu_state.state == ABORT, print iringbuf
 
   uint64_t timer_end = get_time();
   g_timer += timer_end - timer_start;
