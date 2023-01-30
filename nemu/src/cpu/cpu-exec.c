@@ -48,8 +48,9 @@ static const void* g_exec_table[TOTAL_INSTR] = {
 */
 // 1. the iringbuf 
 #ifdef CONFIG_IRINGBUF
-  #define iringbuf_size 20
-  static char *iringbuf[iringbuf_size];
+  #define iringbuf_size 20 
+  #define iringbuf_buf_size 256
+  static char iringbuf[iringbuf_size][iringbuf_buf_size];
   int pos = 0;
 #endif
 
@@ -71,17 +72,14 @@ static void print_iringbuf(){
 static void put_iringbuf(Decode s){
   #ifdef CONFIG_IRINGBUF
     if(nemu_state.state == NEMU_RUNNING){
-      sprintf(iringbuf[pos%iringbuf_size],"---%s",s.logbuf);
-      pos++;
+      sprintf(iringbuf[pos++%iringbuf_size],"---%s",s.logbuf);
     }
     else if(nemu_state.state == NEMU_ABORT){
-      sprintf(iringbuf[pos%iringbuf_size],"-->%s",s.logbuf);
-      pos++;
+      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
       print_iringbuf();
     }
     else if(nemu_state.state != NEMU_RUNNING && nemu_state.halt_ret != 0){
-      sprintf(iringbuf[pos%iringbuf_size],"-->%s",s.logbuf);
-      pos++;
+      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
       print_iringbuf();
     }
   #endif
