@@ -71,14 +71,17 @@ static void print_iringbuf(){
 static void put_iringbuf(Decode s){
   #ifdef CONFIG_IRINGBUF
     if(nemu_state.state == NEMU_RUNNING){
-      sprintf(iringbuf[pos++%iringbuf_size],"---%s",s.logbuf);
+      sprintf(iringbuf[pos%iringbuf_size],"---%s",s.logbuf);
+      pos++;
     }
     else if(nemu_state.state == NEMU_ABORT){
-      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
+      sprintf(iringbuf[pos%iringbuf_size],"-->%s",s.logbuf);
+      pos++;
       print_iringbuf();
     }
     else if(nemu_state.state != NEMU_RUNNING && nemu_state.halt_ret != 0){
-      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
+      sprintf(iringbuf[pos%iringbuf_size],"-->%s",s.logbuf);
+      pos++;
       print_iringbuf();
     }
   #endif
