@@ -49,7 +49,7 @@ static const void* g_exec_table[TOTAL_INSTR] = {
 // 1. the iringbuf 
 #ifdef CONFIG_IRINGBUF
   #define iringbuf_size 20
-  char *iringbuf[iringbuf_size];
+  static char *iringbuf[iringbuf_size];
   int pos = 0;
 #endif
 
