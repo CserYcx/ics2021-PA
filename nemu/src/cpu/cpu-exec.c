@@ -46,30 +46,43 @@ static const void* g_exec_table[TOTAL_INSTR] = {
  * The PA's assignment
  * My complementary:
 */
+// 1. the iringbuf 
+#ifdef CONFIG_IRINGBUF
+  #define iringbuf_size 20
+  char *iringbuf[iringbuf_size];
+  int pos = 0;
+#endif
 
-// 1.iringbuf
-int begin = 0;
-void iringbuf(Decode s){
-  int flag ;
-  char *point[20];
-  // if instruction is error
-  if(nemu_state.state == NEMU_ABORT && nemu_state.halt_ret != 0){
-    flag = begin;
-    (point[begin++%20]) = s.logbuf;
-    for(int i = 0;i<20;++i){
-      if(i == flag){
-        printf("-->%s\n",point[i]);
-      }else{
-        printf("   %s\n",point[i]);
+// print the iringbuf
+static void print_iringbuf(){
+  #ifdef CONFIG_IRINGBUF
+    for(int i=0;i<iringbuf_size;++i){
+      if(iringbuf[i] != NULL){
+        printf("%s\n",iringbuf[i]);
       }
     }
-  }
-  // if instruction is right
-  else{
-    (point[begin++%20]) = s.logbuf;
-  }
+    printf("here is a print_iringbuf test\n");
+  #endif
 }
 
+/* if current state is NEMU_RUNNING, is ok
+ * if current state is ABORT, is error
+*/
+static void put_iringbuf(Decode s){
+  #ifdef CONFIG_IRINGBUF
+    if(nemu_state.state == NEMU_RUNNING){
+      sprintf(iringbuf[pos++%iringbuf_size],"   %s",s.logbuf);
+    }
+    else if(nemu_state.state == NEMU_ABORT){
+      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
+      print_iringbuf();
+    }
+    else if(nemu_state.state != NEMU_RUNNING && nemu_state.halt_ret != 0){
+      sprintf(iringbuf[pos++%iringbuf_size],"-->%s",s.logbuf);
+      print_iringbuf();
+    }
+  #endif
+}
 
 static void fetch_decode_exec_updatepc(Decode *s) {
   fetch_decode(s, cpu.pc);
@@ -150,7 +163,10 @@ void cpu_exec(uint64_t n) {
     //printf("%s\n",s.logbuf);
 		//every cpu loop, call the trace_and_difftest
     trace_and_difftest(&s, cpu.pc);
-    iringbuf(s);
+
+    // PA2.4: Debugging tasks
+    put_iringbuf(s);
+    
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
