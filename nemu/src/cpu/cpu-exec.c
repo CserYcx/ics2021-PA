@@ -71,6 +71,7 @@ static void print_iringbuf(){
 static void put_iringbuf(Decode s){
   #ifdef CONFIG_IRINGBUF
     if(nemu_state.state == NEMU_RUNNING){
+      printf("here is a test\n");
       sprintf(iringbuf[pos++%iringbuf_size],"   %s",s.logbuf);
     }
     else if(nemu_state.state == NEMU_ABORT){
