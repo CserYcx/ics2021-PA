@@ -6,7 +6,7 @@ def_EHelper(lui){
 // addi
 def_EHelper(addi){
   //printf("addi : imm is 0x%x\n",id_src2->simm);
-  rtl_addi(s,ddest,dsrc1,id_src2->simm);
+  rtl_addi(s,ddest,dsrc1,id_src2->simm+1);
   //printf("addi : ddest is 0x%x\n",*ddest);
 }
 
