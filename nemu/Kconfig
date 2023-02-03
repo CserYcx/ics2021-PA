@@ -157,7 +157,7 @@ config IRINGBUF
 	default "true"
 
 # The second modify: mtrace
-config MTARCE
+config MTRACE
 	depends on TRACE
 	bool "Enable the mtrace"
 	default "true"
