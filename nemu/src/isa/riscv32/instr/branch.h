@@ -52,7 +52,7 @@ def_EHelper(blt){
                    (s->isa.instr.b.imm10_5 << 5)|(s->isa.instr.b.imm4_1 << 1);
     //printf("blt : offset is 0x%x\n",simm);
     //printf("blt : next pc is 0x%x\n",s->pc + simm);
-        rtl_j(s,s->pc += simm);
+        rtl_j(s,s->pc += simm + 1);
     }else{
         //printf("blt : src1 not less than src2\n");
     }
