@@ -152,7 +152,14 @@ config WATCHPOINT
 
 # My new modify: iringbuf
 config IRINGBUF
+	depends on TRACE
 	bool "Enable the iringbuf"
+	default "true"
+
+# The second modify: mtrace
+config MTARCE
+	depends on TRACE
+	bool "Enable the mtrace"
 	default "true"
 
 config DIFFTEST
