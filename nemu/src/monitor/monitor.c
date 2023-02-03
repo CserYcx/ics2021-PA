@@ -53,6 +53,13 @@ static long load_img() {
   return size;
 }
 
+/**
+ * The ftrace module:
+ * 1. read the Symbol table and String table
+ * 2. analyze the .elf file
+ * 3. if machine is riscv32, you need to seperate the call and return 
+ *    from the jal and jalr
+*/
 static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
     {"batch"    , no_argument      , NULL, 'b'},

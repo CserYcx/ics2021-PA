@@ -37,6 +37,9 @@ void init_mem() {
       (paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
+/**
+ * CONFIG_MTRACE is a supervisor to monitor the memory
+*/
 word_t paddr_read(paddr_t addr, int len) {
   #ifdef CONFIG_MTRACE 
     printf("Paddr_read %d-word here: 0x%08x\n",len,addr);
