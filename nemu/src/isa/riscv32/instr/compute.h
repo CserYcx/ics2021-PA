@@ -21,7 +21,7 @@ def_EHelper(auipc){
 def_EHelper(add){
   //printf("add : src1 is 0x%x\n",*dsrc1);
   //printf("add : src2 is 0x%x\n",*dsrc2);
-  rtl_sub(s,ddest,dsrc1,dsrc2);
+  rtl_add(s,ddest,dsrc1,dsrc2);
   //printf("add : dest is 0x%x\n",*ddest);
 }
 
