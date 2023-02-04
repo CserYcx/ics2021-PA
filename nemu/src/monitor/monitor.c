@@ -62,6 +62,14 @@ static long load_img() {
 */
 static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
+    /**
+     * option struct :
+     * name(char*) has_arg(int)     flag(int*)    val(int)
+     * 1.has_arg means whether the option takes the parameters
+     * 2.when the flag is NULL, return val when long option is selected
+     *   else, return 0 and flag point val
+     * 3.val is the return value or the flag points value
+     */
     {"batch"    , no_argument      , NULL, 'b'},
     {"log"      , required_argument, NULL, 'l'},
     {"diff"     , required_argument, NULL, 'd'},
